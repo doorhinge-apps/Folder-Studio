@@ -6,23 +6,32 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B9567A732D1F536100CAD0F1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A702D1F536100CAD0F1 /* ContentView.swift */; };
+		B9567A742D1F536100CAD0F1 /* Icons_DesignerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */; };
+		B9567A752D1F536100CAD0F1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9567A6D2D1F536100CAD0F1 /* Preview Assets.xcassets */; };
+		B9567A762D1F536100CAD0F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9567A6F2D1F536100CAD0F1 /* Assets.xcassets */; };
+		B9567A812D1F5C9000CAD0F1 /* SwiftDraw in Frameworks */ = {isa = PBXBuildFile; productRef = B9567A802D1F5C9000CAD0F1 /* SwiftDraw */; };
+		B9567A842D1F631B00CAD0F1 /* PocketSVG in Frameworks */ = {isa = PBXBuildFile; productRef = B9567A832D1F631B00CAD0F1 /* PocketSVG */; };
+		B9567A862D1F633600CAD0F1 /* IconDesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A852D1F633600CAD0F1 /* IconDesignerViewModel.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		B9567A5C2D1F515E00CAD0F1 /* Icons Designer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Icons Designer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9567A6D2D1F536100CAD0F1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B9567A6F2D1F536100CAD0F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B9567A702D1F536100CAD0F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons_DesignerApp.swift; sourceTree = "<group>"; };
+		B9567A852D1F633600CAD0F1 /* IconDesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconDesignerViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		B9567A5E2D1F515E00CAD0F1 /* Icons Designer */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Icons Designer";
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B9567A592D1F515E00CAD0F1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9567A812D1F5C9000CAD0F1 /* SwiftDraw in Frameworks */,
+				B9567A842D1F631B00CAD0F1 /* PocketSVG in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,7 +41,7 @@
 		B9567A532D1F515E00CAD0F1 = {
 			isa = PBXGroup;
 			children = (
-				B9567A5E2D1F515E00CAD0F1 /* Icons Designer */,
+				B9567A722D1F536100CAD0F1 /* Icons Designer */,
 				B9567A5D2D1F515E00CAD0F1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +52,26 @@
 				B9567A5C2D1F515E00CAD0F1 /* Icons Designer.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B9567A6E2D1F536100CAD0F1 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B9567A6D2D1F536100CAD0F1 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B9567A722D1F536100CAD0F1 /* Icons Designer */ = {
+			isa = PBXGroup;
+			children = (
+				B9567A6E2D1F536100CAD0F1 /* Preview Content */,
+				B9567A6F2D1F536100CAD0F1 /* Assets.xcassets */,
+				B9567A702D1F536100CAD0F1 /* ContentView.swift */,
+				B9567A852D1F633600CAD0F1 /* IconDesignerViewModel.swift */,
+				B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */,
+			);
+			path = "Icons Designer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -60,11 +89,10 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				B9567A5E2D1F515E00CAD0F1 /* Icons Designer */,
-			);
 			name = "Icons Designer";
 			packageProductDependencies = (
+				B9567A802D1F5C9000CAD0F1 /* SwiftDraw */,
+				B9567A832D1F631B00CAD0F1 /* PocketSVG */,
 			);
 			productName = "Icons Designer";
 			productReference = B9567A5C2D1F515E00CAD0F1 /* Icons Designer.app */;
@@ -94,6 +122,10 @@
 			);
 			mainGroup = B9567A532D1F515E00CAD0F1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				B9567A7F2D1F5C9000CAD0F1 /* XCRemoteSwiftPackageReference "SwiftDraw" */,
+				B9567A822D1F631B00CAD0F1 /* XCRemoteSwiftPackageReference "PocketSVG" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B9567A5D2D1F515E00CAD0F1 /* Products */;
 			projectDirPath = "";
@@ -109,6 +141,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9567A752D1F536100CAD0F1 /* Preview Assets.xcassets in Resources */,
+				B9567A762D1F536100CAD0F1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +153,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9567A862D1F633600CAD0F1 /* IconDesignerViewModel.swift in Sources */,
+				B9567A732D1F536100CAD0F1 /* ContentView.swift in Sources */,
+				B9567A742D1F536100CAD0F1 /* Icons_DesignerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,9 +304,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.doorhingeapps.Icons-Designer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = NO;
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -296,9 +337,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.doorhingeapps.Icons-Designer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = NO;
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -324,6 +369,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B9567A7F2D1F5C9000CAD0F1 /* XCRemoteSwiftPackageReference "SwiftDraw" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swhitty/SwiftDraw";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.18.1;
+			};
+		};
+		B9567A822D1F631B00CAD0F1 /* XCRemoteSwiftPackageReference "PocketSVG" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pocketsvg/PocketSVG.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B9567A802D1F5C9000CAD0F1 /* SwiftDraw */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B9567A7F2D1F5C9000CAD0F1 /* XCRemoteSwiftPackageReference "SwiftDraw" */;
+			productName = SwiftDraw;
+		};
+		B9567A832D1F631B00CAD0F1 /* PocketSVG */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B9567A822D1F631B00CAD0F1 /* XCRemoteSwiftPackageReference "PocketSVG" */;
+			productName = PocketSVG;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B9567A542D1F515E00CAD0F1 /* Project object */;
 }
