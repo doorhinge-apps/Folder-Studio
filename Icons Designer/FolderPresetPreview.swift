@@ -30,7 +30,8 @@ struct FolderPresetPreview: View {
                            symbolColor: .constant(Color(hex: color1)),
                            symbolOpacity: .constant(0.5),
                            topOffset: $topOffset,
-                           bottomOffset: $bottomOffset)
+                           bottomOffset: $bottomOffset,
+                           imageType: .constant(.sfsymbol))
             .scaleEffect(0.15)
             .frame(width: 70, height: 60)
             .clipped()

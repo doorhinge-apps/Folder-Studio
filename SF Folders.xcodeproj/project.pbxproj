@@ -20,10 +20,11 @@
 		B9567A982D1FAA6F00CAD0F1 /* IconsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A932D1FAA6F00CAD0F1 /* IconsPicker.swift */; };
 		B9567A992D1FAA6F00CAD0F1 /* IconsArrayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A942D1FAA6F00CAD0F1 /* IconsArrayStorage.swift */; };
 		B9567A9A2D1FAA6F00CAD0F1 /* Icons Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */; };
+		B98FCE092D1FDDCC0033EAED /* IconChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FCE082D1FDDCC0033EAED /* IconChanger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B9567A5C2D1F515E00CAD0F1 /* Icons Designer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Icons Designer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9567A5C2D1F515E00CAD0F1 /* SF Folders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SF Folders.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9567A6D2D1F536100CAD0F1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B9567A6F2D1F536100CAD0F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9567A702D1F536100CAD0F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -37,6 +38,8 @@
 		B9567A942D1FAA6F00CAD0F1 /* IconsArrayStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsArrayStorage.swift; sourceTree = "<group>"; };
 		B9567A952D1FAA6F00CAD0F1 /* IconsArrayIOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsArrayIOS18.swift; sourceTree = "<group>"; };
 		B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Icons Arrays.swift"; sourceTree = "<group>"; };
+		B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Icons Designer.entitlements"; sourceTree = "<group>"; };
+		B98FCE082D1FDDCC0033EAED /* IconChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconChanger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +64,7 @@
 		B9567A5D2D1F515E00CAD0F1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B9567A5C2D1F515E00CAD0F1 /* Icons Designer.app */,
+				B9567A5C2D1F515E00CAD0F1 /* SF Folders.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -69,6 +72,7 @@
 		B9567A6E2D1F536100CAD0F1 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */,
 				B9567A6D2D1F536100CAD0F1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -77,29 +81,38 @@
 		B9567A722D1F536100CAD0F1 /* Icons Designer */ = {
 			isa = PBXGroup;
 			children = (
-				B9567A6E2D1F536100CAD0F1 /* Preview Content */,
+				B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */,
 				B9567A702D1F536100CAD0F1 /* ContentView.swift */,
-				B9567A912D1FA74F00CAD0F1 /* FolderPresetPreview.swift */,
-				B9567A872D1F69FF00CAD0F1 /* FolderTop.swift */,
 				B9567A8B2D1F969C00CAD0F1 /* FolderIconView.swift */,
-				B9567A8F2D1F9CD400CAD0F1 /* hex.swift */,
+				B9567A912D1FA74F00CAD0F1 /* FolderPresetPreview.swift */,
 				B9567A8D2D1F96B300CAD0F1 /* Snapshot.swift */,
-				B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */,
+				B9567A872D1F69FF00CAD0F1 /* FolderTop.swift */,
+				B98FCE082D1FDDCC0033EAED /* IconChanger.swift */,
+				B98FCE0A2D1FDE020033EAED /* Icon Picker */,
+				B9567A8F2D1F9CD400CAD0F1 /* hex.swift */,
+				B9567A6F2D1F536100CAD0F1 /* Assets.xcassets */,
+				B9567A6E2D1F536100CAD0F1 /* Preview Content */,
+			);
+			path = "Icons Designer";
+			sourceTree = "<group>";
+		};
+		B98FCE0A2D1FDE020033EAED /* Icon Picker */ = {
+			isa = PBXGroup;
+			children = (
 				B9567A932D1FAA6F00CAD0F1 /* IconsPicker.swift */,
 				B9567A942D1FAA6F00CAD0F1 /* IconsArrayStorage.swift */,
 				B9567A952D1FAA6F00CAD0F1 /* IconsArrayIOS18.swift */,
 				B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */,
-				B9567A6F2D1F536100CAD0F1 /* Assets.xcassets */,
 			);
-			path = "Icons Designer";
+			path = "Icon Picker";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B9567A5B2D1F515E00CAD0F1 /* Icons Designer */ = {
+		B9567A5B2D1F515E00CAD0F1 /* SF Folders */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B9567A6A2D1F516000CAD0F1 /* Build configuration list for PBXNativeTarget "Icons Designer" */;
+			buildConfigurationList = B9567A6A2D1F516000CAD0F1 /* Build configuration list for PBXNativeTarget "SF Folders" */;
 			buildPhases = (
 				B9567A582D1F515E00CAD0F1 /* Sources */,
 				B9567A592D1F515E00CAD0F1 /* Frameworks */,
@@ -109,11 +122,11 @@
 			);
 			dependencies = (
 			);
-			name = "Icons Designer";
+			name = "SF Folders";
 			packageProductDependencies = (
 			);
 			productName = "Icons Designer";
-			productReference = B9567A5C2D1F515E00CAD0F1 /* Icons Designer.app */;
+			productReference = B9567A5C2D1F515E00CAD0F1 /* SF Folders.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -131,7 +144,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B9567A572D1F515E00CAD0F1 /* Build configuration list for PBXProject "Icons Designer" */;
+			buildConfigurationList = B9567A572D1F515E00CAD0F1 /* Build configuration list for PBXProject "SF Folders" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -147,7 +160,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B9567A5B2D1F515E00CAD0F1 /* Icons Designer */,
+				B9567A5B2D1F515E00CAD0F1 /* SF Folders */,
 			);
 		};
 /* End PBXProject section */
@@ -178,6 +191,7 @@
 				B9567A732D1F536100CAD0F1 /* ContentView.swift in Sources */,
 				B9567A922D1FA74F00CAD0F1 /* FolderPresetPreview.swift in Sources */,
 				B9567A742D1F536100CAD0F1 /* Icons_DesignerApp.swift in Sources */,
+				B98FCE092D1FDDCC0033EAED /* IconChanger.swift in Sources */,
 				B9567A8C2D1F969C00CAD0F1 /* FolderIconView.swift in Sources */,
 				B9567A8E2D1F96B300CAD0F1 /* Snapshot.swift in Sources */,
 			);
@@ -310,13 +324,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Icons Designer/Icons Designer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Icons Designer/Preview Content\"";
 				DEVELOPMENT_TEAM = 47J6H2LHDD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Folder Icons";
+				INFOPLIST_KEY_CFBundleDisplayName = "SF Folders";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -344,13 +360,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Icons Designer/Icons Designer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Icons Designer/Preview Content\"";
 				DEVELOPMENT_TEAM = 47J6H2LHDD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Folder Icons";
+				INFOPLIST_KEY_CFBundleDisplayName = "SF Folders";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -376,7 +394,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B9567A572D1F515E00CAD0F1 /* Build configuration list for PBXProject "Icons Designer" */ = {
+		B9567A572D1F515E00CAD0F1 /* Build configuration list for PBXProject "SF Folders" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B9567A682D1F516000CAD0F1 /* Debug */,
@@ -385,7 +403,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B9567A6A2D1F516000CAD0F1 /* Build configuration list for PBXNativeTarget "Icons Designer" */ = {
+		B9567A6A2D1F516000CAD0F1 /* Build configuration list for PBXNativeTarget "SF Folders" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B9567A6B2D1F516000CAD0F1 /* Debug */,
