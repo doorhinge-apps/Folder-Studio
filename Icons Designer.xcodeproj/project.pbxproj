@@ -11,11 +11,15 @@
 		B9567A742D1F536100CAD0F1 /* Icons_DesignerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */; };
 		B9567A752D1F536100CAD0F1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9567A6D2D1F536100CAD0F1 /* Preview Assets.xcassets */; };
 		B9567A762D1F536100CAD0F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9567A6F2D1F536100CAD0F1 /* Assets.xcassets */; };
-		B9567A812D1F5C9000CAD0F1 /* SwiftDraw in Frameworks */ = {isa = PBXBuildFile; productRef = B9567A802D1F5C9000CAD0F1 /* SwiftDraw */; };
-		B9567A842D1F631B00CAD0F1 /* PocketSVG in Frameworks */ = {isa = PBXBuildFile; productRef = B9567A832D1F631B00CAD0F1 /* PocketSVG */; };
-		B9567A862D1F633600CAD0F1 /* IconDesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A852D1F633600CAD0F1 /* IconDesignerViewModel.swift */; };
 		B9567A882D1F69FF00CAD0F1 /* FolderTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A872D1F69FF00CAD0F1 /* FolderTop.swift */; };
-		B9567A8A2D1F6B7900CAD0F1 /* ColorBlended.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A892D1F6B7900CAD0F1 /* ColorBlended.swift */; };
+		B9567A8C2D1F969C00CAD0F1 /* FolderIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A8B2D1F969C00CAD0F1 /* FolderIconView.swift */; };
+		B9567A8E2D1F96B300CAD0F1 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A8D2D1F96B300CAD0F1 /* Snapshot.swift */; };
+		B9567A902D1F9CD400CAD0F1 /* hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A8F2D1F9CD400CAD0F1 /* hex.swift */; };
+		B9567A922D1FA74F00CAD0F1 /* FolderPresetPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A912D1FA74F00CAD0F1 /* FolderPresetPreview.swift */; };
+		B9567A972D1FAA6F00CAD0F1 /* IconsArrayIOS18.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A952D1FAA6F00CAD0F1 /* IconsArrayIOS18.swift */; };
+		B9567A982D1FAA6F00CAD0F1 /* IconsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A932D1FAA6F00CAD0F1 /* IconsPicker.swift */; };
+		B9567A992D1FAA6F00CAD0F1 /* IconsArrayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A942D1FAA6F00CAD0F1 /* IconsArrayStorage.swift */; };
+		B9567A9A2D1FAA6F00CAD0F1 /* Icons Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,9 +28,15 @@
 		B9567A6F2D1F536100CAD0F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9567A702D1F536100CAD0F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons_DesignerApp.swift; sourceTree = "<group>"; };
-		B9567A852D1F633600CAD0F1 /* IconDesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconDesignerViewModel.swift; sourceTree = "<group>"; };
 		B9567A872D1F69FF00CAD0F1 /* FolderTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTop.swift; sourceTree = "<group>"; };
-		B9567A892D1F6B7900CAD0F1 /* ColorBlended.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorBlended.swift; sourceTree = "<group>"; };
+		B9567A8B2D1F969C00CAD0F1 /* FolderIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderIconView.swift; sourceTree = "<group>"; };
+		B9567A8D2D1F96B300CAD0F1 /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		B9567A8F2D1F9CD400CAD0F1 /* hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hex.swift; sourceTree = "<group>"; };
+		B9567A912D1FA74F00CAD0F1 /* FolderPresetPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderPresetPreview.swift; sourceTree = "<group>"; };
+		B9567A932D1FAA6F00CAD0F1 /* IconsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsPicker.swift; sourceTree = "<group>"; };
+		B9567A942D1FAA6F00CAD0F1 /* IconsArrayStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsArrayStorage.swift; sourceTree = "<group>"; };
+		B9567A952D1FAA6F00CAD0F1 /* IconsArrayIOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsArrayIOS18.swift; sourceTree = "<group>"; };
+		B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Icons Arrays.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,8 +44,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9567A812D1F5C9000CAD0F1 /* SwiftDraw in Frameworks */,
-				B9567A842D1F631B00CAD0F1 /* PocketSVG in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +78,18 @@
 			isa = PBXGroup;
 			children = (
 				B9567A6E2D1F536100CAD0F1 /* Preview Content */,
-				B9567A6F2D1F536100CAD0F1 /* Assets.xcassets */,
 				B9567A702D1F536100CAD0F1 /* ContentView.swift */,
-				B9567A852D1F633600CAD0F1 /* IconDesignerViewModel.swift */,
+				B9567A912D1FA74F00CAD0F1 /* FolderPresetPreview.swift */,
 				B9567A872D1F69FF00CAD0F1 /* FolderTop.swift */,
-				B9567A892D1F6B7900CAD0F1 /* ColorBlended.swift */,
+				B9567A8B2D1F969C00CAD0F1 /* FolderIconView.swift */,
+				B9567A8F2D1F9CD400CAD0F1 /* hex.swift */,
+				B9567A8D2D1F96B300CAD0F1 /* Snapshot.swift */,
 				B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */,
+				B9567A932D1FAA6F00CAD0F1 /* IconsPicker.swift */,
+				B9567A942D1FAA6F00CAD0F1 /* IconsArrayStorage.swift */,
+				B9567A952D1FAA6F00CAD0F1 /* IconsArrayIOS18.swift */,
+				B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */,
+				B9567A6F2D1F536100CAD0F1 /* Assets.xcassets */,
 			);
 			path = "Icons Designer";
 			sourceTree = "<group>";
@@ -97,8 +111,6 @@
 			);
 			name = "Icons Designer";
 			packageProductDependencies = (
-				B9567A802D1F5C9000CAD0F1 /* SwiftDraw */,
-				B9567A832D1F631B00CAD0F1 /* PocketSVG */,
 			);
 			productName = "Icons Designer";
 			productReference = B9567A5C2D1F515E00CAD0F1 /* Icons Designer.app */;
@@ -129,8 +141,6 @@
 			mainGroup = B9567A532D1F515E00CAD0F1;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				B9567A7F2D1F5C9000CAD0F1 /* XCRemoteSwiftPackageReference "SwiftDraw" */,
-				B9567A822D1F631B00CAD0F1 /* XCRemoteSwiftPackageReference "PocketSVG" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B9567A5D2D1F515E00CAD0F1 /* Products */;
@@ -159,11 +169,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9567A862D1F633600CAD0F1 /* IconDesignerViewModel.swift in Sources */,
 				B9567A882D1F69FF00CAD0F1 /* FolderTop.swift in Sources */,
+				B9567A902D1F9CD400CAD0F1 /* hex.swift in Sources */,
+				B9567A972D1FAA6F00CAD0F1 /* IconsArrayIOS18.swift in Sources */,
+				B9567A982D1FAA6F00CAD0F1 /* IconsPicker.swift in Sources */,
+				B9567A992D1FAA6F00CAD0F1 /* IconsArrayStorage.swift in Sources */,
+				B9567A9A2D1FAA6F00CAD0F1 /* Icons Arrays.swift in Sources */,
 				B9567A732D1F536100CAD0F1 /* ContentView.swift in Sources */,
+				B9567A922D1FA74F00CAD0F1 /* FolderPresetPreview.swift in Sources */,
 				B9567A742D1F536100CAD0F1 /* Icons_DesignerApp.swift in Sources */,
-				B9567A8A2D1F6B7900CAD0F1 /* ColorBlended.swift in Sources */,
+				B9567A8C2D1F969C00CAD0F1 /* FolderIconView.swift in Sources */,
+				B9567A8E2D1F96B300CAD0F1 /* Snapshot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +316,7 @@
 				DEVELOPMENT_TEAM = 47J6H2LHDD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Folder Icons";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -333,6 +350,7 @@
 				DEVELOPMENT_TEAM = 47J6H2LHDD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Folder Icons";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -377,38 +395,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		B9567A7F2D1F5C9000CAD0F1 /* XCRemoteSwiftPackageReference "SwiftDraw" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/swhitty/SwiftDraw";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.18.1;
-			};
-		};
-		B9567A822D1F631B00CAD0F1 /* XCRemoteSwiftPackageReference "PocketSVG" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pocketsvg/PocketSVG.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.7.3;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		B9567A802D1F5C9000CAD0F1 /* SwiftDraw */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B9567A7F2D1F5C9000CAD0F1 /* XCRemoteSwiftPackageReference "SwiftDraw" */;
-			productName = SwiftDraw;
-		};
-		B9567A832D1F631B00CAD0F1 /* PocketSVG */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B9567A822D1F631B00CAD0F1 /* XCRemoteSwiftPackageReference "PocketSVG" */;
-			productName = PocketSVG;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B9567A542D1F515E00CAD0F1 /* Project object */;
 }
