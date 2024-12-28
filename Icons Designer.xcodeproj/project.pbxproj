@@ -14,6 +14,8 @@
 		B9567A812D1F5C9000CAD0F1 /* SwiftDraw in Frameworks */ = {isa = PBXBuildFile; productRef = B9567A802D1F5C9000CAD0F1 /* SwiftDraw */; };
 		B9567A842D1F631B00CAD0F1 /* PocketSVG in Frameworks */ = {isa = PBXBuildFile; productRef = B9567A832D1F631B00CAD0F1 /* PocketSVG */; };
 		B9567A862D1F633600CAD0F1 /* IconDesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A852D1F633600CAD0F1 /* IconDesignerViewModel.swift */; };
+		B9567A882D1F69FF00CAD0F1 /* FolderTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A872D1F69FF00CAD0F1 /* FolderTop.swift */; };
+		B9567A8A2D1F6B7900CAD0F1 /* ColorBlended.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A892D1F6B7900CAD0F1 /* ColorBlended.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		B9567A702D1F536100CAD0F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons_DesignerApp.swift; sourceTree = "<group>"; };
 		B9567A852D1F633600CAD0F1 /* IconDesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconDesignerViewModel.swift; sourceTree = "<group>"; };
+		B9567A872D1F69FF00CAD0F1 /* FolderTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTop.swift; sourceTree = "<group>"; };
+		B9567A892D1F6B7900CAD0F1 /* ColorBlended.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorBlended.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				B9567A6F2D1F536100CAD0F1 /* Assets.xcassets */,
 				B9567A702D1F536100CAD0F1 /* ContentView.swift */,
 				B9567A852D1F633600CAD0F1 /* IconDesignerViewModel.swift */,
+				B9567A872D1F69FF00CAD0F1 /* FolderTop.swift */,
+				B9567A892D1F6B7900CAD0F1 /* ColorBlended.swift */,
 				B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */,
 			);
 			path = "Icons Designer";
@@ -154,8 +160,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9567A862D1F633600CAD0F1 /* IconDesignerViewModel.swift in Sources */,
+				B9567A882D1F69FF00CAD0F1 /* FolderTop.swift in Sources */,
 				B9567A732D1F536100CAD0F1 /* ContentView.swift in Sources */,
 				B9567A742D1F536100CAD0F1 /* Icons_DesignerApp.swift in Sources */,
+				B9567A8A2D1F6B7900CAD0F1 /* ColorBlended.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

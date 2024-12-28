@@ -2,110 +2,146 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = IconDesignerViewModel()
-    
-    // The color to blend with the SVG
-    @State private var svgColor: Color = .red
-    
+
     var body: some View {
         VStack(spacing: 20) {
             
             // MARK: - Preview
             if let finalImage = viewModel.generateFinalIcon() {
-                // Display the final image with blending and opacity
                 Image(nsImage: finalImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .blending(color: svgColor) // Apply the provided blending modifier
-                    .opacity(0.5) // Set entire image to 50% opacity
-                    .frame(height: 200) // Scale to 200px tall
+                    .frame(height: 200)
                     .border(Color.gray, width: 1)
             } else {
-                Text("No SVG loaded")
+                Text("No icon generated yet")
                     .foregroundColor(.secondary)
             }
             
-            // MARK: - Load SVG & SVG Color Picker
+            // MARK: - Symbol Name & Color
             HStack {
-                Button("Load SVG") {
-                    openPanelAndLoadSVG()
+                VStack(alignment: .leading) {
+                    Text("SF Symbol Name:")
+                        .font(.headline)
+                    TextField("e.g., star.fill", text: $viewModel.symbolName)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(width: 200)
                 }
-                .padding(.trailing, 20)
+                .padding(.trailing, 40)
                 
-                ColorPicker("SVG Color", selection: $svgColor)
-                    .frame(width: 150)
+                VStack(alignment: .leading) {
+                    Text("SF Symbol Color:")
+                        .font(.headline)
+                    ColorPicker("", selection: $viewModel.symbolColor)
+                        .labelsHidden()
+                        .frame(width: 150)
+                }
             }
             
-            // MARK: - Shape Colors
+            // MARK: - Symbol Opacity Slider
+            VStack(alignment: .leading) {
+                Text("Symbol Opacity: \(String(format: "%.2f", viewModel.symbolOpacity))")
+                Slider(value: $viewModel.symbolOpacity, in: 0.0...1.0, step: 0.01)
+                    .frame(width: 200)
+            }
+            
+            // MARK: - Top/Bottom Shape Colors
             HStack {
-                ColorPicker("Top Shape Color", selection: $viewModel.topShapeColor)
-                    .frame(width: 150)
+                VStack(alignment: .leading) {
+                    Text("Top Shape Color:")
+                        .font(.headline)
+                    ColorPicker("", selection: $viewModel.topShapeColor)
+                        .labelsHidden()
+                        .frame(width: 150)
+                }
+                .padding(.trailing, 40)
                 
-                ColorPicker("Bottom Shape Color", selection: $viewModel.bottomShapeColor)
-                    .frame(width: 150)
+                VStack(alignment: .leading) {
+                    Text("Bottom Shape Color:")
+                        .font(.headline)
+                    ColorPicker("", selection: $viewModel.bottomShapeColor)
+                        .labelsHidden()
+                        .frame(width: 150)
+                }
             }
             
-            // MARK: - Offset Sliders with Plus/Minus Buttons
+            // MARK: - Offsets
             VStack(spacing: 20) {
-                // Bottom Rectangle Offset
-                HStack {
-                    Button("-") {
-                        viewModel.bottomOffset -= 1
+                // Bottom Offset
+                VStack(alignment: .leading) {
+                    Text("Bottom Offset:")
+                        .font(.headline)
+                    HStack {
+                        Button {
+                            viewModel.bottomOffset -= 1
+                        } label: {
+                            Image(systemName: "minus.circle.fill")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.red)
+                        }
+                        Slider(value: $viewModel.bottomOffset, in: -470...470, step: 1)
+                            .frame(width: 300)
+                        Button {
+                            viewModel.bottomOffset += 1
+                        } label: {
+                            Image(systemName: "plus.circle.fill")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.green)
+                        }
                     }
-                    .frame(width: 30, height: 30)
-                    
-                    Slider(value: $viewModel.bottomOffset, in: -470...470, step: 1)
-                        .frame(width: 300)
-                    
-                    Button("+") {
-                        viewModel.bottomOffset += 1
-                    }
-                    .frame(width: 30, height: 30)
+                    Text("\(Int(viewModel.bottomOffset))")
+                        .frame(width: 360, alignment: .trailing)
                 }
-                Text("Bottom Offset: \(Int(viewModel.bottomOffset))")
-                    .frame(width: 400, alignment: .leading)
                 
-                // Top Shape Offset
-                HStack {
-                    Button("-") {
-                        viewModel.topOffset -= 1
+                // Top Offset
+                VStack(alignment: .leading) {
+                    Text("Top Offset:")
+                        .font(.headline)
+                    HStack {
+                        Button {
+                            viewModel.topOffset -= 1
+                        } label: {
+                            Image(systemName: "minus.circle.fill")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.red)
+                        }
+                        Slider(value: $viewModel.topOffset, in: -470...470, step: 1)
+                            .frame(width: 300)
+                        Button {
+                            viewModel.topOffset += 1
+                        } label: {
+                            Image(systemName: "plus.circle.fill")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.green)
+                        }
                     }
-                    .frame(width: 30, height: 30)
-                    
-                    Slider(value: $viewModel.topOffset, in: -470...470, step: 1)
-                        .frame(width: 300)
-                    
-                    Button("+") {
-                        viewModel.topOffset += 1
-                    }
-                    .frame(width: 30, height: 30)
+                    Text("\(Int(viewModel.topOffset))")
+                        .frame(width: 360, alignment: .trailing)
                 }
-                Text("Top Offset: \(Int(viewModel.topOffset))")
-                    .frame(width: 400, alignment: .leading)
             }
             .padding()
             .frame(width: 400)
             
-            // MARK: - Save PNG
-            Button("Save PNG") {
+            // MARK: - Save
+            Button {
                 savePNG()
+            } label: {
+                Text("Save PNG")
+                    .font(.headline)
+                    .padding()
+                    .frame(width: 200)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
             }
             .padding(.top, 20)
         }
         .padding()
-        .frame(minWidth: 600, minHeight: 600)
-    }
-    
-    // MARK: - File/Open Panels
-    
-    private func openPanelAndLoadSVG() {
-        let panel = NSOpenPanel()
-        panel.allowedFileTypes = ["svg"]
-        panel.allowsMultipleSelection = false
-        panel.canChooseDirectories = false
-        
-        if panel.runModal() == .OK, let url = panel.url {
-            viewModel.loadSVG(from: url)
-        }
+        .frame(minWidth: 600, minHeight: 700)
     }
     
     private func savePNG() {
@@ -118,30 +154,6 @@ struct ContentView: View {
         }
     }
 }
-
-// MARK: - ColorBlended ViewModifier
-
-public struct ColorBlended: ViewModifier {
-    fileprivate var color: Color
-    
-    public func body(content: Content) -> some View {
-        VStack {
-            ZStack {
-                content
-                color.blendMode(.sourceAtop)
-            }
-            .drawingGroup(opaque: false)
-        }
-    }
-}
-
-extension View {
-    public func blending(color: Color) -> some View {
-        modifier(ColorBlended(color: color))
-    }
-}
-
-// MARK: - Preview
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
