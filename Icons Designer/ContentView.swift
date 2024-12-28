@@ -17,32 +17,130 @@ struct ContentView: View {
     
     @State var imageType: ImageType = .sfsymbol
     @State private var dropError: String? = nil
+    
+    @State var isTargetedDrop = false
 
+    @State var breatheAnimation = false
+    @State var rotateAnimation = false
+    
+    @State var rotationAngle = 0
+    
+    let timer = Timer.publish(every: 0.75, on: .main, in: .common).autoconnect()
+    
     var body: some View {
         GeometryReader { geo in
             VSplitView {
                 HStack {
                     // MARK: - Live Preview
                     // Show the folder icon at a smaller scale, if desired
-                    VStack {
-                        FolderIconView(topShapeColor: $topShapeColor,
-                                       bottomShapeColor: $bottomShapeColor,
-                                       symbolName: $symbolName,
-                                       symbolColor: $symbolColor,
-                                       symbolOpacity: $symbolOpacity,
-                                       topOffset: $topOffset,
-                                       bottomOffset: $bottomOffset,
-                                       imageType: $imageType)
-                        .frame(width: 200, height: 200)
-                        .scaleEffect(0.43)
-                        .onDrop(of: ["public.file-url"], isTargeted: nil) { providers in
+                    GeometryReader { smallGeo in
+                        VStack {
+                            FolderIconView(topShapeColor: $topShapeColor,
+                                           bottomShapeColor: $bottomShapeColor,
+                                           symbolName: $symbolName,
+                                           symbolColor: $symbolColor,
+                                           symbolOpacity: $symbolOpacity,
+                                           topOffset: $topOffset,
+                                           bottomOffset: $bottomOffset,
+                                           imageType: $imageType)
+                            .frame(width: 200, height: 200)
+                            .scaleEffect(0.43)
+                            .cornerRadius(10)
+                            .zIndex(10)
+                            
+                            Text("Drag Folders to Set Icons")
+                            
+                            // -- Save Button
+                            Button(action: savePNG) {
+                                Text("Save as Image")
+                                    .font(.headline)
+                                    .padding()
+                                    .frame(width: 175)
+                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                            }
+                            .buttonStyle(.plain)
+                            .padding(.top, 10)
+                        }
+                        .overlay {
+                            ZStack {
+                                Color.blue
+                                    .frame(width: smallGeo.size.width, height: smallGeo.size.height)
+                                
+                                VStack {
+                                    Text("Drop Folder Here")
+                                        .font(.headline)
+                                        .foregroundStyle(Color.white)
+                                    
+                                    Spacer()
+                                        .frame(height: 75)
+                                    
+                                    ZStack {
+                                        ZStack {
+                                            HStack {
+                                                Image(systemName: "chevron.compact.right")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 20)
+                                                    .foregroundStyle(Color.white)
+                                                
+                                                Spacer()
+                                                    .frame(width: breatheAnimation ? 190: 120)
+                                                    .animation(.bouncy(duration: 0.75), value: breatheAnimation)
+                                                
+                                                Image(systemName: "chevron.compact.right")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 20)
+                                                    .foregroundStyle(Color.white)
+                                                    .rotationEffect(Angle(degrees: 180))
+                                            }
+                                            
+                                            HStack {
+                                                Image(systemName: "chevron.compact.right")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 20)
+                                                    .foregroundStyle(Color.white)
+                                                
+                                                Spacer()
+                                                    .frame(width: breatheAnimation ? 190: 120)
+                                                    .animation(.bouncy(duration: 0.75), value: breatheAnimation)
+                                                
+                                                Image(systemName: "chevron.compact.right")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 20)
+                                                    .foregroundStyle(Color.white)
+                                                    .rotationEffect(Angle(degrees: 180))
+                                                
+                                            }.rotationEffect(Angle(degrees: 90))
+                                        }.rotationEffect(Angle(degrees: Double(rotationAngle)))
+                                            .animation(.bouncy(duration: 0.5), value: rotationAngle)
+                                            .onReceive(timer) { thing in
+                                                breatheAnimation.toggle()
+                                                rotationAngle += 90
+                                            }
+                                        
+                                        FolderIconView(topShapeColor: $topShapeColor,
+                                                       bottomShapeColor: $bottomShapeColor,
+                                                       symbolName: $symbolName,
+                                                       symbolColor: $symbolColor,
+                                                       symbolOpacity: $symbolOpacity,
+                                                       topOffset: $topOffset,
+                                                       bottomOffset: $bottomOffset,
+                                                       imageType: $imageType)
+                                        .frame(width: 100, height: 100)
+                                        .scaleEffect(0.21)
+                                    }
+                                }
+                            }.opacity(isTargetedDrop ? 1 : 0)
+                                .animation(.default, value: isTargetedDrop)
+                        }
+                        .onDrop(of: ["public.file-url"], isTargeted: $isTargetedDrop) { providers in
                             handleDrop(providers: providers)
                         }
-                        //                    .background(Color.gray.opacity(0.2))
-                        .cornerRadius(10)
-                        .zIndex(10)
-                        
-                        Text("Drag Folders to Set Icons")
                     }
 
                     Spacer()
@@ -150,19 +248,6 @@ struct ContentView: View {
                                 }
                                 .padding(.trailing, 20)
                             }
-                            
-                            // -- Save Button
-                            Button(action: savePNG) {
-                                Text("Save as Image")
-                                    .font(.headline)
-                                    .padding()
-                                    .frame(width: 175)
-                                    .background(Color.blue)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(10)
-                            }
-                            .buttonStyle(.plain)
-                            .padding(.top, 10)
                         }
                     }
                     .zIndex(1)
