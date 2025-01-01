@@ -21,6 +21,7 @@
 		B9567A992D1FAA6F00CAD0F1 /* IconsArrayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A942D1FAA6F00CAD0F1 /* IconsArrayStorage.swift */; };
 		B9567A9A2D1FAA6F00CAD0F1 /* Icons Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */; };
 		B98FCE092D1FDDCC0033EAED /* IconChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FCE082D1FDDCC0033EAED /* IconChanger.swift */; };
+		B98FCE0C2D20AED10033EAED /* FolderClippingShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Icons Arrays.swift"; sourceTree = "<group>"; };
 		B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Icons Designer.entitlements"; sourceTree = "<group>"; };
 		B98FCE082D1FDDCC0033EAED /* IconChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconChanger.swift; sourceTree = "<group>"; };
+		B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderClippingShape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			children = (
 				B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */,
 				B9567A702D1F536100CAD0F1 /* ContentView.swift */,
+				B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */,
 				B9567A8B2D1F969C00CAD0F1 /* FolderIconView.swift */,
 				B9567A912D1FA74F00CAD0F1 /* FolderPresetPreview.swift */,
 				B9567A8D2D1F96B300CAD0F1 /* Snapshot.swift */,
@@ -191,6 +194,7 @@
 				B9567A732D1F536100CAD0F1 /* ContentView.swift in Sources */,
 				B9567A922D1FA74F00CAD0F1 /* FolderPresetPreview.swift in Sources */,
 				B9567A742D1F536100CAD0F1 /* Icons_DesignerApp.swift in Sources */,
+				B98FCE0C2D20AED10033EAED /* FolderClippingShape.swift in Sources */,
 				B98FCE092D1FDDCC0033EAED /* IconChanger.swift in Sources */,
 				B9567A8C2D1F969C00CAD0F1 /* FolderIconView.swift in Sources */,
 				B9567A8E2D1F96B300CAD0F1 /* Snapshot.swift in Sources */,
@@ -326,7 +330,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Icons Designer/Icons Designer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Icons Designer/Preview Content\"";
 				DEVELOPMENT_TEAM = 47J6H2LHDD;
 				ENABLE_PREVIEWS = YES;
@@ -362,7 +366,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Icons Designer/Icons Designer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Icons Designer/Preview Content\"";
 				DEVELOPMENT_TEAM = 47J6H2LHDD;
 				ENABLE_PREVIEWS = YES;

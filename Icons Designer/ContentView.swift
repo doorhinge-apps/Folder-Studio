@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var topOffset: CGFloat = -141
     @State private var bottomOffset: CGFloat = -81
     
+    @State private var iconOffset: CGFloat = 0
+    
     @State var showIconPicker = false
     
     @State var imageType: ImageType = .sfsymbol
@@ -25,7 +27,11 @@ struct ContentView: View {
     
     @State var rotationAngle = 0
     
+    @State var iconScale = 1.0
+    
     let timer = Timer.publish(every: 0.75, on: .main, in: .common).autoconnect()
+    
+    @State private var selectedImage: NSImage? = nil
     
     var body: some View {
         GeometryReader { geo in
@@ -42,7 +48,11 @@ struct ContentView: View {
                                            symbolOpacity: $symbolOpacity,
                                            topOffset: $topOffset,
                                            bottomOffset: $bottomOffset,
-                                           imageType: $imageType)
+                                           iconOffset: $iconOffset,
+                                           iconScale: $iconScale,
+                                           imageType: $imageType,
+                                           customImage: $selectedImage
+                            )
                             .frame(width: 200, height: 200)
                             .scaleEffect(0.43)
                             .cornerRadius(10)
@@ -130,7 +140,10 @@ struct ContentView: View {
                                                        symbolOpacity: $symbolOpacity,
                                                        topOffset: $topOffset,
                                                        bottomOffset: $bottomOffset,
-                                                       imageType: $imageType)
+                                                       iconOffset: $iconOffset,
+                                                       iconScale: $iconScale,
+                                                       imageType: $imageType,
+                                                       customImage: $selectedImage)
                                         .frame(width: 100, height: 100)
                                         .scaleEffect(0.21)
                                     }
@@ -170,52 +183,145 @@ struct ContentView: View {
                             
                             Divider()
                             
-                            // -- Symbol Controls
-                            HStack {
-                                Text("Symbol:")
-                                    .font(.headline)
-                                Spacer()
-                            }
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Button {
-                                        showIconPicker = true
-                                    } label: {
-                                        Text(symbolName)
-                                            .font(.headline)
-                                            .padding(5)
-                                            .padding(.horizontal, 10)
-                                            .background(Color.blue)
-                                            .foregroundColor(.white)
-                                            .cornerRadius(10)
-                                    }
-                                    .buttonStyle(.plain)
-                                    .sheet(isPresented: $showIconPicker) {
-                                        VStack {
-                                            HStack {
-                                                Spacer()
-                                                Button {
-                                                    showIconPicker = false
-                                                } label: {
-                                                    Text("Close")
-                                                }
-                                            }.padding(15)
+                            if imageType != .none {
+                                // -- Symbol Controls
+                                HStack {
+                                    Text("Icon:")
+                                        .font(.headline)
+                                    Spacer()
+                                }
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        if imageType == .png {
+                                            if let image = selectedImage {
+                                                Image(nsImage: image)
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 100, height: 100)
+                                            }
                                             
-                                            IconsPicker(currentIcon: $symbolName)
+                                            Button {
+                                                selectImageFile()
+                                            } label: {
+                                                Text(selectedImage != nil ? "Change": "Select")
+                                                    .font(.headline)
+                                                    .padding(5)
+                                                    .padding(.horizontal, 10)
+                                                    .background(Color.blue)
+                                                    .foregroundColor(.white)
+                                                    .cornerRadius(10)
+                                                    .frame(width: 100)
+                                            }
+                                            .buttonStyle(.plain)
+                                        }
+                                        else if imageType == .sfsymbol {
+                                            Image(systemName: symbolName)
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 100, height: 100)
+                                            
+                                            Button {
+                                                showIconPicker = true
+                                            } label: {
+                                                Text(symbolName)
+                                                    .font(.headline)
+                                                    .padding(5)
+                                                    .padding(.horizontal, 10)
+                                                    .background(Color.blue)
+                                                    .foregroundColor(.white)
+                                                    .cornerRadius(10)
+                                                    .frame(width: 100)
+                                            }
+                                            .buttonStyle(.plain)
+                                            .sheet(isPresented: $showIconPicker) {
+                                                VStack {
+                                                    HStack {
+                                                        Spacer()
+                                                        Button {
+                                                            showIconPicker = false
+                                                        } label: {
+                                                            Text("Close")
+                                                        }
+                                                    }.padding(15)
+                                                    
+                                                    IconsPicker(currentIcon: $symbolName)
+                                                }
+                                            }
                                         }
                                     }
+                                    .padding(.trailing, 20)
+                                    
+                                    VStack(alignment: .leading) {
+                                        HStack {
+                                            Text("Opacity: \(Int(symbolOpacity*100))%")
+                                            
+                                            Spacer()
+                                            
+                                            Button {
+                                                symbolOpacity = 0.5
+                                            } label: {
+                                                Text("Reset")
+                                                    .font(.headline)
+                                                    .padding(5)
+                                                    .padding(.horizontal, 10)
+                                                    .background(Color.blue)
+                                                    .foregroundColor(.white)
+                                                    .cornerRadius(10)
+                                            }
+                                            .buttonStyle(.plain)
+                                        }
+                                        Slider(value: $symbolOpacity, in: 0...1)
+                                            .frame(width: 150)
+                                        
+                                        HStack {
+                                            Text("Scale: \(Int(iconScale*100))%")
+                                            
+                                            Spacer()
+                                            
+                                            Button {
+                                                iconScale = 1.0
+                                            } label: {
+                                                Text("Reset")
+                                                    .font(.headline)
+                                                    .padding(5)
+                                                    .padding(.horizontal, 10)
+                                                    .background(Color.blue)
+                                                    .foregroundColor(.white)
+                                                    .cornerRadius(10)
+//                                                    .frame(width: 100)
+                                            }
+                                            .buttonStyle(.plain)
+                                        }
+                                        Slider(value: $iconScale, in: 0...3)
+                                            .frame(width: 150)
+                                        
+                                        
+                                        HStack {
+                                            Text("Offset: \(Int(iconOffset))")
+                                            
+                                            Spacer()
+                                            
+                                            Button {
+                                                iconOffset = 0
+                                            } label: {
+                                                Text("Reset")
+                                                    .font(.headline)
+                                                    .padding(5)
+                                                    .padding(.horizontal, 10)
+                                                    .background(Color.blue)
+                                                    .foregroundColor(.white)
+                                                    .cornerRadius(10)
+                                            }
+                                            .buttonStyle(.plain)
+                                        }
+                                        Slider(value: $iconOffset, in: -150...150)
+                                            .frame(width: 150)
+                                    }.frame(width: 200)
+                                    Spacer()
                                 }
-                                .padding(.trailing, 20)
                                 
-                                VStack(alignment: .leading) {
-                                    Text("Opacity: \(Int(symbolOpacity*100))%")
-                                    Slider(value: $symbolOpacity, in: 0...1, step: 0.01)
-                                        .frame(width: 150)
-                                }
-                                Spacer()
+                                Divider()
                             }
-                            
-                            Divider()
                             
                             // -- Colors
                             HStack {
@@ -253,7 +359,7 @@ struct ContentView: View {
                     .zIndex(1)
                 }
                 .padding(20)
-                .frame(minHeight: 300, idealHeight: 300)
+                .frame(minHeight: 300, idealHeight: 500)
                 
                 // MARK: - Presets
                 VStack {
@@ -269,7 +375,9 @@ struct ContentView: View {
                                                 topShapeColorSetter: $topShapeColor,
                                                 bottomShapeColorSetter: $bottomShapeColor,
                                                 iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity)
+                                                opacitySetter: $symbolOpacity,
+                                                iconScale: $iconScale,
+                                                selectedImage: $selectedImage)
                             
                             FolderPresetPreview(color1: "D23359", color2: "F66F8F",
                                                 symbolName: $symbolName,
@@ -278,7 +386,9 @@ struct ContentView: View {
                                                 topShapeColorSetter: $topShapeColor,
                                                 bottomShapeColorSetter: $bottomShapeColor,
                                                 iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity)
+                                                opacitySetter: $symbolOpacity,
+                                                iconScale: $iconScale,
+                                                selectedImage: $selectedImage)
                             
                             FolderPresetPreview(color1: "DA8521", color2: "F6B86F",
                                                 symbolName: $symbolName,
@@ -287,7 +397,9 @@ struct ContentView: View {
                                                 topShapeColorSetter: $topShapeColor,
                                                 bottomShapeColorSetter: $bottomShapeColor,
                                                 iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity)
+                                                opacitySetter: $symbolOpacity,
+                                                iconScale: $iconScale,
+                                                selectedImage: $selectedImage)
                             
                             FolderPresetPreview(color1: "E1C359", color2: "F6F16F",
                                                 symbolName: $symbolName,
@@ -296,7 +408,9 @@ struct ContentView: View {
                                                 topShapeColorSetter: $topShapeColor,
                                                 bottomShapeColorSetter: $bottomShapeColor,
                                                 iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity)
+                                                opacitySetter: $symbolOpacity,
+                                                iconScale: $iconScale,
+                                                selectedImage: $selectedImage)
                             
                             FolderPresetPreview(color1: "20731D", color2: "43AC40",
                                                 symbolName: $symbolName,
@@ -305,7 +419,9 @@ struct ContentView: View {
                                                 topShapeColorSetter: $topShapeColor,
                                                 bottomShapeColorSetter: $bottomShapeColor,
                                                 iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity)
+                                                opacitySetter: $symbolOpacity,
+                                                iconScale: $iconScale,
+                                                selectedImage: $selectedImage)
                             
                             FolderPresetPreview(color1: "2955AB", color2: "5788E5",
                                                 symbolName: $symbolName,
@@ -314,7 +430,9 @@ struct ContentView: View {
                                                 topShapeColorSetter: $topShapeColor,
                                                 bottomShapeColorSetter: $bottomShapeColor,
                                                 iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity)
+                                                opacitySetter: $symbolOpacity,
+                                                iconScale: $iconScale,
+                                                selectedImage: $selectedImage)
                             
                             FolderPresetPreview(color1: "7125BD", color2: "A750FF",
                                                 symbolName: $symbolName,
@@ -323,7 +441,9 @@ struct ContentView: View {
                                                 topShapeColorSetter: $topShapeColor,
                                                 bottomShapeColorSetter: $bottomShapeColor,
                                                 iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity)
+                                                opacitySetter: $symbolOpacity,
+                                                iconScale: $iconScale,
+                                                selectedImage: $selectedImage)
                             
                             FolderPresetPreview(color1: "BD2593", color2: "FA62F4",
                                                 symbolName: $symbolName,
@@ -332,15 +452,18 @@ struct ContentView: View {
                                                 topShapeColorSetter: $topShapeColor,
                                                 bottomShapeColorSetter: $bottomShapeColor,
                                                 iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity)
+                                                opacitySetter: $symbolOpacity,
+                                                iconScale: $iconScale,
+                                                selectedImage: $selectedImage)
                         }
                         .padding(.horizontal, 10)
                     }
                 }
-                .frame(minHeight: 100, idealHeight: 200)
+//                .frame(minHeight: 100, idealHeight: 100)
+                .frame(height: 100)
             }
         }
-        .frame(minWidth: 550, minHeight: 500)
+        .frame(minWidth: 650, minHeight: 500)
     }
     
     // MARK: - Offset Controls
@@ -370,11 +493,27 @@ struct ContentView: View {
         }
     }
     
+    private func selectImageFile() {
+        let panel = NSOpenPanel()
+        panel.allowedContentTypes = [.image, .png, .svg]
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = false
+        
+        if panel.runModal() == .OK, let url = panel.url {
+            if let image = NSImage(contentsOf: url) {
+                selectedImage = image
+            } else {
+                print("Failed to load the selected PNG file.")
+            }
+        }
+    }
+    
+    
     // MARK: - Save as PNG to user-chosen location
     private func savePNG() {
         let panel = NSSavePanel()
         panel.canCreateDirectories = true
-        panel.allowedFileTypes = ["png"]
+        panel.allowedContentTypes = [.png]
         panel.nameFieldStringValue = "FolderIcon.png"
         
         if panel.runModal() == .OK, let url = panel.url {
@@ -386,7 +525,10 @@ struct ContentView: View {
                                               symbolOpacity: $symbolOpacity,
                                               topOffset: $topOffset,
                                               bottomOffset: $bottomOffset,
-                                              imageType: $imageType)
+                                              iconOffset: $iconOffset,
+                                              iconScale: $iconScale,
+                                              imageType: $imageType,
+                                              customImage: $selectedImage)
             
             // 2) Use .snapshotAsNSImage (your existing logic)
             let nsImage = fullSizeIcon.snapshotAsNSImage()
@@ -464,7 +606,10 @@ struct ContentView: View {
             symbolOpacity: $symbolOpacity,
             topOffset: $topOffset,
             bottomOffset: $bottomOffset,
-            imageType: $imageType
+            iconOffset: $iconOffset,
+            iconScale: $iconScale,
+            imageType: $imageType,
+            customImage: $selectedImage
         )
         let nsImage = fullSizeIcon.snapshotAsNSImage()
         

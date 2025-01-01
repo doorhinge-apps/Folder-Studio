@@ -22,6 +22,10 @@ struct FolderPresetPreview: View {
     @Binding var bottomShapeColorSetter: Color
     @Binding var iconColorSetter: Color
     @Binding var opacitySetter: Double
+    
+    @Binding var iconScale: Double
+    
+    @Binding var selectedImage: NSImage?
     var body: some View {
         ZStack {
             FolderIconView(topShapeColor: .constant(Color(hex: color1)),
@@ -31,7 +35,10 @@ struct FolderPresetPreview: View {
                            symbolOpacity: .constant(0.5),
                            topOffset: $topOffset,
                            bottomOffset: $bottomOffset,
-                           imageType: .constant(.sfsymbol))
+                           iconOffset: .constant(0),
+                           iconScale: .constant(1),
+                           imageType: .constant(.sfsymbol),
+                           customImage: $selectedImage)
             .scaleEffect(0.15)
             .frame(width: 70, height: 60)
             .clipped()
@@ -42,6 +49,7 @@ struct FolderPresetPreview: View {
                     iconColorSetter = Color(hex: color1)
                     bottomShapeColorSetter = Color(hex: color2)
                     opacitySetter = 0.5
+//                    iconScale = 1
                 }
         }
     }

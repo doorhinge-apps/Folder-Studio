@@ -3,6 +3,8 @@ import SwiftData
 
 
 struct IconsPicker: View {
+    @Environment(\.dismiss) var dismiss
+    
     @Binding var currentIcon: String
     
     @State var currentHoverIcon = ""
@@ -122,6 +124,8 @@ struct IconsPicker: View {
                                         currentIcon = icon
                                         print("Icon: \(icon)")
                                         print("Current Icon: \(currentIcon)")
+                                        
+                                        dismiss()
                                     } label: {
                                         ZStack {
                                             Image(systemName: icon)
