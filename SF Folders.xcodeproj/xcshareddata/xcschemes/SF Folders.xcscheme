@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "1620"
+   version = "1.7">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "Automatic">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B9567A5B2D1F515E00CAD0F1"
+               BuildableName = "SF Folders.app"
+               BlueprintName = "SF Folders"
+               ReferencedContainer = "container:SF Folders.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B9567A5B2D1F515E00CAD0F1"
+            BuildableName = "SF Folders.app"
+            BlueprintName = "SF Folders"
+            ReferencedContainer = "container:SF Folders.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B9567A5B2D1F515E00CAD0F1"
+            BuildableName = "SF Folders.app"
+            BlueprintName = "SF Folders"
+            ReferencedContainer = "container:SF Folders.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "# ===================================================================&#10;# INPUT PARAMETERS -- Edit these&#10;# ===================================================================&#10;&#10;# Your Apple Developer &quot;Team ID&quot; to use when exporting&#10;EXPORT_TEAM_ID=&quot;47J6H2LHDD&quot;&#10;EXPORT_DEVELOPER_ID_CERT_NAME=&quot;Developer ID Application: Andrew Myers (47J6H2LHDD)&quot;&#10;&#10;# The name of the generated disk image.&#10;# If you use a either CFBundleVersion or CFBundleShortVersionString,&#10;# in the name (you can use either), keep the string wrapped in single&#10;# quotes.&#10;BUILT_DMG_NAME=&apos;SF_Folders${CFBundleShortVersionString}.dmg&apos;&#10;&#10;# Path to the DMG Canvas document file&#10;#    If it&apos;s in your Xcode project folder:&#10;#      DMG_TEMPLATE_PATH=&quot;$SRCROOT/DiskImage.dmgcanvas&quot;&#10;#    Or use a manually-specified path&#10;#      DMG_TEMPLATE_PATH=&quot;~/Desktop/DiskImage.dmgcanvas&quot;&#10;DMG_TEMPLATE_PATH=&quot;/Users/caedmonmyers/Downloads/SF Folders.dmgcanvas&quot;&#10;&#10;# The file with this name, inside your DMG Canvas template, will get&#10;# replaced with your Xcode build product (which is named $FULL_PRODUCT_NAME).&#10;# In this example, they both have the same name:&#10;FILE_NAME_IN_DMG_TEMPLATE=&quot;SF Folders.app&quot;&#10;&#10;# Use this file if it exists. See below.&#10;EXPORT_OPTIONS_PLIST_PATH=&quot;$SRCROOT/ExportOptions.plist&quot;&#10;&#10;&#10;&#10;# ===================================================================&#10;# DMG Canvas Xcode Post-Archive Script&#10;# ===================================================================&#10;&#10;# Create a unique folder for the build products.&#10;# The app will be exported from the archive into this folder. &#10;EXPORT_UUID=`uuidgen`&#10;EXPORT_PATH=&quot;/tmp/$PRODUCT_NAME-$EXPORT_UUID/&quot;&#10;EXPORT_LOG_FILE_PATH=&quot;$EXPORT_PATH/post-archive-script.log&quot;&#10;mkdir -p &quot;$EXPORT_PATH&quot;&#10;if [ $? -ne 0 ] &#10;then&#10;    echo &quot;Creating the export directory failed&quot;&#10;    osascript -e &apos;display notification &quot;Creating export directory failed.&quot; with title &quot;DMG Canvas Xcode Post-Archive Script&quot;&apos;&#10;    exit -1&#10;fi&#10;&#10;# Xcode does not display the output or errors of Archive scripts&#10;# in the build log, so direct the output to a log file instead.&#10;exec &gt; $EXPORT_LOG_FILE_PATH 2&gt;&amp;1&#10;&#10;&#10;echo &quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;&#10;echo &quot;Running dmgcanvas \&quot;Archive\&quot; post-action script...&quot;&#10;echo &quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;&#10;echo &quot;\n\n\n&quot;&#10;&#10;&#10;# &#10;# Exporting the application from Xcode requires an options file&#10;# Use this default generated file, OR copy the ExportOptions.plist&#10;# file from a previous &quot;manual&quot; export from Xcode and place it in&#10;# your Xcode project&apos;s root folder.&#10;# &#10;if test -f &quot;$EXPORT_OPTIONS_PLIST_PATH&quot; ; then&#10;  echo &quot;&#x2022; Using existing ExportOptions.plist file&quot;&#10;else&#10;  echo &quot;&#x2022; Using default generated ExportOptions.plist file&quot;&#10;  EXPORT_OPTIONS_PLIST_PATH=&quot;$EXPORT_PATH/ExportOptions.plist&quot;&#10;  cat &gt;&quot;$EXPORT_OPTIONS_PLIST_PATH&quot; &lt;&lt;EOF&#10;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;&#10;&lt;plist version=&quot;1.0&quot;&gt;&#10;&lt;dict&gt;&#10;    &lt;key&gt;destination&lt;/key&gt;&#10;    &lt;string&gt;export&lt;/string&gt;&#10;    &lt;key&gt;method&lt;/key&gt;&#10;    &lt;string&gt;developer-id&lt;/string&gt;&#10;    &lt;key&gt;signingCertificate&lt;/key&gt;&#10;    &lt;string&gt;${EXPORT_DEVELOPER_ID_CERT_NAME}&lt;/string&gt;&#10;    &lt;key&gt;signingStyle&lt;/key&gt;&#10;    &lt;string&gt;manual&lt;/string&gt;&#10;    &lt;key&gt;teamID&lt;/key&gt;&#10;    &lt;string&gt;${EXPORT_TEAM_ID}&lt;/string&gt;&#10;&lt;/dict&gt;&#10;&lt;/plist&gt;&#10;EOF&#10;    if [ $? -ne 0 ] &#10;    then&#10;        echo &quot;Writing out the ExportOptions.plist failed&quot;&#10;        osascript -e &apos;display notification &quot;Writing out the ExportOptions.plist failed.&quot; with title &quot;DMG Canvas Xcode Post-Archive Script&quot;&apos;&#10;        open &quot;$EXPORT_LOG_FILE_PATH&quot;&#10;        exit -2&#10;    fi&#10;fi&#10;&#10;&#10;&#10;&#10;echo &quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;&#10;echo &quot;Exporting from Xcode archive...&quot;&#10;echo &quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;&#10;/usr/bin/xcodebuild -exportArchive -archivePath &quot;$ARCHIVE_PATH&quot; -exportPath &quot;$EXPORT_PATH&quot; -exportOptionsPlist &quot;$EXPORT_PATH/ExportOptions.plist&quot; &#10;if [ $? -ne 0 ] &#10;then&#10;    echo &quot;Exporting from Xcode failed&quot;&#10;    osascript -e &apos;display notification &quot;Exporting from Xcode failed.&quot; with title &quot;DMG Canvas Xcode Post-Archive Script&quot;&apos;&#10;    open &quot;$EXPORT_LOG_FILE_PATH&quot;&#10;    exit -3&#10;fi&#10;echo &quot;\n\n\n&quot;&#10;&#10;&#10;# Get the version numbers which we can use in the dmg file name&#10;CFBundleVersion=`/usr/libexec/PlistBuddy -c &quot;Print :CFBundleVersion&quot; &quot;${EXPORT_PATH}${INFOPLIST_PATH}&quot;`&#10;CFBundleShortVersionString=`/usr/libexec/PlistBuddy -c &quot;Print :CFBundleShortVersionString&quot; &quot;${EXPORT_PATH}${INFOPLIST_PATH}&quot;`&#10;&#10;&#10;echo &quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;&#10;echo &quot;Building the disk image with dmgcanvas...&quot;&#10;echo &quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;&#10;BUILT_DMG_PATH=$(eval echo &quot;$EXPORT_PATH/$BUILT_DMG_NAME&quot;)&#10;dmgcanvas &quot;$DMG_TEMPLATE_PATH&quot; &quot;$BUILT_DMG_PATH&quot; -setFilePath &quot;$FILE_NAME_IN_DMG_TEMPLATE&quot; &quot;$EXPORT_PATH/$FULL_PRODUCT_NAME&quot;&#10;if [ $? -ne 0 ] &#10;then&#10;    echo &quot;Building the disk image with dmgcanvas failed.&quot;&#10;    osascript -e &apos;display notification &quot;Building the disk image with dmgcanvas failed.&quot; with title &quot;DMG Canvas Xcode Post-Archive Script&quot;&apos;&#10;    open &quot;$EXPORT_LOG_FILE_PATH&quot;&#10;    exit -4&#10;fi&#10;&#10;echo &quot;&quot;&#10;echo &quot;&quot;&#10;echo &quot;&quot;&#10;echo &quot;$BUILT_DMG_PATH&quot;&#10;echo &quot;Done!&quot;&#10;&#10;&#10;# Reveal the built dmg&#10;open &quot;$EXPORT_PATH&quot;&#10;afplay /System/Library/Sounds/Glass.aiff&#10;osascript -e &apos;display notification &quot;Built Disk Image&quot; with title &quot;DMG Canvas Xcode Post-Archive Script&quot;&apos;&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "B9567A5B2D1F515E00CAD0F1"
+                     BuildableName = "SF Folders.app"
+                     BlueprintName = "SF Folders"
+                     ReferencedContainer = "container:SF Folders.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
+   </ArchiveAction>
+</Scheme>

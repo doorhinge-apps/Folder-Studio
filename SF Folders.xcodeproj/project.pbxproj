@@ -74,7 +74,6 @@
 		B9567A6E2D1F536100CAD0F1 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */,
 				B9567A6D2D1F536100CAD0F1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -84,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */,
+				B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */,
 				B9567A702D1F536100CAD0F1 /* ContentView.swift */,
 				B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */,
 				B9567A8B2D1F969C00CAD0F1 /* FolderIconView.swift */,
@@ -326,11 +326,11 @@
 		B9567A6B2D1F516000CAD0F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "New AppIcon";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Icons Designer/Icons Designer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Icons Designer/Preview Content\"";
 				DEVELOPMENT_TEAM = 47J6H2LHDD;
 				ENABLE_PREVIEWS = YES;
@@ -362,11 +362,11 @@
 		B9567A6C2D1F516000CAD0F1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "New AppIcon";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Icons Designer/Icons Designer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Icons Designer/Preview Content\"";
 				DEVELOPMENT_TEAM = 47J6H2LHDD;
 				ENABLE_PREVIEWS = YES;
