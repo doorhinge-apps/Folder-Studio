@@ -48,7 +48,7 @@ struct FolderIconView: View {
                 
                 if imageType == .none || customImage == nil {
                     Spacer()
-                        .foregroundStyle(symbolColor.shadow(.inner(color: Color(.black).opacity(0.25), radius: 10)))
+                        .foregroundStyle(symbolColor.shadow(.inner(color: Color(.black).opacity(0.5), radius: 10)))
                         .opacity(symbolOpacity)
                         .frame(width: 150, height: 150)
                         .position(x: iconWidth / 2, y: 231)
@@ -60,7 +60,7 @@ struct FolderIconView: View {
                     Image(systemName: symbolName)
                         .resizable()
                         .scaledToFit()
-                        .foregroundStyle(symbolColor.shadow(.inner(color: Color(.black).opacity(0.25), radius: 10)))
+                        .foregroundStyle(symbolColor.shadow(.inner(color: Color(.black).opacity(0.5), radius: 10)))
                         .opacity(symbolOpacity)
                         .frame(width: 150, height: 150)
                         .position(x: iconWidth / 2, y: 231)
@@ -70,18 +70,20 @@ struct FolderIconView: View {
                 
                 if imageType == .png, let image = customImage {
                     ZStack {
-                        Image(nsImage: image)
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundStyle(.shadow(.inner(color: Color(.black).opacity(0.25), radius: 10)))
-                            .opacity(symbolOpacity)
-                            .frame(width: 150, height: 150)
-                            .position(x: iconWidth / 2, y: 231)
-                            .scaleEffect(iconScale)
-                            .offset(y: iconOffset)
-                        
-                        symbolColor.blendMode(.sourceAtop)
-                    }.drawingGroup(opaque: false)
+                        ZStack {
+                            Image(nsImage: image)
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundStyle(.shadow(.inner(color: Color(.black).opacity(0.5), radius: 10)))
+                                .opacity(symbolOpacity)
+                                .frame(width: 150, height: 150)
+                                .position(x: iconWidth / 2, y: 231)
+                                .scaleEffect(iconScale)
+                                .offset(y: iconOffset)
+                            
+                            symbolColor.blendMode(.sourceAtop)
+                        }.drawingGroup(opaque: false)
+                    }
                 }
             }
         }

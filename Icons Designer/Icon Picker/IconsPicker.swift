@@ -149,7 +149,6 @@ struct IconsPicker: View {
                             }
                         }
                 }.scrollIndicators(.hidden)
-                
             }
         }
     }
