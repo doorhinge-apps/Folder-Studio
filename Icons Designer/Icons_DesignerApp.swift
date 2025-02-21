@@ -17,7 +17,15 @@ struct Icons_DesignerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-        }
+                .containerBackground(for: .window, content: {
+                    ZStack {
+                        Color(hex: "6FCDF6")
+                        
+                        Image("grain")
+                            .scaledToFill()
+                    }.ignoresSafeArea()
+                })
+        }.windowStyle(.hiddenTitleBar)
         .commands {
             CommandGroup(replacing: .appInfo) {
                 Button("About Your App") {

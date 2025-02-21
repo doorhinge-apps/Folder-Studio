@@ -22,7 +22,9 @@
 		B9567A9A2D1FAA6F00CAD0F1 /* Icons Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */; };
 		B98FCE092D1FDDCC0033EAED /* IconChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FCE082D1FDDCC0033EAED /* IconChanger.swift */; };
 		B98FCE0C2D20AED10033EAED /* FolderClippingShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */; };
+		B99B9F502D547C5D00C81B69 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99B9F4F2D547C5D00C81B69 /* CustomSlider.swift */; };
 		B99E1CBF2D27DD9A008EF662 /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99E1CBE2D27DD9A008EF662 /* About.swift */; };
+		B9CE9DBB2D403B700008BE06 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CE9DBA2D403B700008BE06 /* ButtonStyles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +45,9 @@
 		B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Icons Designer.entitlements"; sourceTree = "<group>"; };
 		B98FCE082D1FDDCC0033EAED /* IconChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconChanger.swift; sourceTree = "<group>"; };
 		B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderClippingShape.swift; sourceTree = "<group>"; };
+		B99B9F4F2D547C5D00C81B69 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		B99E1CBE2D27DD9A008EF662 /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
+		B9CE9DBA2D403B700008BE06 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,7 @@
 				B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */,
 				B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */,
 				B9567A702D1F536100CAD0F1 /* ContentView.swift */,
+				B99B9F4F2D547C5D00C81B69 /* CustomSlider.swift */,
 				B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */,
 				B9567A8B2D1F969C00CAD0F1 /* FolderIconView.swift */,
 				B9567A912D1FA74F00CAD0F1 /* FolderPresetPreview.swift */,
@@ -94,6 +99,7 @@
 				B9567A872D1F69FF00CAD0F1 /* FolderTop.swift */,
 				B98FCE082D1FDDCC0033EAED /* IconChanger.swift */,
 				B99E1CBE2D27DD9A008EF662 /* About.swift */,
+				B9CE9DBA2D403B700008BE06 /* ButtonStyles.swift */,
 				B98FCE0A2D1FDE020033EAED /* Icon Picker */,
 				B9567A8F2D1F9CD400CAD0F1 /* hex.swift */,
 				B9567A6F2D1F536100CAD0F1 /* Assets.xcassets */,
@@ -199,8 +205,10 @@
 				B9567A742D1F536100CAD0F1 /* Icons_DesignerApp.swift in Sources */,
 				B99E1CBF2D27DD9A008EF662 /* About.swift in Sources */,
 				B98FCE0C2D20AED10033EAED /* FolderClippingShape.swift in Sources */,
+				B99B9F502D547C5D00C81B69 /* CustomSlider.swift in Sources */,
 				B98FCE092D1FDDCC0033EAED /* IconChanger.swift in Sources */,
 				B9567A8C2D1F969C00CAD0F1 /* FolderIconView.swift in Sources */,
+				B9CE9DBB2D403B700008BE06 /* ButtonStyles.swift in Sources */,
 				B9567A8E2D1F96B300CAD0F1 /* Snapshot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

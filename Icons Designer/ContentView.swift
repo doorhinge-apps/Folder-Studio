@@ -33,6 +33,8 @@ struct ContentView: View {
     
     @State private var selectedImage: NSImage? = nil
     
+    @State var shadowStrokeRadius: CGFloat = 0.4
+    
     var body: some View {
         GeometryReader { geo in
             VSplitView {
@@ -63,19 +65,14 @@ struct ContentView: View {
                             // -- Save Button
                             Button(action: savePNG) {
                                 Text("Save as Image")
-                                    .font(.headline)
-                                    .padding()
-                                    .frame(width: 175)
-                                    .background(Color.blue)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(10)
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(Button3DStyle())
+                            .frame(width: 200, height: 50)
                             .padding(.top, 10)
                         }
                         .overlay {
                             ZStack {
-                                Color.blue
+                                Color(hex: "78D6FF")
                                     .frame(width: smallGeo.size.width, height: smallGeo.size.height)
                                 
                                 VStack {
@@ -154,209 +151,299 @@ struct ContentView: View {
                         .onDrop(of: ["public.file-url"], isTargeted: $isTargetedDrop) { providers in
                             handleDrop(providers: providers)
                         }
-                    }
+                    }.frame(width: 300)
 
                     Spacer()
                         .frame(width: 20)
                     
-                    // MARK: - Controls
-                    ScrollView {
-                        VStack(alignment: .center, spacing: 20) {
-                            // -- Image Type
-                            HStack {
-                                Text("Type:")
-                                    .font(.headline)
-                                
-                                Spacer()
-                            }
-                            HStack {
-                                Picker("", selection: $imageType) {
-                                    ForEach(ImageType.allCases, id: \.self) { value in
-                                        Text(value.localizedName)
-                                            .tag(value)
-                                    }
-                                }
-                                .pickerStyle(.radioGroup)
-                                .horizontalRadioGroupLayout()
-                                Spacer()
-                            }
-                            
-                            Divider()
-                            
-                            if imageType != .none {
-                                // -- Symbol Controls
+                    GeometryReader { rightGeo in
+                        // MARK: - Controls
+                        ScrollView {
+                            VStack(alignment: .center, spacing: 20) {
+                                // -- Image Type
                                 HStack {
-                                    Text("Icon:")
+                                    Text("Type:")
+                                        .font(.system(.title, design: .rounded, weight: .bold))
+                                        .foregroundStyle(Color.white)
+                                    
+                                    Spacer()
+                                }
+                                HStack {
+                                    GeometryReader { pickerGeo in
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .fill(Color(hex: "4C7C97"))
+                                                .stroke(Color(hex: "4C7C97"), lineWidth: 3)
+                                                .frame(height: 30)
+                                                .offset(y: 5)
+                                            
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .fill(Color(hex: "78D6FF"))
+                                                .stroke(Color(hex: "1E8CCB"), lineWidth: 3)
+                                                .frame(height: 30)
+                                            
+                                            HStack(alignment: .center) {
+                                                if imageType != .none {
+                                                    Spacer()
+                                                }
+                                                
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .fill(Color(hex: "4C7C97"))
+                                                    .stroke(Color(hex: "4C7C97"), lineWidth: 3)
+                                                    .frame(width: pickerGeo.size.width/3)
+                                                    .overlay {
+                                                        ZStack {
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(Color.black.opacity(0.5), lineWidth: 6)
+                                                                .blur(radius: 4)
+                                                                .mask(
+                                                                    RoundedRectangle(cornerRadius: 10)
+                                                                )
+                                                            
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .fill(Color(hex: "4C7C97").opacity(0.0))
+                                                                .stroke(Color(hex: "4C7C97"), lineWidth: 3)
+                                                        }
+                                                    }
+                                                
+                                                if imageType != .sfsymbol {
+                                                    Spacer()
+                                                }
+                                            }.frame(width: pickerGeo.size.width)
+                                                .animation(.default)
+                                            
+                                            HStack(spacing: 0) {
+                                                Text("None")
+                                                    .frame(width: pickerGeo.size.width/3)
+                                                
+                                                Text("Image")
+                                                    .frame(width: pickerGeo.size.width/3)
+                                                
+                                                Text("SF Symbol")
+                                                    .frame(width: pickerGeo.size.width/3)
+                                            }.foregroundStyle(Color.white)
+                                            
+                                            HStack(spacing: 0) {
+                                                Color.white.opacity(0.001)
+                                                    .frame(width: pickerGeo.size.width/3, height: 30)
+                                                    .onTapGesture {
+//                                                        withAnimation {
+                                                            imageType = .none
+//                                                        }
+                                                    }
+                                                
+                                                Color.white.opacity(0.001)
+                                                    .frame(width: pickerGeo.size.width/3, height: 30)
+                                                    .onTapGesture {
+//                                                        withAnimation {
+                                                            imageType = .png
+//                                                        }
+                                                    }
+                                                
+                                                Color.white.opacity(0.001)
+                                                    .frame(width: pickerGeo.size.width/3, height: 30)
+                                                    .onTapGesture {
+//                                                        withAnimation {
+                                                            imageType = .sfsymbol
+//                                                        }
+                                                    }
+                                            }
+                                            
+                                        }
+                                    }
+                                }.padding(5)
+                                .frame(height: 30)
+                                
+//                                Divider()
+                                
+                                if imageType != .none {
+                                    // -- Symbol Controls
+                                    HStack {
+                                        Text("Icon:")
+                                            .font(.headline)
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        VStack(alignment: .leading) {
+                                            if imageType == .png {
+                                                if let image = selectedImage {
+                                                    Image(nsImage: image)
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 100, height: 100)
+                                                }
+                                                
+                                                Button {
+                                                    selectImageFile()
+                                                } label: {
+                                                    Text(selectedImage != nil ? "Change": "Select")
+                                                        .font(.headline)
+                                                        .padding(5)
+                                                        .padding(.horizontal, 10)
+                                                        .background(Color.blue)
+                                                        .foregroundColor(.white)
+                                                        .cornerRadius(10)
+                                                        .frame(width: 100)
+                                                }
+                                                .buttonStyle(.plain)
+                                            }
+                                            else if imageType == .sfsymbol {
+                                                VStack(alignment: .center) {
+                                                    Image(systemName: symbolName)
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .foregroundStyle(Color(hex: "78D6FF"))
+                                                        .frame(width: 100, height: 100)
+                                                        .fontWeight(.black)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                    
+                                                    //HStack(alignment: .center) {
+                                                    Button {
+                                                        showIconPicker = true
+                                                    } label: {
+                                                        Text(symbolName)
+                                                    }
+                                                    .buttonStyle(SmallButton3DStyle())
+                                                    .frame(width: 100, height: 30)
+                                                    .padding()
+                                                    .sheet(isPresented: $showIconPicker) {
+                                                        VStack {
+                                                            HStack {
+                                                                Spacer()
+                                                                Button {
+                                                                    showIconPicker = false
+                                                                } label: {
+                                                                    Text("Close")
+                                                                }
+                                                            }.padding(15)
+                                                            
+                                                            IconsPicker(currentIcon: $symbolName)
+                                                        }
+                                                    }
+                                                    //}
+                                                }
+                                            }
+                                        }
+                                        .padding(.trailing, 20)
+                                        .frame(width: 200)
+                                        
+                                        VStack(alignment: .leading) {
+                                            HStack {
+                                                Text("Opacity: \(Int(symbolOpacity*100))%")
+                                                
+                                                Spacer()
+                                                
+                                                Button {
+                                                    symbolOpacity = 0.5
+                                                } label: {
+                                                    Text("Reset")
+                                                }
+                                                .buttonStyle(SmallButton3DStyle())
+                                                .frame(width: 100, height: 30)
+                                                .padding()
+                                            }
+//                                            Slider(value: $symbolOpacity, in: 0...1)
+                                            CustomSlider(value: $symbolOpacity, minValue: 0, maxValue: 1)
+                                                .frame(width: 200)
+                                            
+                                            HStack {
+                                                Text("Scale: \(Int(iconScale*100))%")
+                                                
+                                                Spacer()
+                                                
+                                                Button {
+                                                    iconScale = 1.0
+                                                } label: {
+                                                    Text("Reset")
+                                                }
+                                                .buttonStyle(SmallButton3DStyle())
+                                                .frame(width: 100, height: 30)
+                                                .padding()
+                                            }
+//                                            Slider(value: $iconScale, in: 0...3)
+                                            CustomSlider(value: $iconScale, minValue: 0, maxValue: 3)
+                                                .frame(width: 200)
+                                            
+                                            
+                                            HStack {
+                                                Text("Offset: \(Int(iconOffset))")
+                                                
+                                                Spacer()
+                                                
+                                                Button {
+                                                    iconOffset = 0
+                                                } label: {
+                                                    Text("Reset")
+                                                }
+                                                .buttonStyle(SmallButton3DStyle())
+                                                .frame(width: 100, height: 30)
+                                                .padding()
+                                            }
+//                                            Slider(value: $iconOffset, in: -150...150)
+                                            CustomSlider2(value: $iconOffset, minValue: -150, maxValue: 150)
+                                                .frame(width: 200)
+                                        }.frame(width: 200)
+                                        Spacer()
+                                    }
+                                    
+                                    Divider()
+                                }
+                                
+                                // -- Colors
+                                HStack {
+                                    Text("Colors:")
                                         .font(.headline)
                                     Spacer()
                                 }
                                 HStack {
-                                    VStack(alignment: .leading) {
-                                        if imageType == .png {
-                                            if let image = selectedImage {
-                                                Image(nsImage: image)
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(width: 100, height: 100)
-                                            }
-                                            
-                                            Button {
-                                                selectImageFile()
-                                            } label: {
-                                                Text(selectedImage != nil ? "Change": "Select")
-                                                    .font(.headline)
-                                                    .padding(5)
-                                                    .padding(.horizontal, 10)
-                                                    .background(Color.blue)
-                                                    .foregroundColor(.white)
-                                                    .cornerRadius(10)
-                                                    .frame(width: 100)
-                                            }
-                                            .buttonStyle(.plain)
-                                        }
-                                        else if imageType == .sfsymbol {
-                                            Image(systemName: symbolName)
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 100, height: 100)
-                                            
-                                            Button {
-                                                showIconPicker = true
-                                            } label: {
-                                                Text(symbolName)
-                                                    .font(.headline)
-                                                    .padding(5)
-                                                    .padding(.horizontal, 10)
-                                                    .background(Color.blue)
-                                                    .foregroundColor(.white)
-                                                    .cornerRadius(10)
-                                                    .frame(width: 100)
-                                            }
-                                            .buttonStyle(.plain)
-                                            .sheet(isPresented: $showIconPicker) {
-                                                VStack {
-                                                    HStack {
-                                                        Spacer()
-                                                        Button {
-                                                            showIconPicker = false
-                                                        } label: {
-                                                            Text("Close")
-                                                        }
-                                                    }.padding(15)
-                                                    
-                                                    IconsPicker(currentIcon: $symbolName)
-                                                }
-                                            }
-                                        }
+                                    VStack(alignment: .center) {
+                                        Text("Base")
+                                        ColorPicker("", selection: $bottomShapeColor)
+                                            .labelsHidden()
+                                            .frame(width: 50)
                                     }
                                     .padding(.trailing, 20)
                                     
-                                    VStack(alignment: .leading) {
-                                        HStack {
-                                            Text("Opacity: \(Int(symbolOpacity*100))%")
-                                            
-                                            Spacer()
-                                            
-                                            Button {
-                                                symbolOpacity = 0.5
-                                            } label: {
-                                                Text("Reset")
-                                                    .font(.headline)
-                                                    .padding(5)
-                                                    .padding(.horizontal, 10)
-                                                    .background(Color.blue)
-                                                    .foregroundColor(.white)
-                                                    .cornerRadius(10)
-                                            }
-                                            .buttonStyle(.plain)
-                                        }
-                                        Slider(value: $symbolOpacity, in: 0...1)
-                                            .frame(width: 150)
-                                        
-                                        HStack {
-                                            Text("Scale: \(Int(iconScale*100))%")
-                                            
-                                            Spacer()
-                                            
-                                            Button {
-                                                iconScale = 1.0
-                                            } label: {
-                                                Text("Reset")
-                                                    .font(.headline)
-                                                    .padding(5)
-                                                    .padding(.horizontal, 10)
-                                                    .background(Color.blue)
-                                                    .foregroundColor(.white)
-                                                    .cornerRadius(10)
-//                                                    .frame(width: 100)
-                                            }
-                                            .buttonStyle(.plain)
-                                        }
-                                        Slider(value: $iconScale, in: 0...3)
-                                            .frame(width: 150)
-                                        
-                                        
-                                        HStack {
-                                            Text("Offset: \(Int(iconOffset))")
-                                            
-                                            Spacer()
-                                            
-                                            Button {
-                                                iconOffset = 0
-                                            } label: {
-                                                Text("Reset")
-                                                    .font(.headline)
-                                                    .padding(5)
-                                                    .padding(.horizontal, 10)
-                                                    .background(Color.blue)
-                                                    .foregroundColor(.white)
-                                                    .cornerRadius(10)
-                                            }
-                                            .buttonStyle(.plain)
-                                        }
-                                        Slider(value: $iconOffset, in: -150...150)
-                                            .frame(width: 150)
-                                    }.frame(width: 200)
-                                    Spacer()
+                                    VStack(alignment: .center) {
+                                        Text("Tab")
+                                        ColorPicker("", selection: $topShapeColor)
+                                            .labelsHidden()
+                                            .frame(width: 50)
+                                    }
+                                    .padding(.trailing, 20)
+                                    
+                                    VStack(alignment: .center) {
+                                        Text("Symbol")
+                                        ColorPicker("", selection: $symbolColor)
+                                            .labelsHidden()
+                                            .frame(width: 50)
+                                    }
+                                    .padding(.trailing, 20)
                                 }
-                                
-                                Divider()
                             }
-                            
-                            // -- Colors
-                            HStack {
-                                Text("Colors:")
-                                    .font(.headline)
-                                Spacer()
-                            }
-                            HStack {
-                                VStack(alignment: .center) {
-                                    Text("Base")
-                                    ColorPicker("", selection: $bottomShapeColor)
-                                        .labelsHidden()
-                                        .frame(width: 50)
-                                }
-                                .padding(.trailing, 20)
-                                
-                                VStack(alignment: .center) {
-                                    Text("Tab")
-                                    ColorPicker("", selection: $topShapeColor)
-                                        .labelsHidden()
-                                        .frame(width: 50)
-                                }
-                                .padding(.trailing, 20)
-                                
-                                VStack(alignment: .center) {
-                                    Text("Symbol")
-                                    ColorPicker("", selection: $symbolColor)
-                                        .labelsHidden()
-                                        .frame(width: 50)
-                                }
-                                .padding(.trailing, 20)
-                            }
+                            .frame(width: rightGeo.size.width)
                         }
+                        .zIndex(1)
                     }
-                    .zIndex(1)
                 }
                 .padding(20)
                 .frame(minHeight: 300, idealHeight: 500)
@@ -463,7 +550,7 @@ struct ContentView: View {
                 .frame(height: 100)
             }
         }
-        .frame(minWidth: 650, minHeight: 500)
+        .frame(minWidth: 750, minHeight: 500)
     }
     
     // MARK: - Offset Controls
