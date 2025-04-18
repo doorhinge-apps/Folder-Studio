@@ -38,7 +38,10 @@ struct FolderPresetPreview: View {
                            iconOffset: .constant(0),
                            iconScale: .constant(1),
                            imageType: .constant(.sfsymbol),
-                           customImage: $selectedImage)
+                           customImage: $selectedImage,
+                           useAdvancedIconRendering: .constant(false),
+                           resolutionScale: 0.25
+            )
             .scaleEffect(0.15)
             .frame(width: 70, height: 60)
             .clipped()

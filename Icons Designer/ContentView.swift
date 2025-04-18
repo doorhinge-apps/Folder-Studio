@@ -35,6 +35,8 @@ struct ContentView: View {
     
     @State var shadowStrokeRadius: CGFloat = 0.4
     
+    @State private var useAdvancedIconRendering = false
+    
     var body: some View {
         GeometryReader { geo in
             VSplitView {
@@ -43,113 +45,146 @@ struct ContentView: View {
                     // Show the folder icon at a smaller scale, if desired
                     GeometryReader { smallGeo in
                         VStack {
-                            FolderIconView(topShapeColor: $topShapeColor,
-                                           bottomShapeColor: $bottomShapeColor,
-                                           symbolName: $symbolName,
-                                           symbolColor: $symbolColor,
-                                           symbolOpacity: $symbolOpacity,
-                                           topOffset: $topOffset,
-                                           bottomOffset: $bottomOffset,
-                                           iconOffset: $iconOffset,
-                                           iconScale: $iconScale,
-                                           imageType: $imageType,
-                                           customImage: $selectedImage
-                            )
-                            .frame(width: 200, height: 200)
-                            .scaleEffect(0.43)
-                            .cornerRadius(10)
-                            .zIndex(10)
-                            
-                            Text("Drag Folders to Set Icons")
-                            
-                            // -- Save Button
-                            Button(action: savePNG) {
-                                Text("Save as Image")
-                            }
-                            .buttonStyle(Button3DStyle())
-                            .frame(width: 200, height: 50)
-                            .padding(.top, 10)
-                        }
-                        .overlay {
-                            ZStack {
-                                Color(hex: "78D6FF")
-                                    .frame(width: smallGeo.size.width, height: smallGeo.size.height)
+                            VStack {
+                                FolderIconView(topShapeColor: $topShapeColor,
+                                               bottomShapeColor: $bottomShapeColor,
+                                               symbolName: $symbolName,
+                                               symbolColor: $symbolColor,
+                                               symbolOpacity: $symbolOpacity,
+                                               topOffset: $topOffset,
+                                               bottomOffset: $bottomOffset,
+                                               iconOffset: $iconOffset,
+                                               iconScale: $iconScale,
+                                               imageType: $imageType,
+                                               customImage: $selectedImage,
+                                               useAdvancedIconRendering: $useAdvancedIconRendering,
+                                               resolutionScale: 0.25
+                                )
+                                .frame(width: 200, height: 200)
+                                .scaleEffect(0.43)
+                                .cornerRadius(10)
+                                .zIndex(10)
                                 
-                                VStack {
-                                    Text("Drop Folder Here")
-                                        .font(.headline)
-                                        .foregroundStyle(Color.white)
-                                    
-                                    Spacer()
-                                        .frame(height: 75)
-                                    
-                                    ZStack {
-                                        ZStack {
-                                            HStack {
-                                                Image(systemName: "chevron.compact.right")
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(width: 20)
-                                                    .foregroundStyle(Color.white)
-                                                
-                                                Spacer()
-                                                    .frame(width: breatheAnimation ? 190: 120)
-                                                    .animation(.bouncy(duration: 0.75), value: breatheAnimation)
-                                                
-                                                Image(systemName: "chevron.compact.right")
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(width: 20)
-                                                    .foregroundStyle(Color.white)
-                                                    .rotationEffect(Angle(degrees: 180))
-                                            }
-                                            
-                                            HStack {
-                                                Image(systemName: "chevron.compact.right")
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(width: 20)
-                                                    .foregroundStyle(Color.white)
-                                                
-                                                Spacer()
-                                                    .frame(width: breatheAnimation ? 190: 120)
-                                                    .animation(.bouncy(duration: 0.75), value: breatheAnimation)
-                                                
-                                                Image(systemName: "chevron.compact.right")
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(width: 20)
-                                                    .foregroundStyle(Color.white)
-                                                    .rotationEffect(Angle(degrees: 180))
-                                                
-                                            }.rotationEffect(Angle(degrees: 90))
-                                        }.rotationEffect(Angle(degrees: Double(rotationAngle)))
-                                            .animation(.bouncy(duration: 0.5), value: rotationAngle)
-                                            .onReceive(timer) { thing in
-                                                breatheAnimation.toggle()
-                                                rotationAngle += 90
-                                            }
-                                        
-                                        FolderIconView(topShapeColor: $topShapeColor,
-                                                       bottomShapeColor: $bottomShapeColor,
-                                                       symbolName: $symbolName,
-                                                       symbolColor: $symbolColor,
-                                                       symbolOpacity: $symbolOpacity,
-                                                       topOffset: $topOffset,
-                                                       bottomOffset: $bottomOffset,
-                                                       iconOffset: $iconOffset,
-                                                       iconScale: $iconScale,
-                                                       imageType: $imageType,
-                                                       customImage: $selectedImage)
-                                        .frame(width: 100, height: 100)
-                                        .scaleEffect(0.21)
-                                    }
+                                Text("Drag Folders to Set Icons")
+                                
+                                // -- Save Button
+                                Button(action: savePNG) {
+                                    Text("Save as Image")
                                 }
-                            }.opacity(isTargetedDrop ? 1 : 0)
-                                .animation(.default, value: isTargetedDrop)
-                        }
-                        .onDrop(of: ["public.file-url"], isTargeted: $isTargetedDrop) { providers in
-                            handleDrop(providers: providers)
+                                .buttonStyle(Button3DStyle())
+                                .frame(width: 200, height: 50)
+                                .padding(.top, 10)
+                            }
+                            .overlay {
+                                ZStack {
+                                    Color(hex: "78D6FF")
+                                        .frame(width: smallGeo.size.width, height: smallGeo.size.height)
+                                    
+                                    VStack {
+                                        Text("Drop Folder Here")
+                                            .font(.headline)
+                                            .foregroundStyle(Color.white)
+                                        
+                                        Spacer()
+                                            .frame(height: 75)
+                                        
+                                        ZStack {
+                                            ZStack {
+                                                HStack {
+                                                    Image(systemName: "chevron.compact.right")
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 20)
+                                                        .foregroundStyle(Color.white)
+                                                    
+                                                    Spacer()
+                                                        .frame(width: breatheAnimation ? 190: 120)
+                                                        .animation(.bouncy(duration: 0.75), value: breatheAnimation)
+                                                    
+                                                    Image(systemName: "chevron.compact.right")
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 20)
+                                                        .foregroundStyle(Color.white)
+                                                        .rotationEffect(Angle(degrees: 180))
+                                                }
+                                                
+                                                HStack {
+                                                    Image(systemName: "chevron.compact.right")
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 20)
+                                                        .foregroundStyle(Color.white)
+                                                    
+                                                    Spacer()
+                                                        .frame(width: breatheAnimation ? 190: 120)
+                                                        .animation(.bouncy(duration: 0.75), value: breatheAnimation)
+                                                    
+                                                    Image(systemName: "chevron.compact.right")
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 20)
+                                                        .foregroundStyle(Color.white)
+                                                        .rotationEffect(Angle(degrees: 180))
+                                                    
+                                                }.rotationEffect(Angle(degrees: 90))
+                                            }.rotationEffect(Angle(degrees: Double(rotationAngle)))
+                                                .animation(.bouncy(duration: 0.5), value: rotationAngle)
+                                                .onReceive(timer) { thing in
+                                                    breatheAnimation.toggle()
+                                                    rotationAngle += 90
+                                                }
+                                            
+                                            FolderIconView(topShapeColor: $topShapeColor,
+                                                           bottomShapeColor: $bottomShapeColor,
+                                                           symbolName: $symbolName,
+                                                           symbolColor: $symbolColor,
+                                                           symbolOpacity: $symbolOpacity,
+                                                           topOffset: $topOffset,
+                                                           bottomOffset: $bottomOffset,
+                                                           iconOffset: $iconOffset,
+                                                           iconScale: $iconScale,
+                                                           imageType: $imageType,
+                                                           customImage: $selectedImage,
+                                                           useAdvancedIconRendering: $useAdvancedIconRendering,
+                                                           resolutionScale: 0.125
+                                            )
+                                            .frame(width: 100, height: 100)
+                                            .scaleEffect(0.21)
+                                        }
+                                    }
+                                }.opacity(isTargetedDrop ? 1 : 0)
+                                    .animation(.default, value: isTargetedDrop)
+                            }
+                            .onDrop(of: ["public.file-url"], isTargeted: $isTargetedDrop) { providers in
+                                handleDrop(providers: providers)
+                            }
+                            
+                            // -- Colors
+                            HStack {
+                                Text("Colors")
+                                    .font(.headline)
+                                Spacer()
+                            }
+                            HStack {
+                                VStack(alignment: .center) {
+                                    Text("Base")
+                                    ColorWell(color: $bottomShapeColor)
+                                }
+                                .padding(.trailing, 20)
+                                
+                                VStack(alignment: .center) {
+                                    Text("Tab")
+                                    ColorWell(color: $topShapeColor)
+                                }
+                                .padding(.trailing, 20)
+                                
+                                VStack(alignment: .center) {
+                                    Text("Symbol")
+                                    ColorWell(color: $symbolColor)
+                                }
+                                .padding(.trailing, 20)
+                            }.frame(height: 50)
                         }
                     }.frame(width: 300)
 
@@ -266,6 +301,10 @@ struct ContentView: View {
                                     HStack {
                                         VStack(alignment: .leading) {
                                             if imageType == .png {
+                                                Toggle("Advanced Icon Mode", isOn: $useAdvancedIconRendering)
+                                                    .toggleStyle(.switch)
+                                                    .frame(width: 200)
+                                                
                                                 if let image = selectedImage {
                                                     Image(nsImage: image)
                                                         .resizable()
@@ -277,15 +316,9 @@ struct ContentView: View {
                                                     selectImageFile()
                                                 } label: {
                                                     Text(selectedImage != nil ? "Change": "Select")
-                                                        .font(.headline)
-                                                        .padding(5)
-                                                        .padding(.horizontal, 10)
-                                                        .background(Color.blue)
-                                                        .foregroundColor(.white)
-                                                        .cornerRadius(10)
-                                                        .frame(width: 100)
                                                 }
-                                                .buttonStyle(.plain)
+                                                .buttonStyle(SmallButton3DStyle())
+                                                .frame(width: 100, height: 30)
                                             }
                                             else if imageType == .sfsymbol {
                                                 VStack(alignment: .center) {
@@ -348,7 +381,8 @@ struct ContentView: View {
                                         
                                         VStack(alignment: .leading) {
                                             HStack {
-                                                Text("Opacity: \(Int(symbolOpacity*100))%")
+//                                                Text("Opacity: \(Int(symbolOpacity*100))%")
+                                                Text("Opacity")
                                                 
                                                 Spacer()
                                                 
@@ -366,7 +400,8 @@ struct ContentView: View {
                                                 .frame(width: 200)
                                             
                                             HStack {
-                                                Text("Scale: \(Int(iconScale*100))%")
+//                                                Text("Scale: \(Int(iconScale*100))%")
+                                                Text("Scale")
                                                 
                                                 Spacer()
                                                 
@@ -380,12 +415,13 @@ struct ContentView: View {
                                                 .padding()
                                             }
 //                                            Slider(value: $iconScale, in: 0...3)
-                                            CustomSlider(value: $iconScale, minValue: 0, maxValue: 3)
+                                            CustomSlider(value: $iconScale, minValue: 0, maxValue: 5)
                                                 .frame(width: 200)
                                             
                                             
                                             HStack {
-                                                Text("Offset: \(Int(iconOffset))")
+//                                                Text("Offset: \(Int(iconOffset))")
+                                                Text("Offset")
                                                 
                                                 Spacer()
                                                 
@@ -399,45 +435,13 @@ struct ContentView: View {
                                                 .padding()
                                             }
 //                                            Slider(value: $iconOffset, in: -150...150)
-                                            CustomSlider2(value: $iconOffset, minValue: -150, maxValue: 150)
+                                            CustomSlider2(value: $iconOffset, minValue: 200, maxValue: -200)
                                                 .frame(width: 200)
                                         }.frame(width: 200)
                                         Spacer()
                                     }
                                     
                                     Divider()
-                                }
-                                
-                                // -- Colors
-                                HStack {
-                                    Text("Colors:")
-                                        .font(.headline)
-                                    Spacer()
-                                }
-                                HStack {
-                                    VStack(alignment: .center) {
-                                        Text("Base")
-                                        ColorPicker("", selection: $bottomShapeColor)
-                                            .labelsHidden()
-                                            .frame(width: 50)
-                                    }
-                                    .padding(.trailing, 20)
-                                    
-                                    VStack(alignment: .center) {
-                                        Text("Tab")
-                                        ColorPicker("", selection: $topShapeColor)
-                                            .labelsHidden()
-                                            .frame(width: 50)
-                                    }
-                                    .padding(.trailing, 20)
-                                    
-                                    VStack(alignment: .center) {
-                                        Text("Symbol")
-                                        ColorPicker("", selection: $symbolColor)
-                                            .labelsHidden()
-                                            .frame(width: 50)
-                                    }
-                                    .padding(.trailing, 20)
                                 }
                             }
                             .frame(width: rightGeo.size.width)
@@ -488,7 +492,7 @@ struct ContentView: View {
                                                 iconScale: $iconScale,
                                                 selectedImage: $selectedImage)
                             
-                            FolderPresetPreview(color1: "E1C359", color2: "F6F16F",
+                            FolderPresetPreview(color1: "DCAE46", color2: "F5DD62",
                                                 symbolName: $symbolName,
                                                 topOffset: $topOffset,
                                                 bottomOffset: $bottomOffset,
@@ -615,7 +619,10 @@ struct ContentView: View {
                                               iconOffset: $iconOffset,
                                               iconScale: $iconScale,
                                               imageType: $imageType,
-                                              customImage: $selectedImage)
+                                              customImage: $selectedImage,
+                                              useAdvancedIconRendering: $useAdvancedIconRendering,
+                                              resolutionScale: 1.0
+            )
             
             // 2) Use .snapshotAsNSImage (your existing logic)
             let nsImage = fullSizeIcon.snapshotAsNSImage()
@@ -696,7 +703,9 @@ struct ContentView: View {
             iconOffset: $iconOffset,
             iconScale: $iconScale,
             imageType: $imageType,
-            customImage: $selectedImage
+            customImage: $selectedImage,
+            useAdvancedIconRendering: $useAdvancedIconRendering,
+            resolutionScale: 1.0
         )
         let nsImage = fullSizeIcon.snapshotAsNSImage()
         
