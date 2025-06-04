@@ -2,45 +2,17 @@ import SwiftUI
 import AppKit
 
 struct ContentView: View {
-    // MARK: - State
-    @State private var topShapeColor: Color = Color(hex: "1E8CCB")
-    @State private var bottomShapeColor: Color = Color(hex: "6FCDF6")
-    
-    @State private var symbolName: String = "star.fill"
-    @State private var symbolColor: Color = Color(hex: "1E8CCB")
-    @State private var symbolOpacity: Double = 0.5
-    
-    @State private var topOffset: CGFloat = -141
-    @State private var bottomOffset: CGFloat = -81
-    
-    @State private var iconOffset: CGFloat = 0
-    @State private var plane2DTest: CGFloat = 0
-    
-    @State var showIconPicker = false
-    
-    @State var imageType: ImageType = .sfsymbol
-    @State private var dropError: String? = nil
-    
-    @State var isTargetedDrop = false
-
-    @State var breatheAnimation = false
-    @State var rotateAnimation = false
-    
-    @State var rotationAngle = 0
-    
-    @State var iconScale = 1.0
+    @EnvironmentObject var foldersViewModel: FoldersViewModel
     
     let timer = Timer.publish(every: 0.75, on: .main, in: .common).autoconnect()
     
-    @State private var selectedImage: NSImage? = nil
+    @State var bottomShapeColor = Color.blue
+    @State var topShapeColor = Color.blue
+    @State var symbolColor = Color.blue
     
-    @State private var useAdvancedIconRendering = false
-    
-    @State var presets = [["1E8CCB", "6FCDF6"], ["D23359", "F66F8F"], ["DA8521", "F6B86F"], ["DCAE46", "F5DD62"], ["20731D", "43AC40"], ["2955AB", "5788E5"], ["7125BD", "A750FF"], ["BD2593", "FA62F4"]]
-    
-    @AppStorage("hideOpacity") var hideOpacity = false
-    @AppStorage("hideScale") var hideScale = true
-    @AppStorage("hideOffset") var hideOffset = true
+    @State var bottomShapeColorIsUpdating: Bool = false
+    @State var topShapeColorIsUpdating: Bool = false
+    @State var symbolColorIsUpdating: Bool = false
     
     var body: some View {
         GeometryReader { geo in
@@ -60,17 +32,11 @@ struct ContentView: View {
                     
                     ScrollView(showsIndicators: false) {
                         VStack(alignment: .leading) {
-                            ForEach(presets, id:\.self) { preset in
-                                FolderPresetPreview(color1: preset[0], color2: preset[1],
-                                                    symbolName: $symbolName,
-                                                    topOffset: $topOffset,
-                                                    bottomOffset: $bottomOffset,
-                                                    topShapeColorSetter: $topShapeColor,
-                                                    bottomShapeColorSetter: $bottomShapeColor,
-                                                    iconColorSetter: $symbolColor,
-                                                    opacitySetter: $symbolOpacity,
-                                                    iconScale: $iconScale,
-                                                    selectedImage: $selectedImage)
+                            ForEach(foldersViewModel.presets, id:\.self) { preset in
+                                FolderPresetPreview(
+                                    color1: preset[0],
+                                    color2: preset[1]
+                                )
                             }
                         }
                     }.frame(width: 80)
@@ -79,20 +45,24 @@ struct ContentView: View {
                     GeometryReader { smallGeo in
                         VStack {
                             VStack {
-                                FolderIconView(topShapeColor: $topShapeColor,
-                                               bottomShapeColor: $bottomShapeColor,
-                                               symbolName: $symbolName,
-                                               symbolColor: $symbolColor,
-                                               symbolOpacity: $symbolOpacity,
-                                               topOffset: $topOffset,
-                                               bottomOffset: $bottomOffset,
-                                               iconOffset: $iconOffset,
-                                               iconScale: $iconScale,
-                                               imageType: $imageType,
-                                               customImage: $selectedImage,
-                                               useAdvancedIconRendering: $useAdvancedIconRendering,
-                                               resolutionScale: 0.25
+                                FolderIconView(
+                                    resolutionScale: 0.25
                                 )
+//                                FolderIconView(
+//                                    topShapeColor: $foldersViewModel.topShapeColor,
+//                                    bottomShapeColor: $foldersViewModel.bottomShapeColor,
+//                                    symbolName: $foldersViewModel.symbolName,
+//                                    symbolColor: $foldersViewModel.symbolColor,
+//                                    symbolOpacity: $foldersViewModel.symbolOpacity,
+//                                    topOffset: $foldersViewModel.topOffset,
+//                                    bottomOffset: $foldersViewModel.bottomOffset,
+//                                    iconOffset: $foldersViewModel.iconOffset,
+//                                    iconScale: $foldersViewModel.iconScale,
+//                                    imageType: $foldersViewModel.imageType,
+//                                    customImage: $foldersViewModel.selectedImage,
+//                                    useAdvancedIconRendering: $foldersViewModel.useAdvancedIconRendering,
+//                                    resolutionScale: 0.25
+//                                )
                                 .frame(width: 200, height: 200)
                                 .scaleEffect(0.43)
                                 .cornerRadius(10)
@@ -131,8 +101,8 @@ struct ContentView: View {
                                                         .foregroundStyle(Color.white)
                                                     
                                                     Spacer()
-                                                        .frame(width: breatheAnimation ? 190: 120)
-                                                        .animation(.bouncy(duration: 0.75), value: breatheAnimation)
+                                                        .frame(width: foldersViewModel.breatheAnimation ? 190: 120)
+                                                        .animation(.bouncy(duration: 0.75), value: foldersViewModel.breatheAnimation)
                                                     
                                                     Image(systemName: "chevron.compact.right")
                                                         .resizable()
@@ -150,8 +120,8 @@ struct ContentView: View {
                                                         .foregroundStyle(Color.white)
                                                     
                                                     Spacer()
-                                                        .frame(width: breatheAnimation ? 190: 120)
-                                                        .animation(.bouncy(duration: 0.75), value: breatheAnimation)
+                                                        .frame(width: foldersViewModel.breatheAnimation ? 190: 120)
+                                                        .animation(.bouncy(duration: 0.75), value: foldersViewModel.breatheAnimation)
                                                     
                                                     Image(systemName: "chevron.compact.right")
                                                         .resizable()
@@ -161,63 +131,116 @@ struct ContentView: View {
                                                         .rotationEffect(Angle(degrees: 180))
                                                     
                                                 }.rotationEffect(Angle(degrees: 90))
-                                            }.rotationEffect(Angle(degrees: Double(rotationAngle)))
-                                                .animation(.bouncy(duration: 0.5), value: rotationAngle)
+                                            }.rotationEffect(Angle(degrees: Double(foldersViewModel.rotationAngle)))
+                                                .animation(.bouncy(duration: 0.5), value: foldersViewModel.rotationAngle)
                                                 .onReceive(timer) { thing in
-                                                    breatheAnimation.toggle()
-                                                    rotationAngle += 90
+                                                    foldersViewModel.breatheAnimation.toggle()
+                                                    foldersViewModel.rotationAngle += 90
                                                 }
                                             
-                                            FolderIconView(topShapeColor: $topShapeColor,
-                                                           bottomShapeColor: $bottomShapeColor,
-                                                           symbolName: $symbolName,
-                                                           symbolColor: $symbolColor,
-                                                           symbolOpacity: $symbolOpacity,
-                                                           topOffset: $topOffset,
-                                                           bottomOffset: $bottomOffset,
-                                                           iconOffset: $iconOffset,
-                                                           iconScale: $iconScale,
-                                                           imageType: $imageType,
-                                                           customImage: $selectedImage,
-                                                           useAdvancedIconRendering: $useAdvancedIconRendering,
-                                                           resolutionScale: 0.125
+                                            FolderIconView(
+                                                resolutionScale: 0.125
                                             )
+                                            
+//                                            FolderIconView(topShapeColor: $foldersViewModel.topShapeColor,
+//                                                           bottomShapeColor: $foldersViewModel.bottomShapeColor,
+//                                                           symbolName: $foldersViewModel.symbolName,
+//                                                           symbolColor: $foldersViewModel.symbolColor,
+//                                                           symbolOpacity: $foldersViewModel.symbolOpacity,
+//                                                           topOffset: $foldersViewModel.topOffset,
+//                                                           bottomOffset: $foldersViewModel.bottomOffset,
+//                                                           iconOffset: $foldersViewModel.iconOffset,
+//                                                           iconScale: $foldersViewModel.iconScale,
+//                                                           imageType: $foldersViewModel.imageType,
+//                                                           customImage: $foldersViewModel.selectedImage,
+//                                                           useAdvancedIconRendering: $foldersViewModel.useAdvancedIconRendering,
+//                                                           resolutionScale: 0.125
+//                                            )
                                             .frame(width: 100, height: 100)
                                             .scaleEffect(0.21)
                                         }
                                     }
-                                }.opacity(isTargetedDrop ? 1 : 0)
-                                    .animation(.default, value: isTargetedDrop)
+                                }.opacity(foldersViewModel.isTargetedDrop ? 1 : 0)
+                                    .animation(.default, value: foldersViewModel.isTargetedDrop)
                             }
-                            .onDrop(of: ["public.file-url"], isTargeted: $isTargetedDrop) { providers in
+                            .onDrop(of: ["public.file-url"], isTargeted: $foldersViewModel.isTargetedDrop) { providers in
                                 handleDrop(providers: providers)
                             }
                             
                             // -- Colors
                             HStack {
                                 Text("Colors")
-                                    .font(.headline)
+                                    .font(.system(.title, design: .rounded, weight: .bold))
+                                    .foregroundStyle(Color.white)
                                 Spacer()
-                            }
+                            }.padding(.top, 20)
+                            
                             HStack {
                                 VStack(alignment: .center) {
                                     Text("Base")
                                     ColorWell(color: $bottomShapeColor)
+                                        .onChange(of: bottomShapeColor) { oldValue, newValue in
+                                            bottomShapeColorIsUpdating = true
+                                            foldersViewModel.bottomShapeColor = newValue
+                                            print("Updating 1")
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                                                bottomShapeColorIsUpdating = false
+                                            }
+                                        }
+                                        .onChange(of: foldersViewModel.bottomShapeColor) { oldValue, newValue in
+                                            if !bottomShapeColorIsUpdating {
+                                                bottomShapeColor = newValue
+                                                print("Updating 2")
+                                            }
+                                        }
                                 }
                                 .padding(.trailing, 20)
                                 
                                 VStack(alignment: .center) {
                                     Text("Tab")
                                     ColorWell(color: $topShapeColor)
+                                        .onChange(of: topShapeColor) { oldValue, newValue in
+                                            topShapeColorIsUpdating = true
+                                            foldersViewModel.topShapeColor = newValue
+                                            print("Updating 1")
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                                                topShapeColorIsUpdating = false
+                                            }
+                                        }
+                                        .onChange(of: foldersViewModel.topShapeColor) { oldValue, newValue in
+                                            if !topShapeColorIsUpdating {
+                                                topShapeColor = newValue
+                                                print("Updating 2")
+                                            }
+                                        }
                                 }
                                 .padding(.trailing, 20)
                                 
                                 VStack(alignment: .center) {
                                     Text("Symbol")
                                     ColorWell(color: $symbolColor)
+                                        .onChange(of: symbolColor) { oldValue, newValue in
+                                            symbolColorIsUpdating = true
+                                            foldersViewModel.symbolColor = newValue
+                                            print("Updating 1")
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                                                symbolColorIsUpdating = false
+                                            }
+                                        }
+                                        .onChange(of: foldersViewModel.symbolColor) { oldValue, newValue in
+                                            if !symbolColorIsUpdating {
+                                                symbolColor = newValue
+                                                print("Updating 2")
+                                            }
+                                        }
                                 }
                                 .padding(.trailing, 20)
                             }.frame(height: 50)
+                                .onAppear() {
+                                    bottomShapeColor = foldersViewModel.bottomShapeColor
+                                    topShapeColor = foldersViewModel.topShapeColor
+                                    symbolColor = foldersViewModel.symbolColor
+                                }
                         }
                     }.frame(width: 300)
 
@@ -251,7 +274,7 @@ struct ContentView: View {
                                                 .frame(height: 30)
                                             
                                             HStack(alignment: .center) {
-                                                if imageType != .none {
+                                                if foldersViewModel.imageType != .none {
                                                     Spacer()
                                                 }
                                                 
@@ -274,7 +297,7 @@ struct ContentView: View {
                                                         }
                                                     }
                                                 
-                                                if imageType != .sfsymbol {
+                                                if foldersViewModel.imageType != .sfsymbol {
                                                     Spacer()
                                                 }
                                             }.frame(width: pickerGeo.size.width)
@@ -295,25 +318,19 @@ struct ContentView: View {
                                                 Color.white.opacity(0.001)
                                                     .frame(width: pickerGeo.size.width/3, height: 30)
                                                     .onTapGesture {
-//                                                        withAnimation {
-                                                            imageType = .none
-//                                                        }
+                                                        foldersViewModel.imageType = .none
                                                     }
                                                 
                                                 Color.white.opacity(0.001)
                                                     .frame(width: pickerGeo.size.width/3, height: 30)
                                                     .onTapGesture {
-//                                                        withAnimation {
-                                                            imageType = .png
-//                                                        }
+                                                        foldersViewModel.imageType = .png
                                                     }
                                                 
                                                 Color.white.opacity(0.001)
                                                     .frame(width: pickerGeo.size.width/3, height: 30)
                                                     .onTapGesture {
-//                                                        withAnimation {
-                                                            imageType = .sfsymbol
-//                                                        }
+                                                        foldersViewModel.imageType = .sfsymbol
                                                     }
                                             }
                                             
@@ -324,15 +341,16 @@ struct ContentView: View {
                                 
 //                                Divider()
                                 
-                                if imageType != .none {
+                                if foldersViewModel.imageType != .none {
                                     // -- Symbol Controls
                                     HStack(alignment: .top) {
+                                        
                                         VStack(alignment: .leading) {
                                             Spacer()
                                                 .frame(height: 80)
                                             
-                                            if imageType == .png {
-                                                if let image = selectedImage {
+                                            if foldersViewModel.imageType == .png {
+                                                if let image = foldersViewModel.selectedImage {
                                                     Image(nsImage: image)
                                                         .resizable()
                                                         .scaledToFit()
@@ -342,14 +360,14 @@ struct ContentView: View {
                                                 Button {
                                                     selectImageFile()
                                                 } label: {
-                                                    Text(selectedImage != nil ? "Change": "Select")
+                                                    Text(foldersViewModel.selectedImage != nil ? "Change": "Select")
                                                 }
                                                 .buttonStyle(SmallButton3DStyle())
                                                 .frame(width: 100, height: 30)
                                             }
-                                            else if imageType == .sfsymbol {
+                                            else if foldersViewModel.imageType == .sfsymbol {
                                                 VStack(alignment: .center) {
-                                                    Image(systemName: symbolName)
+                                                    Image(systemName: foldersViewModel.symbolName)
                                                         .resizable()
                                                         .scaledToFit()
                                                         .foregroundStyle(Color(hex: "78D6FF"))
@@ -360,25 +378,25 @@ struct ContentView: View {
                                                     
                                                     //HStack(alignment: .center) {
                                                     Button {
-                                                        showIconPicker = true
+                                                        foldersViewModel.showIconPicker = true
                                                     } label: {
-                                                        Text(symbolName)
+                                                        Text(foldersViewModel.symbolName)
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
                                                     .frame(width: 100, height: 30)
                                                     .padding()
-                                                    .popover(isPresented: $showIconPicker) {
+                                                    .popover(isPresented: $foldersViewModel.showIconPicker) {
                                                         VStack {
                                                             HStack {
                                                                 Spacer()
                                                                 Button {
-                                                                    showIconPicker = false
+                                                                    foldersViewModel.showIconPicker = false
                                                                 } label: {
                                                                     Text("Close")
                                                                 }
                                                             }.padding(15)
                                                             
-                                                            IconsPicker(currentIcon: $symbolName)
+                                                            IconsPicker(currentIcon: $foldersViewModel.symbolName)
                                                         }
                                                     }
                                                     //}
@@ -390,7 +408,7 @@ struct ContentView: View {
                                         
                                         ScrollView {
                                             VStack(alignment: .leading) {
-                                                if imageType == .png {
+                                                if foldersViewModel.imageType == .png {
                                                     HStack {
                                                         GeometryReader { advancedImagePicker in
                                                             ZStack {
@@ -406,7 +424,7 @@ struct ContentView: View {
                                                                     .frame(height: 30)
                                                                 
                                                                 HStack {
-                                                                    if useAdvancedIconRendering {
+                                                                    if foldersViewModel.useAdvancedIconRendering {
                                                                         Spacer()
                                                                     }
                                                                     
@@ -429,7 +447,7 @@ struct ContentView: View {
                                                                             }
                                                                         }
                                                                     
-                                                                    if !useAdvancedIconRendering {
+                                                                    if !foldersViewModel.useAdvancedIconRendering {
                                                                         Spacer()
                                                                     }
                                                                 }.frame(width: advancedImagePicker.size.width)
@@ -447,13 +465,13 @@ struct ContentView: View {
                                                                     Color.white.opacity(0.001)
                                                                         .frame(width: advancedImagePicker.size.width/2, height: 30)
                                                                         .onTapGesture {
-                                                                            useAdvancedIconRendering = false
+                                                                            foldersViewModel.useAdvancedIconRendering = false
                                                                         }
                                                                     
                                                                     Color.white.opacity(0.001)
                                                                         .frame(width: advancedImagePicker.size.width/2, height: 30)
                                                                         .onTapGesture {
-                                                                            useAdvancedIconRendering = true
+                                                                            foldersViewModel.useAdvancedIconRendering = true
                                                                         }
                                                                 }
                                                                 
@@ -472,7 +490,7 @@ struct ContentView: View {
                                                     Spacer()
                                                     
                                                     Button {
-                                                        symbolOpacity = 0.5
+                                                        foldersViewModel.symbolOpacity = 0.5
                                                     } label: {
                                                         Text("Reset")
                                                     }
@@ -482,19 +500,19 @@ struct ContentView: View {
                                                     
                                                     Button {
                                                         withAnimation {
-                                                            hideOpacity.toggle()
+                                                            foldersViewModel.hideOpacity.toggle()
                                                         }
                                                     } label: {
                                                         Image(systemName: "chevron.down")
-                                                            .rotationEffect(Angle(degrees: hideOpacity ? -180: 0))
+                                                            .rotationEffect(Angle(degrees: foldersViewModel.hideOpacity ? -180: 0))
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
                                                     .frame(width: 30, height: 30)
                                                     .padding([.top, .bottom, .trailing])
                                                 }
                                                 
-                                                if !hideOpacity {
-                                                    CustomSlider(value: $symbolOpacity, minValue: 0, maxValue: 1)
+                                                if !foldersViewModel.hideOpacity {
+                                                    CustomSlider(value: $foldersViewModel.symbolOpacity, minValue: 0, maxValue: 1)
                                                         .frame(width: 200)
                                                         .padding(.horizontal, 5)
                                                 }
@@ -508,7 +526,7 @@ struct ContentView: View {
                                                     Spacer()
                                                     
                                                     Button {
-                                                        iconScale = 1.0
+                                                        foldersViewModel.iconScale = 1.0
                                                     } label: {
                                                         Text("Reset")
                                                     }
@@ -518,19 +536,19 @@ struct ContentView: View {
                                                     
                                                     Button {
                                                         withAnimation {
-                                                            hideScale.toggle()
+                                                            foldersViewModel.hideScale.toggle()
                                                         }
                                                     } label: {
                                                         Image(systemName: "chevron.down")
-                                                            .rotationEffect(Angle(degrees: hideScale ? -180: 0))
+                                                            .rotationEffect(Angle(degrees: foldersViewModel.hideScale ? -180: 0))
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
                                                     .frame(width: 30, height: 30)
                                                     .padding([.top, .bottom, .trailing])
                                                 }
                                                 
-                                                if !hideScale {
-                                                    CustomSlider(value: $iconScale, minValue: 0, maxValue: 5)
+                                                if !foldersViewModel.hideScale {
+                                                    CustomSlider(value: $foldersViewModel.iconScale, minValue: 0, maxValue: 5)
                                                         .frame(width: 200)
                                                         .padding(.horizontal, 5)
                                                 }
@@ -543,7 +561,7 @@ struct ContentView: View {
                                                     Spacer()
                                                     
                                                     Button {
-                                                        iconOffset = 0
+                                                        foldersViewModel.iconOffset = 0
                                                     } label: {
                                                         Text("Reset")
                                                     }
@@ -553,19 +571,19 @@ struct ContentView: View {
                                                     
                                                     Button {
                                                         withAnimation {
-                                                            hideOffset.toggle()
+                                                            foldersViewModel.hideOffset.toggle()
                                                         }
                                                     } label: {
                                                         Image(systemName: "chevron.down")
-                                                            .rotationEffect(Angle(degrees: hideOffset ? -180: 0))
+                                                            .rotationEffect(Angle(degrees: foldersViewModel.hideOffset ? -180: 0))
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
                                                     .frame(width: 30, height: 30)
                                                     .padding([.top, .bottom, .trailing])
                                                 }
                                                 
-                                                if !hideOffset {
-                                                    CustomSlider2(value: $iconOffset, minValue: 200, maxValue: -200)
+                                                if !foldersViewModel.hideOffset {
+                                                    CustomSlider2(value: $foldersViewModel.iconOffset, minValue: 200, maxValue: -200)
                                                         .frame(width: 200)
                                                         .padding(.horizontal, 5)
                                                 }
@@ -625,7 +643,7 @@ struct ContentView: View {
         
         if panel.runModal() == .OK, let url = panel.url {
             if let image = NSImage(contentsOf: url) {
-                selectedImage = image
+                foldersViewModel.selectedImage = image
             } else {
                 print("Failed to load the selected PNG file.")
             }
@@ -642,19 +660,22 @@ struct ContentView: View {
         
         if panel.runModal() == .OK, let url = panel.url {
             // 1) Render a 470×395 icon at 100% scale
-            let fullSizeIcon = FolderIconView(topShapeColor: $topShapeColor,
-                                              bottomShapeColor: $bottomShapeColor,
-                                              symbolName: $symbolName,
-                                              symbolColor: $symbolColor,
-                                              symbolOpacity: $symbolOpacity,
-                                              topOffset: $topOffset,
-                                              bottomOffset: $bottomOffset,
-                                              iconOffset: $iconOffset,
-                                              iconScale: $iconScale,
-                                              imageType: $imageType,
-                                              customImage: $selectedImage,
-                                              useAdvancedIconRendering: $useAdvancedIconRendering,
-                                              resolutionScale: 1.0
+//            let fullSizeIcon = FolderIconView(topShapeColor: $foldersViewModel.topShapeColor,
+//                                              bottomShapeColor: $foldersViewModel.bottomShapeColor,
+//                                              symbolName: $foldersViewModel.symbolName,
+//                                              symbolColor: $foldersViewModel.symbolColor,
+//                                              symbolOpacity: $foldersViewModel.symbolOpacity,
+//                                              topOffset: $foldersViewModel.topOffset,
+//                                              bottomOffset: $foldersViewModel.bottomOffset,
+//                                              iconOffset: $foldersViewModel.iconOffset,
+//                                              iconScale: $foldersViewModel.iconScale,
+//                                              imageType: $foldersViewModel.imageType,
+//                                              customImage: $foldersViewModel.selectedImage,
+//                                              useAdvancedIconRendering: $foldersViewModel.useAdvancedIconRendering,
+//                                              resolutionScale: 1.0
+//            )
+            let fullSizeIcon = FolderIconView(
+                resolutionScale: 1.0
             )
             
             // 2) Use .snapshotAsNSImage (your existing logic)
@@ -716,7 +737,7 @@ struct ContentView: View {
         }
 
         group.notify(queue: .main) {
-            dropError = encounteredError
+            foldersViewModel.dropError = encounteredError
         }
 
         return true
@@ -725,19 +746,22 @@ struct ContentView: View {
     // MARK: - Set Folder Icon (Drag-and-Drop) - Unified Logic
     private func setFolderIcon(folderURL: URL) throws {
         // 1) Generate the same 470×395 icon as "Save as Image".
+//        let fullSizeIcon = FolderIconView(
+//            topShapeColor: $foldersViewModel.topShapeColor,
+//            bottomShapeColor: $foldersViewModel.bottomShapeColor,
+//            symbolName: $foldersViewModel.symbolName,
+//            symbolColor: $foldersViewModel.symbolColor,
+//            symbolOpacity: $foldersViewModel.symbolOpacity,
+//            topOffset: $foldersViewModel.topOffset,
+//            bottomOffset: $foldersViewModel.bottomOffset,
+//            iconOffset: $foldersViewModel.iconOffset,
+//            iconScale: $foldersViewModel.iconScale,
+//            imageType: $foldersViewModel.imageType,
+//            customImage: $foldersViewModel.selectedImage,
+//            useAdvancedIconRendering: $foldersViewModel.useAdvancedIconRendering,
+//            resolutionScale: 1.0
+//        )
         let fullSizeIcon = FolderIconView(
-            topShapeColor: $topShapeColor,
-            bottomShapeColor: $bottomShapeColor,
-            symbolName: $symbolName,
-            symbolColor: $symbolColor,
-            symbolOpacity: $symbolOpacity,
-            topOffset: $topOffset,
-            bottomOffset: $bottomOffset,
-            iconOffset: $iconOffset,
-            iconScale: $iconScale,
-            imageType: $imageType,
-            customImage: $selectedImage,
-            useAdvancedIconRendering: $useAdvancedIconRendering,
             resolutionScale: 1.0
         )
         let nsImage = fullSizeIcon.snapshotAsNSImage()

@@ -13,10 +13,13 @@ import SwiftUI
 @main
 struct Icons_DesignerApp: App {
     @State private var aboutWindow: NSWindow?
+    
+    @StateObject var foldersViewModel = FoldersViewModel()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(foldersViewModel)
                 .containerBackground(for: .window, content: {
                     ZStack {
                         Color(hex: "6FCDF6")
@@ -28,7 +31,7 @@ struct Icons_DesignerApp: App {
         }.windowStyle(.hiddenTitleBar)
         .commands {
             CommandGroup(replacing: .appInfo) {
-                Button("About Your App") {
+                Button("About SF Folders") {
                     showAboutWindow()
                 }
             }

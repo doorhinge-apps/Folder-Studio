@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B90822BB2DF0008B00C04565 /* Custom2DSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90822BA2DF0008B00C04565 /* Custom2DSlider.swift */; };
 		B90822BD2DF0051F00C04565 /* StrokeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90822BC2DF0051F00C04565 /* StrokeModifier.swift */; };
+		B90822BF2DF012EC00C04565 /* FoldersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90822BE2DF012EC00C04565 /* FoldersViewModel.swift */; };
 		B9281BA22D9C4B3200C29B95 /* ColorWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9281BA12D9C4B3200C29B95 /* ColorWell.swift */; };
 		B9567A732D1F536100CAD0F1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A702D1F536100CAD0F1 /* ContentView.swift */; };
 		B9567A742D1F536100CAD0F1 /* Icons_DesignerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		B90822BA2DF0008B00C04565 /* Custom2DSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Custom2DSlider.swift; sourceTree = "<group>"; };
 		B90822BC2DF0051F00C04565 /* StrokeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeModifier.swift; sourceTree = "<group>"; };
+		B90822BE2DF012EC00C04565 /* FoldersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersViewModel.swift; sourceTree = "<group>"; };
 		B9281BA12D9C4B3200C29B95 /* ColorWell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWell.swift; sourceTree = "<group>"; };
 		B9567A5C2D1F515E00CAD0F1 /* SF Folders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SF Folders.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9567A6D2D1F536100CAD0F1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */,
 				B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */,
 				B9567A702D1F536100CAD0F1 /* ContentView.swift */,
+				B90822BE2DF012EC00C04565 /* FoldersViewModel.swift */,
 				B90822B82DEFFCA700C04565 /* The Folder */,
 				B90822B92DF0006C00C04565 /* UI Components */,
 				B9567A8D2D1F96B300CAD0F1 /* Snapshot.swift */,
@@ -227,6 +230,7 @@
 				B90822BB2DF0008B00C04565 /* Custom2DSlider.swift in Sources */,
 				B9567A9A2D1FAA6F00CAD0F1 /* Icons Arrays.swift in Sources */,
 				B9281BA22D9C4B3200C29B95 /* ColorWell.swift in Sources */,
+				B90822BF2DF012EC00C04565 /* FoldersViewModel.swift in Sources */,
 				B9567A732D1F536100CAD0F1 /* ContentView.swift in Sources */,
 				B9567A922D1FA74F00CAD0F1 /* FolderPresetPreview.swift in Sources */,
 				B9567A742D1F536100CAD0F1 /* Icons_DesignerApp.swift in Sources */,
