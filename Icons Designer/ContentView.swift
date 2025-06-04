@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var bottomOffset: CGFloat = -81
     
     @State private var iconOffset: CGFloat = 0
+    @State private var plane2DTest: CGFloat = 0
     
     @State var showIconPicker = false
     
@@ -33,16 +34,48 @@ struct ContentView: View {
     
     @State private var selectedImage: NSImage? = nil
     
-    @State var shadowStrokeRadius: CGFloat = 0.4
-    
     @State private var useAdvancedIconRendering = false
+    
+    @State var presets = [["1E8CCB", "6FCDF6"], ["D23359", "F66F8F"], ["DA8521", "F6B86F"], ["DCAE46", "F5DD62"], ["20731D", "43AC40"], ["2955AB", "5788E5"], ["7125BD", "A750FF"], ["BD2593", "FA62F4"]]
+    
+    @AppStorage("hideOpacity") var hideOpacity = false
+    @AppStorage("hideScale") var hideScale = true
+    @AppStorage("hideOffset") var hideOffset = true
     
     var body: some View {
         GeometryReader { geo in
             VSplitView {
-                HStack {
+                HStack(spacing: 0) {
                     // MARK: - Live Preview
                     // Show the folder icon at a smaller scale, if desired
+                    
+                    HStack {
+                        Text("Presets")
+                            .font(.system(.title, design: .rounded, weight: .bold))
+                            .rotationEffect(Angle(degrees: -90))
+                            .foregroundStyle(Color.white)
+                            .frame(width: 200, height: 20)
+                    }.frame(width: 10)
+                        .offset(x: -10)
+                    
+                    ScrollView(showsIndicators: false) {
+                        VStack(alignment: .leading) {
+                            ForEach(presets, id:\.self) { preset in
+                                FolderPresetPreview(color1: preset[0], color2: preset[1],
+                                                    symbolName: $symbolName,
+                                                    topOffset: $topOffset,
+                                                    bottomOffset: $bottomOffset,
+                                                    topShapeColorSetter: $topShapeColor,
+                                                    bottomShapeColorSetter: $bottomShapeColor,
+                                                    iconColorSetter: $symbolColor,
+                                                    opacitySetter: $symbolOpacity,
+                                                    iconScale: $iconScale,
+                                                    selectedImage: $selectedImage)
+                            }
+                        }
+                    }.frame(width: 80)
+                        .offset(x: -5)
+                    
                     GeometryReader { smallGeo in
                         VStack {
                             VStack {
@@ -193,7 +226,7 @@ struct ContentView: View {
                     
                     GeometryReader { rightGeo in
                         // MARK: - Controls
-                        ScrollView {
+                        //ScrollView {
                             VStack(alignment: .center, spacing: 20) {
                                 // -- Image Type
                                 HStack {
@@ -293,23 +326,17 @@ struct ContentView: View {
                                 
                                 if imageType != .none {
                                     // -- Symbol Controls
-                                    HStack {
-                                        Text("Icon:")
-                                            .font(.headline)
-                                        Spacer()
-                                    }
-                                    HStack {
+                                    HStack(alignment: .top) {
                                         VStack(alignment: .leading) {
+                                            Spacer()
+                                                .frame(height: 80)
+                                            
                                             if imageType == .png {
-                                                Toggle("Advanced Icon Mode", isOn: $useAdvancedIconRendering)
-                                                    .toggleStyle(.switch)
-                                                    .frame(width: 200)
-                                                
                                                 if let image = selectedImage {
                                                     Image(nsImage: image)
                                                         .resizable()
                                                         .scaledToFit()
-                                                        .frame(width: 100, height: 100)
+                                                        //.frame(width: 100, height: 100)
                                                 }
                                                 
                                                 Button {
@@ -328,26 +355,8 @@ struct ContentView: View {
                                                         .foregroundStyle(Color(hex: "78D6FF"))
                                                         .frame(width: 100, height: 100)
                                                         .fontWeight(.black)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
-                                                        .shadow(color: Color(hex: "1E8CCB"), radius: shadowStrokeRadius, x: 0, y: 0)
+                                                        .modifier(ShadowStrokeModifier())
+                                                        
                                                     
                                                     //HStack(alignment: .center) {
                                                     Button {
@@ -358,7 +367,7 @@ struct ContentView: View {
                                                     .buttonStyle(SmallButton3DStyle())
                                                     .frame(width: 100, height: 30)
                                                     .padding()
-                                                    .sheet(isPresented: $showIconPicker) {
+                                                    .popover(isPresented: $showIconPicker) {
                                                         VStack {
                                                             HStack {
                                                                 Spacer()
@@ -377,181 +386,205 @@ struct ContentView: View {
                                             }
                                         }
                                         .padding(.trailing, 20)
-                                        .frame(width: 200)
+                                        .frame(minWidth: 200)
                                         
-                                        VStack(alignment: .leading) {
-                                            HStack {
-//                                                Text("Opacity: \(Int(symbolOpacity*100))%")
-                                                Text("Opacity")
-                                                
-                                                Spacer()
-                                                
-                                                Button {
-                                                    symbolOpacity = 0.5
-                                                } label: {
-                                                    Text("Reset")
+                                        ScrollView {
+                                            VStack(alignment: .leading) {
+                                                if imageType == .png {
+                                                    HStack {
+                                                        GeometryReader { advancedImagePicker in
+                                                            ZStack {
+                                                                RoundedRectangle(cornerRadius: 10)
+                                                                    .fill(Color(hex: "4C7C97"))
+                                                                    .stroke(Color(hex: "4C7C97"), lineWidth: 3)
+                                                                    .frame(height: 30)
+                                                                    .offset(y: 5)
+                                                                
+                                                                RoundedRectangle(cornerRadius: 10)
+                                                                    .fill(Color(hex: "78D6FF"))
+                                                                    .stroke(Color(hex: "1E8CCB"), lineWidth: 3)
+                                                                    .frame(height: 30)
+                                                                
+                                                                HStack {
+                                                                    if useAdvancedIconRendering {
+                                                                        Spacer()
+                                                                    }
+                                                                    
+                                                                    RoundedRectangle(cornerRadius: 10)
+                                                                        .fill(Color(hex: "4C7C97"))
+                                                                        .stroke(Color(hex: "4C7C97"), lineWidth: 3)
+                                                                        .frame(width: advancedImagePicker.size.width/2)
+                                                                        .overlay {
+                                                                            ZStack {
+                                                                                RoundedRectangle(cornerRadius: 10)
+                                                                                    .stroke(Color.black.opacity(0.5), lineWidth: 6)
+                                                                                    .blur(radius: 4)
+                                                                                    .mask(
+                                                                                        RoundedRectangle(cornerRadius: 10)
+                                                                                    )
+                                                                                
+                                                                                RoundedRectangle(cornerRadius: 10)
+                                                                                    .fill(Color(hex: "4C7C97").opacity(0.0))
+                                                                                    .stroke(Color(hex: "4C7C97"), lineWidth: 3)
+                                                                            }
+                                                                        }
+                                                                    
+                                                                    if !useAdvancedIconRendering {
+                                                                        Spacer()
+                                                                    }
+                                                                }.frame(width: advancedImagePicker.size.width)
+                                                                    .animation(.default)
+                                                                
+                                                                HStack(spacing: 0) {
+                                                                    Text("Standard")
+                                                                        .frame(width: advancedImagePicker.size.width/2)
+                                                                    
+                                                                    Text("Advanced")
+                                                                        .frame(width: advancedImagePicker.size.width/2)
+                                                                }.foregroundStyle(Color.white)
+                                                                
+                                                                HStack(spacing: 0) {
+                                                                    Color.white.opacity(0.001)
+                                                                        .frame(width: advancedImagePicker.size.width/2, height: 30)
+                                                                        .onTapGesture {
+                                                                            useAdvancedIconRendering = false
+                                                                        }
+                                                                    
+                                                                    Color.white.opacity(0.001)
+                                                                        .frame(width: advancedImagePicker.size.width/2, height: 30)
+                                                                        .onTapGesture {
+                                                                            useAdvancedIconRendering = true
+                                                                        }
+                                                                }
+                                                                
+                                                            }
+                                                            
+                                                        }
+                                                    }.padding([.leading, .vertical], 5)
+                                                        .padding(.trailing)
+                                                        .frame(height: 30)
                                                 }
-                                                .buttonStyle(SmallButton3DStyle())
-                                                .frame(width: 100, height: 30)
-                                                .padding()
-                                            }
-//                                            Slider(value: $symbolOpacity, in: 0...1)
-                                            CustomSlider(value: $symbolOpacity, minValue: 0, maxValue: 1)
-                                                .frame(width: 200)
-                                            
-                                            HStack {
-//                                                Text("Scale: \(Int(iconScale*100))%")
-                                                Text("Scale")
                                                 
-                                                Spacer()
-                                                
-                                                Button {
-                                                    iconScale = 1.0
-                                                } label: {
-                                                    Text("Reset")
+                                                HStack {
+                                                    //                                                Text("Opacity: \(Int(symbolOpacity*100))%")
+                                                    Text("Opacity")
+                                                    
+                                                    Spacer()
+                                                    
+                                                    Button {
+                                                        symbolOpacity = 0.5
+                                                    } label: {
+                                                        Text("Reset")
+                                                    }
+                                                    .buttonStyle(SmallButton3DStyle())
+                                                    .frame(width: 70, height: 30)
+                                                    .padding([.top, .bottom])
+                                                    
+                                                    Button {
+                                                        withAnimation {
+                                                            hideOpacity.toggle()
+                                                        }
+                                                    } label: {
+                                                        Image(systemName: "chevron.down")
+                                                            .rotationEffect(Angle(degrees: hideOpacity ? -180: 0))
+                                                    }
+                                                    .buttonStyle(SmallButton3DStyle())
+                                                    .frame(width: 30, height: 30)
+                                                    .padding([.top, .bottom, .trailing])
                                                 }
-                                                .buttonStyle(SmallButton3DStyle())
-                                                .frame(width: 100, height: 30)
-                                                .padding()
-                                            }
-//                                            Slider(value: $iconScale, in: 0...3)
-                                            CustomSlider(value: $iconScale, minValue: 0, maxValue: 5)
-                                                .frame(width: 200)
-                                            
-                                            
-                                            HStack {
-//                                                Text("Offset: \(Int(iconOffset))")
-                                                Text("Offset")
                                                 
-                                                Spacer()
-                                                
-                                                Button {
-                                                    iconOffset = 0
-                                                } label: {
-                                                    Text("Reset")
+                                                if !hideOpacity {
+                                                    CustomSlider(value: $symbolOpacity, minValue: 0, maxValue: 1)
+                                                        .frame(width: 200)
+                                                        .padding(.horizontal, 5)
                                                 }
-                                                .buttonStyle(SmallButton3DStyle())
-                                                .frame(width: 100, height: 30)
-                                                .padding()
-                                            }
-//                                            Slider(value: $iconOffset, in: -150...150)
-                                            CustomSlider2(value: $iconOffset, minValue: 200, maxValue: -200)
-                                                .frame(width: 200)
-                                        }.frame(width: 200)
+                                                
+                                                Divider()
+                                                
+                                                HStack {
+                                                    //                                                Text("Scale: \(Int(iconScale*100))%")
+                                                    Text("Scale")
+                                                    
+                                                    Spacer()
+                                                    
+                                                    Button {
+                                                        iconScale = 1.0
+                                                    } label: {
+                                                        Text("Reset")
+                                                    }
+                                                    .buttonStyle(SmallButton3DStyle())
+                                                    .frame(width: 70, height: 30)
+                                                    .padding([.top, .bottom])
+                                                    
+                                                    Button {
+                                                        withAnimation {
+                                                            hideScale.toggle()
+                                                        }
+                                                    } label: {
+                                                        Image(systemName: "chevron.down")
+                                                            .rotationEffect(Angle(degrees: hideScale ? -180: 0))
+                                                    }
+                                                    .buttonStyle(SmallButton3DStyle())
+                                                    .frame(width: 30, height: 30)
+                                                    .padding([.top, .bottom, .trailing])
+                                                }
+                                                
+                                                if !hideScale {
+                                                    CustomSlider(value: $iconScale, minValue: 0, maxValue: 5)
+                                                        .frame(width: 200)
+                                                        .padding(.horizontal, 5)
+                                                }
+                                                
+                                                Divider()
+                                                
+                                                HStack {
+                                                    Text("Offset")
+                                                    
+                                                    Spacer()
+                                                    
+                                                    Button {
+                                                        iconOffset = 0
+                                                    } label: {
+                                                        Text("Reset")
+                                                    }
+                                                    .buttonStyle(SmallButton3DStyle())
+                                                    .frame(width: 70, height: 30)
+                                                    .padding([.top, .bottom])
+                                                    
+                                                    Button {
+                                                        withAnimation {
+                                                            hideOffset.toggle()
+                                                        }
+                                                    } label: {
+                                                        Image(systemName: "chevron.down")
+                                                            .rotationEffect(Angle(degrees: hideOffset ? -180: 0))
+                                                    }
+                                                    .buttonStyle(SmallButton3DStyle())
+                                                    .frame(width: 30, height: 30)
+                                                    .padding([.top, .bottom, .trailing])
+                                                }
+                                                
+                                                if !hideOffset {
+                                                    CustomSlider2(value: $iconOffset, minValue: 200, maxValue: -200)
+                                                        .frame(width: 200)
+                                                        .padding(.horizontal, 5)
+                                                }
+                                                
+                                                //                                            Custom2DSlider(valueX: $plane2DTest, valueY: $iconOffset, minValueX: 0, maxValueX: 5, minValueY: -200, maxValueY: 200)
+                                            }.frame(width: 210)
+                                        }.frame(width: 210)
                                         Spacer()
                                     }
                                     
-                                    Divider()
                                 }
                             }
                             .frame(width: rightGeo.size.width)
-                        }
+                        //}
                         .zIndex(1)
                     }
                 }
                 .padding(20)
                 .frame(minHeight: 300, idealHeight: 500)
-                
-                // MARK: - Presets
-                VStack {
-                    Text("Preset Colors")
-                        .font(.system(.title2, design: .default, weight: .medium))
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(alignment: .center) {
-                            FolderPresetPreview(color1: "1E8CCB", color2: "6FCDF6",
-                                                symbolName: $symbolName,
-                                                topOffset: $topOffset,
-                                                bottomOffset: $bottomOffset,
-                                                topShapeColorSetter: $topShapeColor,
-                                                bottomShapeColorSetter: $bottomShapeColor,
-                                                iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity,
-                                                iconScale: $iconScale,
-                                                selectedImage: $selectedImage)
-                            
-                            FolderPresetPreview(color1: "D23359", color2: "F66F8F",
-                                                symbolName: $symbolName,
-                                                topOffset: $topOffset,
-                                                bottomOffset: $bottomOffset,
-                                                topShapeColorSetter: $topShapeColor,
-                                                bottomShapeColorSetter: $bottomShapeColor,
-                                                iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity,
-                                                iconScale: $iconScale,
-                                                selectedImage: $selectedImage)
-                            
-                            FolderPresetPreview(color1: "DA8521", color2: "F6B86F",
-                                                symbolName: $symbolName,
-                                                topOffset: $topOffset,
-                                                bottomOffset: $bottomOffset,
-                                                topShapeColorSetter: $topShapeColor,
-                                                bottomShapeColorSetter: $bottomShapeColor,
-                                                iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity,
-                                                iconScale: $iconScale,
-                                                selectedImage: $selectedImage)
-                            
-                            FolderPresetPreview(color1: "DCAE46", color2: "F5DD62",
-                                                symbolName: $symbolName,
-                                                topOffset: $topOffset,
-                                                bottomOffset: $bottomOffset,
-                                                topShapeColorSetter: $topShapeColor,
-                                                bottomShapeColorSetter: $bottomShapeColor,
-                                                iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity,
-                                                iconScale: $iconScale,
-                                                selectedImage: $selectedImage)
-                            
-                            FolderPresetPreview(color1: "20731D", color2: "43AC40",
-                                                symbolName: $symbolName,
-                                                topOffset: $topOffset,
-                                                bottomOffset: $bottomOffset,
-                                                topShapeColorSetter: $topShapeColor,
-                                                bottomShapeColorSetter: $bottomShapeColor,
-                                                iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity,
-                                                iconScale: $iconScale,
-                                                selectedImage: $selectedImage)
-                            
-                            FolderPresetPreview(color1: "2955AB", color2: "5788E5",
-                                                symbolName: $symbolName,
-                                                topOffset: $topOffset,
-                                                bottomOffset: $bottomOffset,
-                                                topShapeColorSetter: $topShapeColor,
-                                                bottomShapeColorSetter: $bottomShapeColor,
-                                                iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity,
-                                                iconScale: $iconScale,
-                                                selectedImage: $selectedImage)
-                            
-                            FolderPresetPreview(color1: "7125BD", color2: "A750FF",
-                                                symbolName: $symbolName,
-                                                topOffset: $topOffset,
-                                                bottomOffset: $bottomOffset,
-                                                topShapeColorSetter: $topShapeColor,
-                                                bottomShapeColorSetter: $bottomShapeColor,
-                                                iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity,
-                                                iconScale: $iconScale,
-                                                selectedImage: $selectedImage)
-                            
-                            FolderPresetPreview(color1: "BD2593", color2: "FA62F4",
-                                                symbolName: $symbolName,
-                                                topOffset: $topOffset,
-                                                bottomOffset: $bottomOffset,
-                                                topShapeColorSetter: $topShapeColor,
-                                                bottomShapeColorSetter: $bottomShapeColor,
-                                                iconColorSetter: $symbolColor,
-                                                opacitySetter: $symbolOpacity,
-                                                iconScale: $iconScale,
-                                                selectedImage: $selectedImage)
-                        }
-                        .padding(.horizontal, 10)
-                    }
-                }
-//                .frame(minHeight: 100, idealHeight: 100)
-                .frame(height: 100)
             }
         }
         .frame(minWidth: 750, minHeight: 500)

@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct CustomSlider: View {
-    @Binding var value: Double
+struct CustomSlider<T: BinaryFloatingPoint & Equatable>: View {
+    @Binding var value: T
     @State var minValue: Double
     @State var maxValue: Double
     
@@ -16,7 +16,7 @@ struct CustomSlider: View {
             // sliderWidth: the horizontal distance over which the handle's center can move.
             let sliderWidth = geometry.size.width - handleSize - trailingMargin
             // progress: a value between 0 and 1.
-            let progress = (value - minValue) / (maxValue - minValue)
+            let progress = (Double(value) - minValue) / (maxValue - minValue)
             // fillWidth: should be exactly up to the handle’s center.
             let fillWidth = (handleSize / 2) + CGFloat(progress) * sliderWidth
             
@@ -89,7 +89,7 @@ struct CustomSlider: View {
                         let clampedX = min(max(drag.location.x, minCenter), maxCenter)
                         // Map the clamped x-coordinate back to a progress value.
                         let computedProgress = (clampedX - minCenter) / sliderWidth
-                        self.value = minValue + Double(computedProgress) * (maxValue - minValue)
+                        self.value = T(minValue + Double(computedProgress) * (maxValue - minValue))
                     }
             )
         }

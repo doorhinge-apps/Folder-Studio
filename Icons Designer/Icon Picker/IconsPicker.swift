@@ -52,6 +52,7 @@ struct IconsPicker: View {
                         .opacity(filterApplied == .all ? 1.0: 0.5)
                         .scaleEffect(filterApplied == .all ? 1.0: 0.75)
                         .animation(.default, value: filterApplied)
+                        .buttonStyle(Button3DStyle())
                     
                     Button {
                         filterApplied = .outline
@@ -63,6 +64,7 @@ struct IconsPicker: View {
                         .opacity(filterApplied == .outline ? 1.0: 0.5)
                         .scaleEffect(filterApplied == .outline ? 1.0: 0.75)
                         .animation(.default, value: filterApplied)
+                        .buttonStyle(Button3DStyle())
                     
                     Button {
                         filterApplied = .fill
@@ -74,6 +76,7 @@ struct IconsPicker: View {
                         .opacity(filterApplied == .fill ? 1.0: 0.5)
                         .scaleEffect(filterApplied == .fill ? 1.0: 0.75)
                         .animation(.default, value: filterApplied)
+                        .buttonStyle(Button3DStyle())
                     
                     Button {
                         filterApplied = .circle
@@ -85,6 +88,7 @@ struct IconsPicker: View {
                         .opacity(filterApplied == .circle ? 1.0: 0.5)
                         .scaleEffect(filterApplied == .circle ? 1.0: 0.75)
                         .animation(.default, value: filterApplied)
+                        .buttonStyle(Button3DStyle())
                     
                     Button {
                         filterApplied = .circleFill
@@ -96,6 +100,7 @@ struct IconsPicker: View {
                         .opacity(filterApplied == .circleFill ? 1.0: 0.5)
                         .scaleEffect(filterApplied == .circleFill ? 1.0: 0.75)
                         .animation(.default, value: filterApplied)
+                        .buttonStyle(Button3DStyle())
                 }
                 
                 
@@ -149,6 +154,14 @@ struct IconsPicker: View {
                             }
                         }
                 }.scrollIndicators(.hidden)
+            }.frame(maxHeight: 700)
+            .background {
+                ZStack {
+                    Color(hex: "6FCDF6")
+                    
+                    Image("grain")
+                        .scaledToFill()
+                }.ignoresSafeArea()
             }
         }
     }
