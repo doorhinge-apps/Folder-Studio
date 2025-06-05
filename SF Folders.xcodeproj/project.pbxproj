@@ -25,6 +25,7 @@
 		B9567A992D1FAA6F00CAD0F1 /* IconsArrayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A942D1FAA6F00CAD0F1 /* IconsArrayStorage.swift */; };
 		B9567A9A2D1FAA6F00CAD0F1 /* Icons Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */; };
 		B984865E2DF20B8200F25E91 /* AxisPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984865D2DF20B8200F25E91 /* AxisPicker.swift */; };
+		B98486602DF24A2B00F25E91 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984865F2DF24A2B00F25E91 /* EntryView.swift */; };
 		B98FCE092D1FDDCC0033EAED /* IconChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FCE082D1FDDCC0033EAED /* IconChanger.swift */; };
 		B98FCE0C2D20AED10033EAED /* FolderClippingShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */; };
 		B99B9F502D547C5D00C81B69 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99B9F4F2D547C5D00C81B69 /* CustomSlider.swift */; };
@@ -52,6 +53,7 @@
 		B9567A952D1FAA6F00CAD0F1 /* IconsArrayIOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsArrayIOS18.swift; sourceTree = "<group>"; };
 		B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Icons Arrays.swift"; sourceTree = "<group>"; };
 		B984865D2DF20B8200F25E91 /* AxisPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisPicker.swift; sourceTree = "<group>"; };
+		B984865F2DF24A2B00F25E91 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Icons Designer.entitlements"; sourceTree = "<group>"; };
 		B98FCE082D1FDDCC0033EAED /* IconChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconChanger.swift; sourceTree = "<group>"; };
 		B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderClippingShape.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */,
 				B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */,
 				B9567A702D1F536100CAD0F1 /* ContentView.swift */,
+				B984865F2DF24A2B00F25E91 /* EntryView.swift */,
 				B90822BE2DF012EC00C04565 /* FoldersViewModel.swift */,
 				B90822B82DEFFCA700C04565 /* The Folder */,
 				B90822B92DF0006C00C04565 /* UI Components */,
@@ -246,6 +249,7 @@
 				B9CE9DBB2D403B700008BE06 /* ButtonStyles.swift in Sources */,
 				B90822BD2DF0051F00C04565 /* StrokeModifier.swift in Sources */,
 				B9567A8E2D1F96B300CAD0F1 /* Snapshot.swift in Sources */,
+				B98486602DF24A2B00F25E91 /* EntryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

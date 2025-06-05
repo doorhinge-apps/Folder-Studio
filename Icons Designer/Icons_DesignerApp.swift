@@ -14,12 +14,12 @@ import SwiftUI
 struct Icons_DesignerApp: App {
     @State private var aboutWindow: NSWindow?
     
-    @StateObject var foldersViewModel = FoldersViewModel()
+//    @StateObject var foldersViewModel = FoldersViewModel()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(foldersViewModel)
+            EntryView()
+//                .environmentObject(foldersViewModel)
                 .containerBackground(for: .window, content: {
                     ZStack {
                         Color(hex: "6FCDF6")

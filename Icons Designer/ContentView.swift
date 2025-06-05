@@ -593,6 +593,7 @@ struct ContentView: View {
             }
         }
         .frame(minWidth: 850, minHeight: 500)
+//        .environmentObject(foldersViewModel)
     }
     
     // MARK: - Offset Controls
