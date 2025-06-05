@@ -30,19 +30,18 @@ struct AboutView: View {
                 .font(.subheadline)
                 .foregroundColor(.secondary)
             
-            Text(.init("This application is open source and licensed under the Mozilla Public License (MPL) 2.0. You can view the source code and license at [https://github.com/CaedmonMyers/SF-Symbols-Folders](https://github.com/CaedmonMyers/SF-Symbols-Folders)."))
-                .lineLimit(nil)
+            Text(.init("""
+            **License**  
+            This application is open source and distributed under the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).
+            
+            You can view the source code and license details on [GitHub](https://github.com/doorhinge-apps/SF-Symbols-Folders).
+            """))
+            .lineLimit(nil)
 
-            Text(copyright)
+            Text(.init("[\(copyright)](https://doorhingeapps.com)"))
                 .font(.footnote)
                 .foregroundColor(.secondary)
-
-            Button("Visit Website") {
-                if let url = URL(string: "https://doorhingeapps.com") {
-                    NSWorkspace.shared.open(url)
-                }
-            }
-            .padding(.top)
+                .underline(true)
 
             Spacer()
         }

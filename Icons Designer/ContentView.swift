@@ -18,9 +18,6 @@ struct ContentView: View {
         GeometryReader { geo in
             VSplitView {
                 HStack(spacing: 0) {
-                    // MARK: - Live Preview
-                    // Show the folder icon at a smaller scale, if desired
-                    
                     HStack {
                         Text("Presets")
                             .font(.system(.title, design: .rounded, weight: .bold))
@@ -48,21 +45,6 @@ struct ContentView: View {
                                 FolderIconView(
                                     resolutionScale: 0.25
                                 )
-//                                FolderIconView(
-//                                    topShapeColor: $foldersViewModel.topShapeColor,
-//                                    bottomShapeColor: $foldersViewModel.bottomShapeColor,
-//                                    symbolName: $foldersViewModel.symbolName,
-//                                    symbolColor: $foldersViewModel.symbolColor,
-//                                    symbolOpacity: $foldersViewModel.symbolOpacity,
-//                                    topOffset: $foldersViewModel.topOffset,
-//                                    bottomOffset: $foldersViewModel.bottomOffset,
-//                                    iconOffset: $foldersViewModel.iconOffset,
-//                                    iconScale: $foldersViewModel.iconScale,
-//                                    imageType: $foldersViewModel.imageType,
-//                                    customImage: $foldersViewModel.selectedImage,
-//                                    useAdvancedIconRendering: $foldersViewModel.useAdvancedIconRendering,
-//                                    resolutionScale: 0.25
-//                                )
                                 .frame(width: 200, height: 200)
                                 .scaleEffect(0.43)
                                 .cornerRadius(10)
@@ -70,7 +52,6 @@ struct ContentView: View {
                                 
                                 Text("Drag Folders to Set Icons")
                                 
-                                // -- Save Button
                                 Button(action: savePNG) {
                                     Text("Save as Image")
                                 }
@@ -141,21 +122,6 @@ struct ContentView: View {
                                             FolderIconView(
                                                 resolutionScale: 0.125
                                             )
-                                            
-//                                            FolderIconView(topShapeColor: $foldersViewModel.topShapeColor,
-//                                                           bottomShapeColor: $foldersViewModel.bottomShapeColor,
-//                                                           symbolName: $foldersViewModel.symbolName,
-//                                                           symbolColor: $foldersViewModel.symbolColor,
-//                                                           symbolOpacity: $foldersViewModel.symbolOpacity,
-//                                                           topOffset: $foldersViewModel.topOffset,
-//                                                           bottomOffset: $foldersViewModel.bottomOffset,
-//                                                           iconOffset: $foldersViewModel.iconOffset,
-//                                                           iconScale: $foldersViewModel.iconScale,
-//                                                           imageType: $foldersViewModel.imageType,
-//                                                           customImage: $foldersViewModel.selectedImage,
-//                                                           useAdvancedIconRendering: $foldersViewModel.useAdvancedIconRendering,
-//                                                           resolutionScale: 0.125
-//                                            )
                                             .frame(width: 100, height: 100)
                                             .scaleEffect(0.21)
                                         }
@@ -374,6 +340,9 @@ struct ContentView: View {
                                                         .frame(width: 100, height: 100)
                                                         .fontWeight(.black)
                                                         .modifier(ShadowStrokeModifier())
+                                                        .onTapGesture {
+                                                            foldersViewModel.showIconPicker = true
+                                                        }
                                                         
                                                     
                                                     //HStack(alignment: .center) {
@@ -504,7 +473,7 @@ struct ContentView: View {
                                                         }
                                                     } label: {
                                                         Image(systemName: "chevron.down")
-                                                            .rotationEffect(Angle(degrees: foldersViewModel.hideOpacity ? -180: 0))
+                                                            .rotationEffect(Angle(degrees: !foldersViewModel.hideOpacity ? -180: 0))
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
                                                     .frame(width: 30, height: 30)
@@ -513,7 +482,7 @@ struct ContentView: View {
                                                 
                                                 if !foldersViewModel.hideOpacity {
                                                     CustomSlider(value: $foldersViewModel.symbolOpacity, minValue: 0, maxValue: 1)
-                                                        .frame(width: 200)
+                                                        //.frame(width: 200)
                                                         .padding(.horizontal, 5)
                                                 }
                                                 
@@ -540,7 +509,7 @@ struct ContentView: View {
                                                         }
                                                     } label: {
                                                         Image(systemName: "chevron.down")
-                                                            .rotationEffect(Angle(degrees: foldersViewModel.hideScale ? -180: 0))
+                                                            .rotationEffect(Angle(degrees: !foldersViewModel.hideScale ? -180: 0))
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
                                                     .frame(width: 30, height: 30)
@@ -549,7 +518,7 @@ struct ContentView: View {
                                                 
                                                 if !foldersViewModel.hideScale {
                                                     CustomSlider(value: $foldersViewModel.iconScale, minValue: 0, maxValue: 5)
-                                                        .frame(width: 200)
+                                                        //.frame(width: 200)
                                                         .padding(.horizontal, 5)
                                                 }
                                                 
@@ -575,7 +544,7 @@ struct ContentView: View {
                                                         }
                                                     } label: {
                                                         Image(systemName: "chevron.down")
-                                                            .rotationEffect(Angle(degrees: foldersViewModel.hideOffset ? -180: 0))
+                                                            .rotationEffect(Angle(degrees: !foldersViewModel.hideOffset ? -180: 0))
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
                                                     .frame(width: 30, height: 30)
@@ -584,13 +553,13 @@ struct ContentView: View {
                                                 
                                                 if !foldersViewModel.hideOffset {
                                                     CustomSlider2(value: $foldersViewModel.iconOffset, minValue: 200, maxValue: -200)
-                                                        .frame(width: 200)
+                                                        //.frame(width: 200)
                                                         .padding(.horizontal, 5)
                                                 }
                                                 
                                                 //                                            Custom2DSlider(valueX: $plane2DTest, valueY: $iconOffset, minValueX: 0, maxValueX: 5, minValueY: -200, maxValueY: 200)
-                                            }.frame(width: 210)
-                                        }.frame(width: 210)
+                                            }//.frame(width: 210)
+                                        }//.frame(width: 210)
                                         Spacer()
                                     }
                                     
@@ -601,11 +570,11 @@ struct ContentView: View {
                         .zIndex(1)
                     }
                 }
-                .padding(20)
+                .padding([.horizontal, .top], 20)
                 .frame(minHeight: 300, idealHeight: 500)
             }
         }
-        .frame(minWidth: 750, minHeight: 500)
+        .frame(minWidth: 850, minHeight: 500)
     }
     
     // MARK: - Offset Controls
@@ -660,20 +629,6 @@ struct ContentView: View {
         
         if panel.runModal() == .OK, let url = panel.url {
             // 1) Render a 470×395 icon at 100% scale
-//            let fullSizeIcon = FolderIconView(topShapeColor: $foldersViewModel.topShapeColor,
-//                                              bottomShapeColor: $foldersViewModel.bottomShapeColor,
-//                                              symbolName: $foldersViewModel.symbolName,
-//                                              symbolColor: $foldersViewModel.symbolColor,
-//                                              symbolOpacity: $foldersViewModel.symbolOpacity,
-//                                              topOffset: $foldersViewModel.topOffset,
-//                                              bottomOffset: $foldersViewModel.bottomOffset,
-//                                              iconOffset: $foldersViewModel.iconOffset,
-//                                              iconScale: $foldersViewModel.iconScale,
-//                                              imageType: $foldersViewModel.imageType,
-//                                              customImage: $foldersViewModel.selectedImage,
-//                                              useAdvancedIconRendering: $foldersViewModel.useAdvancedIconRendering,
-//                                              resolutionScale: 1.0
-//            )
             let fullSizeIcon = FolderIconView(
                 resolutionScale: 1.0
             )
@@ -746,21 +701,6 @@ struct ContentView: View {
     // MARK: - Set Folder Icon (Drag-and-Drop) - Unified Logic
     private func setFolderIcon(folderURL: URL) throws {
         // 1) Generate the same 470×395 icon as "Save as Image".
-//        let fullSizeIcon = FolderIconView(
-//            topShapeColor: $foldersViewModel.topShapeColor,
-//            bottomShapeColor: $foldersViewModel.bottomShapeColor,
-//            symbolName: $foldersViewModel.symbolName,
-//            symbolColor: $foldersViewModel.symbolColor,
-//            symbolOpacity: $foldersViewModel.symbolOpacity,
-//            topOffset: $foldersViewModel.topOffset,
-//            bottomOffset: $foldersViewModel.bottomOffset,
-//            iconOffset: $foldersViewModel.iconOffset,
-//            iconScale: $foldersViewModel.iconScale,
-//            imageType: $foldersViewModel.imageType,
-//            customImage: $foldersViewModel.selectedImage,
-//            useAdvancedIconRendering: $foldersViewModel.useAdvancedIconRendering,
-//            resolutionScale: 1.0
-//        )
         let fullSizeIcon = FolderIconView(
             resolutionScale: 1.0
         )

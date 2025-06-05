@@ -88,6 +88,7 @@
 				B90822BA2DF0008B00C04565 /* Custom2DSlider.swift */,
 				B9281BA12D9C4B3200C29B95 /* ColorWell.swift */,
 				B9CE9DBA2D403B700008BE06 /* ButtonStyles.swift */,
+				B98FCE0A2D1FDE020033EAED /* Icon Picker */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -128,7 +129,6 @@
 				B9567A8D2D1F96B300CAD0F1 /* Snapshot.swift */,
 				B98FCE082D1FDDCC0033EAED /* IconChanger.swift */,
 				B99E1CBE2D27DD9A008EF662 /* About.swift */,
-				B98FCE0A2D1FDE020033EAED /* Icon Picker */,
 				B9567A8F2D1F9CD400CAD0F1 /* hex.swift */,
 				B9567A6F2D1F536100CAD0F1 /* Assets.xcassets */,
 				B9567A6E2D1F536100CAD0F1 /* Preview Content */,

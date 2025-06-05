@@ -47,7 +47,7 @@ class FoldersViewModel: ObservableObject {
     
     @Published var selectedImage: NSImage? = nil
     
-    @Published var useAdvancedIconRendering = false
+    @AppStorage("useAdvancedIconRendering") var useAdvancedIconRendering = true
     
     @Published var rotationAngle = 0
     
