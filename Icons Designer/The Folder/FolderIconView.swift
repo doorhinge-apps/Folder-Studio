@@ -62,7 +62,7 @@ struct FolderIconView: View {
                         .frame(width: 150, height: 150)
                         .position(x: iconWidth / 2, y: 231)
                         .scaleEffect(foldersViewModel.iconScale)
-                        .offset(y: foldersViewModel.iconOffset)
+                        .offset(x: foldersViewModel.iconOffsetX, y: foldersViewModel.iconOffset)
                 }
                 
                 if foldersViewModel.imageType == .png, let image = foldersViewModel.selectedImage {
@@ -76,7 +76,7 @@ struct FolderIconView: View {
                                     .frame(width: 150, height: 150)
                                     .position(x: iconWidth / 2, y: 231)
                                     .scaleEffect(foldersViewModel.iconScale)
-                                    .offset(y: foldersViewModel.iconOffset)
+                                    .offset(x: foldersViewModel.iconOffsetX, y: foldersViewModel.iconOffset)
                             }
                             
                             if isProcessingImage || advancedProcessedImage == nil {
@@ -289,7 +289,7 @@ struct PresetFolderIconView: View {
                         .frame(width: 150, height: 150)
                         .position(x: iconWidth / 2, y: 231)
                         .scaleEffect(foldersViewModel.iconScale)
-                        .offset(y: foldersViewModel.iconOffset)
+                        .offset(x: foldersViewModel.iconOffsetX, y: foldersViewModel.iconOffset)
                 }
                 
                 if foldersViewModel.imageType == .png, let image = foldersViewModel.selectedImage {
@@ -303,7 +303,7 @@ struct PresetFolderIconView: View {
                                     .frame(width: 150, height: 150)
                                     .position(x: iconWidth / 2, y: 231)
                                     .scaleEffect(foldersViewModel.iconScale)
-                                    .offset(y: foldersViewModel.iconOffset)
+                                    .offset(x: foldersViewModel.iconOffsetX, y: foldersViewModel.iconOffset)
                             }
                             
                             if isProcessingImage || advancedProcessedImage == nil {

@@ -41,6 +41,7 @@ class FoldersViewModel: ObservableObject {
     @Published var imageType: ImageType = .sfsymbol
     
     @Published var iconOffset: CGFloat = 0
+    @Published var iconOffsetX: CGFloat = 0
     @Published var plane2DTest: CGFloat = 0
     
     @Published var iconScale = 1.0

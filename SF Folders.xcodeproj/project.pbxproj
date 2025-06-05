@@ -24,6 +24,7 @@
 		B9567A982D1FAA6F00CAD0F1 /* IconsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A932D1FAA6F00CAD0F1 /* IconsPicker.swift */; };
 		B9567A992D1FAA6F00CAD0F1 /* IconsArrayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A942D1FAA6F00CAD0F1 /* IconsArrayStorage.swift */; };
 		B9567A9A2D1FAA6F00CAD0F1 /* Icons Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */; };
+		B984865E2DF20B8200F25E91 /* AxisPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984865D2DF20B8200F25E91 /* AxisPicker.swift */; };
 		B98FCE092D1FDDCC0033EAED /* IconChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FCE082D1FDDCC0033EAED /* IconChanger.swift */; };
 		B98FCE0C2D20AED10033EAED /* FolderClippingShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */; };
 		B99B9F502D547C5D00C81B69 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99B9F4F2D547C5D00C81B69 /* CustomSlider.swift */; };
@@ -50,6 +51,7 @@
 		B9567A942D1FAA6F00CAD0F1 /* IconsArrayStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsArrayStorage.swift; sourceTree = "<group>"; };
 		B9567A952D1FAA6F00CAD0F1 /* IconsArrayIOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsArrayIOS18.swift; sourceTree = "<group>"; };
 		B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Icons Arrays.swift"; sourceTree = "<group>"; };
+		B984865D2DF20B8200F25E91 /* AxisPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisPicker.swift; sourceTree = "<group>"; };
 		B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Icons Designer.entitlements"; sourceTree = "<group>"; };
 		B98FCE082D1FDDCC0033EAED /* IconChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconChanger.swift; sourceTree = "<group>"; };
 		B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderClippingShape.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				B99B9F4F2D547C5D00C81B69 /* CustomSlider.swift */,
+				B984865D2DF20B8200F25E91 /* AxisPicker.swift */,
 				B90822BC2DF0051F00C04565 /* StrokeModifier.swift */,
 				B90822BA2DF0008B00C04565 /* Custom2DSlider.swift */,
 				B9281BA12D9C4B3200C29B95 /* ColorWell.swift */,
@@ -236,6 +239,7 @@
 				B9567A742D1F536100CAD0F1 /* Icons_DesignerApp.swift in Sources */,
 				B99E1CBF2D27DD9A008EF662 /* About.swift in Sources */,
 				B98FCE0C2D20AED10033EAED /* FolderClippingShape.swift in Sources */,
+				B984865E2DF20B8200F25E91 /* AxisPicker.swift in Sources */,
 				B99B9F502D547C5D00C81B69 /* CustomSlider.swift in Sources */,
 				B98FCE092D1FDDCC0033EAED /* IconChanger.swift in Sources */,
 				B9567A8C2D1F969C00CAD0F1 /* FolderIconView.swift in Sources */,

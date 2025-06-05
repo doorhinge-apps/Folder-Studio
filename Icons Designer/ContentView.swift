@@ -14,6 +14,8 @@ struct ContentView: View {
     @State var topShapeColorIsUpdating: Bool = false
     @State var symbolColorIsUpdating: Bool = false
     
+    @State private var pos: [CGFloat] = [0, 0]
+    
     var body: some View {
         GeometryReader { geo in
             VSplitView {
@@ -531,6 +533,7 @@ struct ContentView: View {
                                                     
                                                     Button {
                                                         foldersViewModel.iconOffset = 0
+                                                        foldersViewModel.iconOffsetX = 0
                                                     } label: {
                                                         Text("Reset")
                                                     }
@@ -550,13 +553,28 @@ struct ContentView: View {
                                                     .frame(width: 30, height: 30)
                                                     .padding([.top, .bottom, .trailing])
                                                 }
-                                                
-                                                if !foldersViewModel.hideOffset {
-                                                    CustomSlider2(value: $foldersViewModel.iconOffset, minValue: 200, maxValue: -200)
-                                                        //.frame(width: 200)
-                                                        .padding(.horizontal, 5)
+                                                .onChange(of: pos) { oldValue, newValue in
+                                                    foldersViewModel.iconOffset = newValue[1]
+                                                    foldersViewModel.iconOffsetX = newValue[0]
+                                                    //print("Updating thing 1")
+                                                }
+                                                .onChange(of: foldersViewModel.iconOffset + foldersViewModel.iconOffsetX) { oldValue, newValue in
+                                                    pos = [foldersViewModel.iconOffsetX, foldersViewModel.iconOffset]
+                                                    //print("Updating thing 2")
                                                 }
                                                 
+                                                if !foldersViewModel.hideOffset {
+//                                                    CustomSlider2(value: $foldersViewModel.iconOffset, minValue: 200, maxValue: -200)
+//                                                        .padding(.horizontal, 5)
+                                                    
+                                                    
+                                                    AxisPicker(
+                                                        coords: $pos,
+                                                        xMin: -200,  xMax: 200,
+                                                        yMin: -200,  yMax: 200
+                                                    )
+                                                    .padding(.horizontal, 5)
+                                                }
                                                 //                                            Custom2DSlider(valueX: $plane2DTest, valueY: $iconOffset, minValueX: 0, maxValueX: 5, minValueY: -200, maxValueY: 200)
                                             }//.frame(width: 210)
                                         }//.frame(width: 210)
