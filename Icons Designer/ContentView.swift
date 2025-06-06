@@ -37,6 +37,9 @@ struct ContentView: View {
                                     color2: preset[1]
                                 )
                             }
+                            
+                            Spacer()
+                                .frame(height: 50)
                         }
                     }.frame(width: 80)
                         .offset(x: -5)
@@ -53,6 +56,8 @@ struct ContentView: View {
                                 .zIndex(10)
                                 
                                 Text("Drag Folders to Set Icons")
+                                    .foregroundStyle(Color.white)
+                                    .font(.system(.title3, design: .rounded, weight: .semibold))
                                 
                                 Button(action: savePNG) {
                                     Text("Save as Image")
@@ -146,6 +151,9 @@ struct ContentView: View {
                             HStack {
                                 VStack(alignment: .center) {
                                     Text("Base")
+                                        .foregroundStyle(Color.white)
+                                        .font(.system(.headline, design: .rounded, weight: .semibold))
+                                    
                                     ColorWell(color: $bottomShapeColor)
                                         .onChange(of: bottomShapeColor) { oldValue, newValue in
                                             bottomShapeColorIsUpdating = true
@@ -166,6 +174,9 @@ struct ContentView: View {
                                 
                                 VStack(alignment: .center) {
                                     Text("Tab")
+                                        .foregroundStyle(Color.white)
+                                        .font(.system(.headline, design: .rounded, weight: .semibold))
+                                    
                                     ColorWell(color: $topShapeColor)
                                         .onChange(of: topShapeColor) { oldValue, newValue in
                                             topShapeColorIsUpdating = true
@@ -186,6 +197,9 @@ struct ContentView: View {
                                 
                                 VStack(alignment: .center) {
                                     Text("Symbol")
+                                        .foregroundStyle(Color.white)
+                                        .font(.system(.headline, design: .rounded, weight: .semibold))
+                                    
                                     ColorWell(color: $symbolColor)
                                         .onChange(of: symbolColor) { oldValue, newValue in
                                             symbolColorIsUpdating = true
@@ -217,7 +231,6 @@ struct ContentView: View {
                     
                     GeometryReader { rightGeo in
                         // MARK: - Controls
-                        //ScrollView {
                             VStack(alignment: .center, spacing: 20) {
                                 // -- Image Type
                                 HStack {
@@ -339,6 +352,17 @@ struct ContentView: View {
                                                         .resizable()
                                                         .scaledToFit()
                                                         .foregroundStyle(Color(hex: "78D6FF"))
+                                                        .fontWeight(
+                                                            foldersViewModel.symbolWeight.rounded() == 1 ? .ultraLight:
+                                                                foldersViewModel.symbolWeight.rounded() == 2 ? .thin:
+                                                                foldersViewModel.symbolWeight.rounded() == 3 ? .light:
+                                                                foldersViewModel.symbolWeight.rounded() == 4 ? .regular:
+                                                                foldersViewModel.symbolWeight.rounded() == 5 ? .medium:
+                                                                foldersViewModel.symbolWeight.rounded() == 6 ? .semibold:
+                                                                foldersViewModel.symbolWeight.rounded() == 7 ? .bold:
+                                                                foldersViewModel.symbolWeight.rounded() == 8 ? .heavy:
+                                                                foldersViewModel.symbolWeight.rounded() == 9 ? .black: .regular
+                                                        )
                                                         .frame(width: 100, height: 100)
                                                         .fontWeight(.black)
                                                         .modifier(ShadowStrokeModifier())
@@ -377,7 +401,7 @@ struct ContentView: View {
                                         .padding(.trailing, 20)
                                         .frame(minWidth: 200)
                                         
-                                        ScrollView {
+                                        ScrollView(showsIndicators: false) {
                                             VStack(alignment: .leading) {
                                                 if foldersViewModel.imageType == .png {
                                                     HStack {
@@ -454,14 +478,58 @@ struct ContentView: View {
                                                         .frame(height: 30)
                                                 }
                                                 
+                                                if foldersViewModel.imageType == .sfsymbol {
+                                                    HStack {
+                                                        Text("Weight")
+                                                            .foregroundStyle(Color.white)
+                                                            .font(.system(.title3, design: .rounded, weight: .semibold))
+                                                        
+                                                        Spacer()
+                                                        
+                                                        Button {
+                                                            withAnimation {
+                                                                foldersViewModel.symbolWeight = 4.0
+                                                            }
+                                                        } label: {
+                                                            Text("Reset")
+                                                        }
+                                                        .buttonStyle(SmallButton3DStyle())
+                                                        .frame(width: 70, height: 30)
+                                                        .padding([.top, .bottom])
+                                                        
+                                                        Button {
+                                                            withAnimation {
+                                                                foldersViewModel.hideWeight.toggle()
+                                                            }
+                                                        } label: {
+                                                            Image(systemName: "chevron.down")
+                                                                .rotationEffect(Angle(degrees: !foldersViewModel.hideWeight ? -180: 0))
+                                                        }
+                                                        .buttonStyle(SmallButton3DStyle())
+                                                        .frame(width: 30, height: 30)
+                                                        .padding([.top, .bottom, .trailing])
+                                                    }
+                                                    
+                                                    if !foldersViewModel.hideWeight {
+                                                        CustomSlider(value: $foldersViewModel.symbolWeight, minValue: 1, maxValue: 9)
+                                                            .padding(.horizontal, 5)
+                                                    }
+                                                    
+                                                    Divider()
+                                                }
+                                                
                                                 HStack {
                                                     //                                                Text("Opacity: \(Int(symbolOpacity*100))%")
                                                     Text("Opacity")
+                                                        .foregroundStyle(Color.white)
+                                                        .font(.system(.title3, design: .rounded, weight: .semibold))
                                                     
                                                     Spacer()
                                                     
                                                     Button {
-                                                        foldersViewModel.symbolOpacity = 0.5
+                                                        withAnimation {
+                                                            foldersViewModel.symbolOpacity = 0.5
+                                                        }
                                                     } label: {
                                                         Text("Reset")
                                                     }
@@ -493,11 +561,15 @@ struct ContentView: View {
                                                 HStack {
                                                     //                                                Text("Scale: \(Int(iconScale*100))%")
                                                     Text("Scale")
+                                                        .foregroundStyle(Color.white)
+                                                        .font(.system(.title3, design: .rounded, weight: .semibold))
                                                     
                                                     Spacer()
                                                     
                                                     Button {
-                                                        foldersViewModel.iconScale = 1.0
+                                                        withAnimation {
+                                                            foldersViewModel.iconScale = 1.0
+                                                        }
                                                     } label: {
                                                         Text("Reset")
                                                     }
@@ -519,7 +591,7 @@ struct ContentView: View {
                                                 }
                                                 
                                                 if !foldersViewModel.hideScale {
-                                                    CustomSlider(value: $foldersViewModel.iconScale, minValue: 0, maxValue: 5)
+                                                    CustomSlider(value: $foldersViewModel.iconScale, minValue: 0.2, maxValue: 5)
                                                         //.frame(width: 200)
                                                         .padding(.horizontal, 5)
                                                 }
@@ -528,12 +600,16 @@ struct ContentView: View {
                                                 
                                                 HStack {
                                                     Text("Offset")
+                                                        .foregroundStyle(Color.white)
+                                                        .font(.system(.title3, design: .rounded, weight: .semibold))
                                                     
                                                     Spacer()
                                                     
                                                     Button {
-                                                        foldersViewModel.iconOffset = 0
-                                                        foldersViewModel.iconOffsetX = 0
+                                                        withAnimation {
+                                                            foldersViewModel.iconOffset = 0
+                                                            foldersViewModel.iconOffsetX = 0
+                                                        }
                                                     } label: {
                                                         Text("Reset")
                                                     }
@@ -556,35 +632,30 @@ struct ContentView: View {
                                                 .onChange(of: pos) { oldValue, newValue in
                                                     foldersViewModel.iconOffset = newValue[1]
                                                     foldersViewModel.iconOffsetX = newValue[0]
-                                                    //print("Updating thing 1")
                                                 }
-                                                .onChange(of: foldersViewModel.iconOffset + foldersViewModel.iconOffsetX) { oldValue, newValue in
-                                                    pos = [foldersViewModel.iconOffsetX, foldersViewModel.iconOffset]
-                                                    //print("Updating thing 2")
+                                                .onChange(of: foldersViewModel.iconOffset * foldersViewModel.iconOffsetX + foldersViewModel.iconOffset + foldersViewModel.iconOffsetX) { oldValue, newValue in
+                                                    withAnimation {
+                                                        pos = [foldersViewModel.iconOffsetX, foldersViewModel.iconOffset]
+                                                    }
                                                 }
                                                 
                                                 if !foldersViewModel.hideOffset {
-//                                                    CustomSlider2(value: $foldersViewModel.iconOffset, minValue: 200, maxValue: -200)
-//                                                        .padding(.horizontal, 5)
-                                                    
-                                                    
                                                     AxisPicker(
                                                         coords: $pos,
                                                         xMin: -200,  xMax: 200,
                                                         yMin: -200,  yMax: 200
                                                     )
                                                     .padding(.horizontal, 5)
+                                                    .padding(.bottom, 20)
                                                 }
-                                                //                                            Custom2DSlider(valueX: $plane2DTest, valueY: $iconOffset, minValueX: 0, maxValueX: 5, minValueY: -200, maxValueY: 200)
-                                            }//.frame(width: 210)
-                                        }//.frame(width: 210)
+                                            }
+                                        }
                                         Spacer()
                                     }
                                     
                                 }
                             }
                             .frame(width: rightGeo.size.width)
-                        //}
                         .zIndex(1)
                     }
                 }
@@ -593,7 +664,6 @@ struct ContentView: View {
             }
         }
         .frame(minWidth: 850, minHeight: 500)
-//        .environmentObject(foldersViewModel)
     }
     
     // MARK: - Offset Controls
@@ -650,7 +720,7 @@ struct ContentView: View {
             // 1) Render a 470×395 icon at 100% scale
             let fullSizeIcon = FolderIconView(
                 resolutionScale: 1.0
-            )
+            ).environmentObject(foldersViewModel)
             
             // 2) Use .snapshotAsNSImage (your existing logic)
             let nsImage = fullSizeIcon.snapshotAsNSImage()
@@ -722,7 +792,7 @@ struct ContentView: View {
         // 1) Generate the same 470×395 icon as "Save as Image".
         let fullSizeIcon = FolderIconView(
             resolutionScale: 1.0
-        )
+        ).environmentObject(foldersViewModel)
         let nsImage = fullSizeIcon.snapshotAsNSImage()
         
         // 2) Convert NSImage -> PNG data

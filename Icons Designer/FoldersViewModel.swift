@@ -20,6 +20,8 @@ class FoldersViewModel: ObservableObject {
     @Published var symbolName: String = "star.fill"
     @Published var symbolOpacity: Double = 0.5
     
+    @Published var symbolWeight: Double = 4.0
+    
     // MARK: - App Settings & UI
     // For preset previews
     @Published var topOffset: CGFloat = -141
@@ -53,6 +55,7 @@ class FoldersViewModel: ObservableObject {
     @Published var rotationAngle = 0
     
     @AppStorage("hideOpacity") var hideOpacity = false
-    @AppStorage("hideScale") var hideScale = true
-    @AppStorage("hideOffset") var hideOffset = true
+    @AppStorage("hideScale") var hideScale = false
+    @AppStorage("hideOffset") var hideOffset = false
+    @AppStorage("hideWeight") var hideWeight = false
 }

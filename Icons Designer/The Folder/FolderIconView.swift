@@ -58,6 +58,17 @@ struct FolderIconView: View {
                         .resizable()
                         .scaledToFit()
                         .foregroundStyle(foldersViewModel.symbolColor.shadow(.inner(color: Color(.black).opacity(0.5), radius: 10)))
+                        .fontWeight(
+                            foldersViewModel.symbolWeight.rounded() == 1 ? .ultraLight:
+                                foldersViewModel.symbolWeight.rounded() == 2 ? .thin:
+                                foldersViewModel.symbolWeight.rounded() == 3 ? .light:
+                                foldersViewModel.symbolWeight.rounded() == 4 ? .regular:
+                                foldersViewModel.symbolWeight.rounded() == 5 ? .medium:
+                                foldersViewModel.symbolWeight.rounded() == 6 ? .semibold:
+                                foldersViewModel.symbolWeight.rounded() == 7 ? .bold:
+                                foldersViewModel.symbolWeight.rounded() == 8 ? .heavy:
+                                foldersViewModel.symbolWeight.rounded() == 9 ? .black: .regular
+                        )
                         .opacity(foldersViewModel.symbolOpacity)
                         .frame(width: 150, height: 150)
                         .position(x: iconWidth / 2, y: 231)
@@ -111,7 +122,7 @@ struct FolderIconView: View {
                                     .frame(width: 150, height: 150)
                                     .position(x: iconWidth / 2, y: 231)
                                     .scaleEffect(foldersViewModel.iconScale)
-                                    .offset(y: foldersViewModel.iconOffset)
+                                    .offset(x: foldersViewModel.iconOffsetX, y: foldersViewModel.iconOffset)
                                 
                                 foldersViewModel.symbolColor.blendMode(.sourceAtop)
                             }.drawingGroup(opaque: false)
@@ -285,6 +296,17 @@ struct PresetFolderIconView: View {
                         .resizable()
                         .scaledToFit()
                         .foregroundStyle(symbolColor.shadow(.inner(color: Color(.black).opacity(0.5), radius: 10)))
+                        .fontWeight(
+                            foldersViewModel.symbolWeight.rounded() == 1 ? .ultraLight:
+                                foldersViewModel.symbolWeight.rounded() == 2 ? .thin:
+                                foldersViewModel.symbolWeight.rounded() == 3 ? .light:
+                                foldersViewModel.symbolWeight.rounded() == 4 ? .regular:
+                                foldersViewModel.symbolWeight.rounded() == 5 ? .medium:
+                                foldersViewModel.symbolWeight.rounded() == 6 ? .semibold:
+                                foldersViewModel.symbolWeight.rounded() == 7 ? .bold:
+                                foldersViewModel.symbolWeight.rounded() == 8 ? .heavy:
+                                foldersViewModel.symbolWeight.rounded() == 9 ? .black: .regular
+                        )
                         .opacity(symbolOpacity)
                         .frame(width: 150, height: 150)
                         .position(x: iconWidth / 2, y: 231)
@@ -338,7 +360,7 @@ struct PresetFolderIconView: View {
                                     .frame(width: 150, height: 150)
                                     .position(x: iconWidth / 2, y: 231)
                                     .scaleEffect(foldersViewModel.iconScale)
-                                    .offset(y: foldersViewModel.iconOffset)
+                                    .offset(x: foldersViewModel.iconOffsetX, y: foldersViewModel.iconOffset)
                                 
                                 symbolColor.blendMode(.sourceAtop)
                             }.drawingGroup(opaque: false)
