@@ -19,7 +19,6 @@ struct Icons_DesignerApp: App {
     var body: some Scene {
         WindowGroup {
             EntryView()
-//                .environmentObject(foldersViewModel)
                 .containerBackground(for: .window, content: {
                     ZStack {
                         Color(hex: "6FCDF6")

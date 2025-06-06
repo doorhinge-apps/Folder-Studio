@@ -35,4 +35,26 @@ final class SF_Symbols_FoldersUITests: XCTestCase {
             noneText.tap()
         }
     }
+    
+    func testSaveAsImageButtonExists() throws {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.buttons["Save as Image"].waitForExistence(timeout: 2))
+    }
+
+    func testPresetsLabelExists() throws {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["Presets"].exists)
+    }
+
+    func testSymbolButtonAppearsAfterSwitch() throws {
+        let app = XCUIApplication()
+        app.launch()
+        let symbolText = app.staticTexts["SF Symbol"]
+        if symbolText.exists {
+            symbolText.tap()
+            XCTAssertTrue(app.buttons["star.fill"].exists)
+        }
+    }
 }

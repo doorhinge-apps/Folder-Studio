@@ -26,4 +26,18 @@ final class SnapshotTests: XCTestCase {
         XCTAssertGreaterThan(image.size.height, 0)
         #endif
     }
+    
+    func testFolderIconViewSnapshotHasSize() {
+        let vm = FoldersViewModel()
+        let view = FolderIconView(resolutionScale: 0.2).environmentObject(vm)
+        #if os(macOS)
+        let img = view.snapshotAsNSImage()
+        XCTAssertGreaterThan(img.size.width, 0)
+        XCTAssertGreaterThan(img.size.height, 0)
+        #else
+        let img = view.snapshotAsUIImage()
+        XCTAssertGreaterThan(img.size.width, 0)
+        XCTAssertGreaterThan(img.size.height, 0)
+        #endif
+    }
 }
