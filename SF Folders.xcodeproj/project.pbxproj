@@ -73,6 +73,7 @@
 		B984865F2DF24A2B00F25E91 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		B984866C2DF2931C00F25E91 /* SF FoldersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SF FoldersTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B98486792DF2932A00F25E91 /* SF FoldersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SF FoldersUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B984868E2DF2AB4400F25E91 /* SF-Folders-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SF-Folders-Info.plist"; sourceTree = "<group>"; };
 		B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Icons Designer.entitlements"; sourceTree = "<group>"; };
 		B98FCE082D1FDDCC0033EAED /* IconChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconChanger.swift; sourceTree = "<group>"; };
 		B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderClippingShape.swift; sourceTree = "<group>"; };
@@ -147,6 +148,7 @@
 		B9567A532D1F515E00CAD0F1 = {
 			isa = PBXGroup;
 			children = (
+				B984868E2DF2AB4400F25E91 /* SF-Folders-Info.plist */,
 				B9567A722D1F536100CAD0F1 /* Icons Designer */,
 				B984866D2DF2931C00F25E91 /* SF FoldersTests */,
 				B984867A2DF2932A00F25E91 /* SF FoldersUITests */,
@@ -530,13 +532,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Icons Designer/Icons Designer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Icons Designer/Preview Content\"";
 				DEVELOPMENT_TEAM = 47J6H2LHDD;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SF-Folders-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "SF Folders";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -568,13 +572,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Icons Designer/Icons Designer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Icons Designer/Preview Content\"";
 				DEVELOPMENT_TEAM = 47J6H2LHDD;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SF-Folders-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "SF Folders";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
