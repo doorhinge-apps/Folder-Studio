@@ -31,11 +31,11 @@ struct FolderPresetPreview: View {
     var body: some View {
         ZStack {
             PresetFolderIconView(
+                resolutionScale: 0.25,
                 topShapeColor: .constant(Color(hex: color1)),
                 bottomShapeColor: .constant(Color(hex: color2)),
                 symbolColor: .constant(Color(hex: color1)),
-                symbolOpacity: .constant(0.5),
-                resolutionScale: 0.25
+                symbolOpacity: .constant(0.5)
             )
             .scaleEffect(0.15)
             .frame(width: 70, height: 60)

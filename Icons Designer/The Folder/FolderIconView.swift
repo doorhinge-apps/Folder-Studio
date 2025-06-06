@@ -11,6 +11,11 @@ enum ImageType: String, Equatable, CaseIterable {
 
 struct FolderIconView: View {
     @EnvironmentObject var foldersViewModel: FoldersViewModel
+
+    /// Optional pre-processed image. When provided the view will use this image
+    /// directly instead of performing asynchronous processing. This allows
+    /// export operations to render synchronously.
+    var preRenderedImage: NSImage? = nil
 //    
 //    @Binding var topShapeColor: Color
 //    @Binding var bottomShapeColor: Color
@@ -22,6 +27,11 @@ struct FolderIconView: View {
     private let iconHeight: CGFloat = 395
     
     @State var resolutionScale: Double
+
+    init(resolutionScale: Double, preRenderedImage: NSImage? = nil) {
+        _resolutionScale = State(initialValue: resolutionScale)
+        self.preRenderedImage = preRenderedImage
+    }
     
     @State private var advancedProcessedImage: NSImage? = nil
     
@@ -79,7 +89,7 @@ struct FolderIconView: View {
                 if foldersViewModel.imageType == .png, let image = foldersViewModel.selectedImage {
                     if foldersViewModel.useAdvancedIconRendering {
                         ZStack {
-                            if let img = advancedProcessedImage {
+                            if let img = preRenderedImage ?? advancedProcessedImage {
                                 Image(nsImage: img)
                                     .resizable()
                                     .scaledToFit()
@@ -89,24 +99,27 @@ struct FolderIconView: View {
                                     .scaleEffect(foldersViewModel.iconScale)
                                     .offset(x: foldersViewModel.iconOffsetX, y: foldersViewModel.iconOffset)
                             }
-                            
-                            if isProcessingImage || advancedProcessedImage == nil {
+
+                            if (isProcessingImage || advancedProcessedImage == nil) && preRenderedImage == nil {
                                 ProgressView()
                                     .frame(width: 150, height: 150)
                                     .position(x: iconWidth / 2, y: 231)
                             }
-                        }.onChange(of: foldersViewModel.symbolColor) { newColor in
-                            if let image = foldersViewModel.selectedImage {
+                        }
+                        .onChange(of: foldersViewModel.symbolColor) { newColor in
+                            if preRenderedImage == nil, let image = foldersViewModel.selectedImage {
                                 updateAdvancedImageAsync(from: image, tint: NSColor(newColor))
                             }
                         }
                         .onChange(of: foldersViewModel.selectedImage) { newImage in
-                            if let img = newImage {
+                            if preRenderedImage == nil, let img = newImage {
                                 updateAdvancedImageAsync(from: img, tint: NSColor(foldersViewModel.symbolColor))
                             }
                         }
                         .onAppear {
-                            if foldersViewModel.useAdvancedIconRendering, let img = foldersViewModel.selectedImage {
+                            if preRenderedImage == nil,
+                               foldersViewModel.useAdvancedIconRendering,
+                               let img = foldersViewModel.selectedImage {
                                 updateAdvancedImageAsync(from: img, tint: NSColor(foldersViewModel.symbolColor))
                             }
                         }
@@ -249,6 +262,9 @@ struct FolderIconView: View {
 
 struct PresetFolderIconView: View {
     @EnvironmentObject var foldersViewModel: FoldersViewModel
+
+    /// Pre-rendered image used when exporting preset previews.
+    var preRenderedImage: NSImage? = nil
     
     @Binding var topShapeColor: Color
     @Binding var bottomShapeColor: Color
@@ -260,6 +276,17 @@ struct PresetFolderIconView: View {
     private let iconHeight: CGFloat = 395
     
     @State var resolutionScale: Double
+
+    init(resolutionScale: Double, preRenderedImage: NSImage? = nil,
+         topShapeColor: Binding<Color>, bottomShapeColor: Binding<Color>,
+         symbolColor: Binding<Color>, symbolOpacity: Binding<Double>) {
+        _resolutionScale = State(initialValue: resolutionScale)
+        self.preRenderedImage = preRenderedImage
+        self._topShapeColor = topShapeColor
+        self._bottomShapeColor = bottomShapeColor
+        self._symbolColor = symbolColor
+        self._symbolOpacity = symbolOpacity
+    }
     
     @State private var advancedProcessedImage: NSImage? = nil
     
@@ -317,7 +344,7 @@ struct PresetFolderIconView: View {
                 if foldersViewModel.imageType == .png, let image = foldersViewModel.selectedImage {
                     if foldersViewModel.useAdvancedIconRendering {
                         ZStack {
-                            if let img = advancedProcessedImage {
+                            if let img = preRenderedImage ?? advancedProcessedImage {
                                 Image(nsImage: img)
                                     .resizable()
                                     .scaledToFit()
@@ -327,24 +354,27 @@ struct PresetFolderIconView: View {
                                     .scaleEffect(foldersViewModel.iconScale)
                                     .offset(x: foldersViewModel.iconOffsetX, y: foldersViewModel.iconOffset)
                             }
-                            
-                            if isProcessingImage || advancedProcessedImage == nil {
+
+                            if (isProcessingImage || advancedProcessedImage == nil) && preRenderedImage == nil {
                                 ProgressView()
                                     .frame(width: 150, height: 150)
                                     .position(x: iconWidth / 2, y: 231)
                             }
-                        }.onChange(of: symbolColor) { newColor in
-                            if let image = foldersViewModel.selectedImage {
+                        }
+                        .onChange(of: symbolColor) { newColor in
+                            if preRenderedImage == nil, let image = foldersViewModel.selectedImage {
                                 updateAdvancedImageAsync(from: image, tint: NSColor(newColor))
                             }
                         }
                         .onChange(of: foldersViewModel.selectedImage) { newImage in
-                            if let img = newImage {
+                            if preRenderedImage == nil, let img = newImage {
                                 updateAdvancedImageAsync(from: img, tint: NSColor(symbolColor))
                             }
                         }
                         .onAppear {
-                            if foldersViewModel.useAdvancedIconRendering, let img = foldersViewModel.selectedImage {
+                            if preRenderedImage == nil,
+                               foldersViewModel.useAdvancedIconRendering,
+                               let img = foldersViewModel.selectedImage {
                                 updateAdvancedImageAsync(from: img, tint: NSColor(symbolColor))
                             }
                         }
