@@ -717,9 +717,12 @@ struct ContentView: View {
         panel.nameFieldStringValue = "FolderIcon.png"
         
         if panel.runModal() == .OK, let url = panel.url {
-            // 1) Render a 470×395 icon at 100% scale
+            // 1) Render a 470×395 icon at 100% scale. If advanced rendering is
+            // enabled we synchronously pre-process the image so the snapshot is
+            // fully rendered.
             let fullSizeIcon = FolderIconView(
-                resolutionScale: 1.0
+                resolutionScale: 1.0,
+                preRenderedImage: foldersViewModel.preRenderedImage()
             ).environmentObject(foldersViewModel)
             
             // 2) Use .snapshotAsNSImage (your existing logic)
@@ -791,7 +794,8 @@ struct ContentView: View {
     private func setFolderIcon(folderURL: URL) throws {
         // 1) Generate the same 470×395 icon as "Save as Image".
         let fullSizeIcon = FolderIconView(
-            resolutionScale: 1.0
+            resolutionScale: 1.0,
+            preRenderedImage: foldersViewModel.preRenderedImage()
         ).environmentObject(foldersViewModel)
         let nsImage = fullSizeIcon.snapshotAsNSImage()
         
