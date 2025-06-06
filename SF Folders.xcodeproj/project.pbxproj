@@ -33,6 +33,23 @@
 		B9CE9DBB2D403B700008BE06 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CE9DBA2D403B700008BE06 /* ButtonStyles.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B98486702DF2931C00F25E91 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B9567A542D1F515E00CAD0F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B9567A5B2D1F515E00CAD0F1;
+			remoteInfo = "SF Folders";
+		};
+		B984867F2DF2932A00F25E91 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B9567A542D1F515E00CAD0F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B9567A5B2D1F515E00CAD0F1;
+			remoteInfo = "SF Folders";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		B90822BA2DF0008B00C04565 /* Custom2DSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Custom2DSlider.swift; sourceTree = "<group>"; };
 		B90822BC2DF0051F00C04565 /* StrokeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeModifier.swift; sourceTree = "<group>"; };
@@ -54,6 +71,8 @@
 		B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Icons Arrays.swift"; sourceTree = "<group>"; };
 		B984865D2DF20B8200F25E91 /* AxisPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisPicker.swift; sourceTree = "<group>"; };
 		B984865F2DF24A2B00F25E91 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
+		B984866C2DF2931C00F25E91 /* SF FoldersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SF FoldersTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B98486792DF2932A00F25E91 /* SF FoldersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SF FoldersUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Icons Designer.entitlements"; sourceTree = "<group>"; };
 		B98FCE082D1FDDCC0033EAED /* IconChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconChanger.swift; sourceTree = "<group>"; };
 		B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderClippingShape.swift; sourceTree = "<group>"; };
@@ -62,8 +81,35 @@
 		B9CE9DBA2D403B700008BE06 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		B984866D2DF2931C00F25E91 /* SF FoldersTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "SF FoldersTests";
+			sourceTree = "<group>";
+		};
+		B984867A2DF2932A00F25E91 /* SF FoldersUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "SF FoldersUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		B9567A592D1F515E00CAD0F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B98486692DF2931C00F25E91 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B98486762DF2932A00F25E91 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -102,6 +148,8 @@
 			isa = PBXGroup;
 			children = (
 				B9567A722D1F536100CAD0F1 /* Icons Designer */,
+				B984866D2DF2931C00F25E91 /* SF FoldersTests */,
+				B984867A2DF2932A00F25E91 /* SF FoldersUITests */,
 				B9567A5D2D1F515E00CAD0F1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -110,6 +158,8 @@
 			isa = PBXGroup;
 			children = (
 				B9567A5C2D1F515E00CAD0F1 /* SF Folders.app */,
+				B984866C2DF2931C00F25E91 /* SF FoldersTests.xctest */,
+				B98486792DF2932A00F25E91 /* SF FoldersUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -175,6 +225,52 @@
 			productReference = B9567A5C2D1F515E00CAD0F1 /* SF Folders.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B984866B2DF2931C00F25E91 /* SF FoldersTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B98486722DF2931C00F25E91 /* Build configuration list for PBXNativeTarget "SF FoldersTests" */;
+			buildPhases = (
+				B98486682DF2931C00F25E91 /* Sources */,
+				B98486692DF2931C00F25E91 /* Frameworks */,
+				B984866A2DF2931C00F25E91 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B98486712DF2931C00F25E91 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B984866D2DF2931C00F25E91 /* SF FoldersTests */,
+			);
+			name = "SF FoldersTests";
+			packageProductDependencies = (
+			);
+			productName = "SF FoldersTests";
+			productReference = B984866C2DF2931C00F25E91 /* SF FoldersTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B98486782DF2932A00F25E91 /* SF FoldersUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B98486812DF2932A00F25E91 /* Build configuration list for PBXNativeTarget "SF FoldersUITests" */;
+			buildPhases = (
+				B98486752DF2932A00F25E91 /* Sources */,
+				B98486762DF2932A00F25E91 /* Frameworks */,
+				B98486772DF2932A00F25E91 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B98486802DF2932A00F25E91 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B984867A2DF2932A00F25E91 /* SF FoldersUITests */,
+			);
+			name = "SF FoldersUITests";
+			packageProductDependencies = (
+			);
+			productName = "SF FoldersUITests";
+			productReference = B98486792DF2932A00F25E91 /* SF FoldersUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -182,11 +278,20 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1610;
+				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					B9567A5B2D1F515E00CAD0F1 = {
 						CreatedOnToolsVersion = 16.1;
+					};
+					B984866B2DF2931C00F25E91 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = B9567A5B2D1F515E00CAD0F1;
+					};
+					B98486782DF2932A00F25E91 = {
+						CreatedOnToolsVersion = 16.3;
+						LastSwiftMigration = 1630;
+						TestTargetID = B9567A5B2D1F515E00CAD0F1;
 					};
 				};
 			};
@@ -207,6 +312,8 @@
 			projectRoot = "";
 			targets = (
 				B9567A5B2D1F515E00CAD0F1 /* SF Folders */,
+				B984866B2DF2931C00F25E91 /* SF FoldersTests */,
+				B98486782DF2932A00F25E91 /* SF FoldersUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -218,6 +325,20 @@
 			files = (
 				B9567A752D1F536100CAD0F1 /* Preview Assets.xcassets in Resources */,
 				B9567A762D1F536100CAD0F1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B984866A2DF2931C00F25E91 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B98486772DF2932A00F25E91 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +374,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B98486682DF2931C00F25E91 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B98486752DF2932A00F25E91 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B98486712DF2931C00F25E91 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B9567A5B2D1F515E00CAD0F1 /* SF Folders */;
+			targetProxy = B98486702DF2931C00F25E91 /* PBXContainerItemProxy */;
+		};
+		B98486802DF2932A00F25E91 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B9567A5B2D1F515E00CAD0F1 /* SF Folders */;
+			targetProxy = B984867F2DF2932A00F25E91 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B9567A682D1F516000CAD0F1 /* Debug */ = {
@@ -449,6 +597,83 @@
 			};
 			name = Release;
 		};
+		B98486732DF2931C00F25E91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 47J6H2LHDD;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.doorhingeapps.SF-FoldersTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SF Folders.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SF Folders";
+			};
+			name = Debug;
+		};
+		B98486742DF2931C00F25E91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 47J6H2LHDD;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.doorhingeapps.SF-FoldersTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SF Folders.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SF Folders";
+			};
+			name = Release;
+		};
+		B98486822DF2932A00F25E91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 47J6H2LHDD;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.doorhingeapps.SF-FoldersUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "SF Folders";
+			};
+			name = Debug;
+		};
+		B98486832DF2932A00F25E91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 47J6H2LHDD;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.doorhingeapps.SF-FoldersUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "SF Folders";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -466,6 +691,24 @@
 			buildConfigurations = (
 				B9567A6B2D1F516000CAD0F1 /* Debug */,
 				B9567A6C2D1F516000CAD0F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B98486722DF2931C00F25E91 /* Build configuration list for PBXNativeTarget "SF FoldersTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B98486732DF2931C00F25E91 /* Debug */,
+				B98486742DF2931C00F25E91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B98486812DF2932A00F25E91 /* Build configuration list for PBXNativeTarget "SF FoldersUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B98486822DF2932A00F25E91 /* Debug */,
+				B98486832DF2932A00F25E91 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

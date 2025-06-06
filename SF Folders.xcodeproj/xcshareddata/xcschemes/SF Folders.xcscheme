@@ -29,6 +29,30 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B984866B2DF2931C00F25E91"
+               BuildableName = "SF FoldersTests.xctest"
+               BlueprintName = "SF FoldersTests"
+               ReferencedContainer = "container:SF Folders.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B98486782DF2932A00F25E91"
+               BuildableName = "SF FoldersUITests.xctest"
+               BlueprintName = "SF FoldersUITests"
+               ReferencedContainer = "container:SF Folders.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
