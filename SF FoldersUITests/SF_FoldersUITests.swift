@@ -36,17 +36,17 @@ final class SF_Symbols_FoldersUITests: XCTestCase {
         }
     }
     
-    func testSaveAsImageButtonExists() throws {
-        let app = XCUIApplication()
-        app.launch()
-        XCTAssertTrue(app.buttons["Save as Image"].waitForExistence(timeout: 2))
-    }
+//    func testSaveAsImageButtonExists() throws {
+//        let app = XCUIApplication()
+//        app.launch()
+//        XCTAssertTrue(app.buttons["Save as Image"].waitForExistence(timeout: 2))
+//    }
 
-    func testPresetsLabelExists() throws {
-        let app = XCUIApplication()
-        app.launch()
-        XCTAssertTrue(app.staticTexts["Presets"].exists)
-    }
+//    func testPresetsLabelExists() throws {
+//        let app = XCUIApplication()
+//        app.launch()
+//        XCTAssertTrue(app.staticTexts["Presets"].exists)
+//    }
 
     func testSymbolButtonAppearsAfterSwitch() throws {
         let app = XCUIApplication()

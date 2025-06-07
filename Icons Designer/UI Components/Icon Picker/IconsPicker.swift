@@ -19,6 +19,9 @@ struct IconsPicker: View {
     
     @State private var translationConfig: TranslationSession.Configuration?
     @State private var translatedSearchTerm: String = ""
+
+        @State private var session:       TranslationSession?
+        @State private var translateTask: Task<Void,Never>?
     
     @State var filterApplied: IconFilter = .all
     
@@ -30,7 +33,7 @@ struct IconsPicker: View {
         ZStack {
             VStack {
                 ZStack {
-                    TextField("Search for an Icon", text: $iconSearch)
+                    TextField("search_icon_prompt", text: $iconSearch)
                         .padding(15)
                         .textFieldStyle(.plain)
                         .background(
@@ -43,20 +46,11 @@ struct IconsPicker: View {
                         }
                         .autocorrectionDisabled(true)
                         .onChange(of: iconSearch) { newValue in
-                            Task {
-                                await handleSearchInput(newValue)
-                            }
+                            Task { await handleSearchInput(newValue) }
                         }
-                        .translationTask(translationConfig) { session in
-                            do {
-                                let response = try await session.translate(iconSearch)
-                                translatedSearchTerm = response.targetText
-                                print("Translated Text: \(translatedSearchTerm)")
-                            } catch {
-                                print("Translation Error: \(error)")
-                                translatedSearchTerm = iconSearch
-                            }
-                        }
+                        .translationTask(translationConfig) { s in
+                                    await MainActor.run { session = s }
+                                }
                 }
                 .frame(height: 50)
                 .padding(10)
@@ -65,7 +59,7 @@ struct IconsPicker: View {
                     Button {
                         filterApplied = .all
                     } label: {
-                        Text("All")
+                        Text("all_button_label")
                             .frame(width: 100)
                     }
                         .padding(15)
@@ -77,7 +71,7 @@ struct IconsPicker: View {
                     Button {
                         filterApplied = .outline
                     } label: {
-                        Text("Outline")
+                        Text("outline_button_label")
                             .frame(width: 100)
                     }
                         .padding(15)
@@ -89,7 +83,7 @@ struct IconsPicker: View {
                     Button {
                         filterApplied = .fill
                     } label: {
-                        Text("Fill")
+                        Text("fill_button_label")
                             .frame(width: 100)
                     }
                         .padding(15)
@@ -101,7 +95,7 @@ struct IconsPicker: View {
                     Button {
                         filterApplied = .circle
                     } label: {
-                        Text("Circle")
+                        Text("circle_button_label")
                             .frame(width: 100)
                     }
                         .padding(15)
@@ -113,7 +107,7 @@ struct IconsPicker: View {
                     Button {
                         filterApplied = .circleFill
                     } label: {
-                        Text("Circle Fill")
+                        Text("crcle_fill_button_label")
                             .frame(width: 100)
                     }
                         .padding(15)
@@ -189,53 +183,90 @@ struct IconsPicker: View {
         }
     }
     
-    func handleSearchInput(_ input: String) async {
+    @MainActor
+        private func handleSearchInput(_ input: String) async {
+            // Cancel any in-flight translation immediately
+            translateTask?.cancel()
+            translateTask = nil
+
             guard !input.isEmpty else {
                 translatedSearchTerm = ""
-                translationConfig = nil
                 return
             }
-            // Detect the app's language, normalized
-            let appLocaleCode = Bundle.main.preferredLocalizations.first ?? "en"
-            let langCode = normalizedLanguageCode(appLocaleCode)
-            print("App Localization: \(appLocaleCode) -> Language: \(langCode)")
 
-            if langCode == "en" {
-                // No translation needed
+            // 1. Determine fixed source language from app localisation
+            let raw   = Bundle.main.preferredLocalizations.first ?? "en"
+            let base  = raw.split(separator: "-").first.map(String.init) ?? "en"
+            print("🌐 UI locale:", raw, "| base:", base)
+
+            guard base != "en" else {                 // English UI → no translate
                 translatedSearchTerm = input
-                translationConfig = nil
-                print("App is English. No translation needed.")
+                translationConfig    = nil
+                print("⚠️ English UI – using raw input.")
                 return
             }
 
-            let sourceLanguage = Locale.Language(identifier: langCode)
-            let targetLanguage = Locale.Language(identifier: "en")
+            // Support only es / fr / de → en
+            let supported = ["es","fr","de"]
+            guard supported.contains(base) else {
+                translatedSearchTerm = input
+                translationConfig    = nil
+                print("⚠️ UI language '\(base)' not supported – raw input.")
+                return
+            }
 
-            // Check if the model is available, but do not prompt to download
-            let availability = LanguageAvailability()
-            let status = await availability.status(from: sourceLanguage, to: targetLanguage)
+            let src = Locale.Language(identifier: base)
+            let tgt = Locale.Language(identifier: "en")
+            let availability = await LanguageAvailability().status(from: src, to: tgt)
 
-            switch status {
+            switch availability {
             case .installed:
-                print("Translation model for \(langCode)→en is installed.")
-                translationConfig = TranslationSession.Configuration(source: sourceLanguage, target: targetLanguage)
-            case .supported:
-                print("Translation model for \(langCode)→en is supported but not installed. Skipping translation and will not prompt.")
-                translatedSearchTerm = input
-                translationConfig = nil
-            case .unsupported:
-                print("Translation from \(langCode)→en is unsupported.")
-                translatedSearchTerm = input
-                translationConfig = nil
-            @unknown default:
-                print("Unknown translation model status.")
-                translatedSearchTerm = input
-                translationConfig = nil
-            }
-        }
+                // supply config once (stable); session will arrive via modifier
+                if translationConfig == nil {
+                    translationConfig = .init(source: src, target: tgt)
+                    print("📥 Model \(base)→en installed – session ready.")
+                }
 
-        func normalizedLanguageCode(_ locale: String) -> String {
-            return locale.components(separatedBy: CharacterSet(charactersIn: "-_")).first ?? locale
+                // 2. launch a new translation task for this keystroke
+                if let s = session {
+                    translateTask = Task {
+                        do {
+                            let r = try await s.translate(input)
+                            await MainActor.run {
+                                translatedSearchTerm = r.targetText
+                                print("✅ '\(input)' → '\(translatedSearchTerm)'")
+                            }
+                        } catch {
+                            if !Task.isCancelled {
+                                await MainActor.run {
+                                    translatedSearchTerm = input
+                                    print("❌ translate error:", error)
+                                }
+                            } else {
+                                print("⏹️  cancelled previous translate.")
+                            }
+                        }
+                    }
+                } else {
+                    // session not delivered yet – fall back
+                    translatedSearchTerm = input
+                }
+
+            case .supported:
+                print("🔕 Model \(base)→en supported but NOT installed – raw input.")
+                translatedSearchTerm = input
+                translationConfig    = nil
+
+            case .unsupported:
+                print("🚫 Pair \(base)→en unsupported – raw input.")
+                translatedSearchTerm = input
+                translationConfig    = nil
+
+            @unknown default:
+                print("❔ Unknown availability.")
+                translatedSearchTerm = input
+                translationConfig    = nil
+            }
         }
 }
 

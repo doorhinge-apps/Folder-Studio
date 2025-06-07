@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     "[%@](https://doorhingeapps.com)" : {
       "localizations" : {
         "de" : {
@@ -24,36 +21,21 @@
             "value" : "[%@](https://doorhingeapps.com)"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
-    "**License**\nThis application is open source and distributed under the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).\n\nYou can view the source code and license details on [GitHub](https://github.com/doorhinge-apps/SF-Symbols-Folders)." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenz\nDiese Anwendung ist Open Source und wird unter der  [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).\n\nDen Quellcode und die Lizenzdetails findest du auf [GitHub](https://github.com/doorhinge-apps/SF-Symbols-Folders)."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "**Licencia**\nEsta aplicación es de código abierto y se distribuye bajo la [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).\n\nPuedes ver el código fuente y los detalles de la licencia en [GitHub](https://github.com/doorhinge-apps/SF-Symbols-Folders)."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "**Licence**\nCette application est open source et distribuée sous la [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).\n\nVous pouvez consulter le code source et les détails de la licence sur [GitHub](https://github.com/doorhinge-apps/SF-Symbols-Folders)."
-          }
-        }
-      }
-    },
-    "About SF Folders" : {
+    "about_menu_text" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Über Folder Studio"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About Folder Studio"
           }
         },
         "es" : {
@@ -70,12 +52,46 @@
         }
       }
     },
-    "Advanced" : {
+    "about_window_title" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Über Folder Studio"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acerca"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À propos de Folder Studio"
+          }
+        }
+      }
+    },
+    "advanced_image_mode" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erweitert"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advanced"
           }
         },
         "es" : {
@@ -92,12 +108,18 @@
         }
       }
     },
-    "All" : {
+    "all_button_label" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alle"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
           }
         },
         "es" : {
@@ -114,12 +136,75 @@
         }
       }
     },
-    "Base" : {
+    "app_name" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder Studio"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder Studio"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder Studio"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder Studio"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
+    "back_button_text" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zurück"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atrás"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour"
+          }
+        }
+      }
+    },
+    "base_color_label" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Basis"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Base"
           }
         },
         "es" : {
@@ -136,12 +221,18 @@
         }
       }
     },
-    "Change" : {
+    "change_image" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ändern"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change"
           }
         },
         "es" : {
@@ -158,12 +249,18 @@
         }
       }
     },
-    "Circle" : {
+    "circle_button_label" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kreis"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Circle"
           }
         },
         "es" : {
@@ -180,34 +277,18 @@
         }
       }
     },
-    "Circle Fill" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gefüllter Kreis"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Círculo Relleno"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cercle Rempli"
-          }
-        }
-      }
-    },
-    "Close" : {
+    "close_popup" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schließen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
           }
         },
         "es" : {
@@ -224,12 +305,18 @@
         }
       }
     },
-    "Colors" : {
+    "colors_label" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Farben"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Colors"
           }
         },
         "es" : {
@@ -246,12 +333,74 @@
         }
       }
     },
-    "Drag Folders to Set Icons" : {
+    "continue_button_text" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weiter"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer"
+          }
+        }
+      }
+    },
+    "crcle_fill_button_label" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gefüllter Kreis"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Circle Fill"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Círculo Relleno"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cercle Rempli"
+          }
+        }
+      }
+    },
+    "drag_to_set" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ordner ziehen, um Symbole festzulegen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag Folders to Set Icons"
           }
         },
         "es" : {
@@ -268,12 +417,18 @@
         }
       }
     },
-    "Drop Folder Here" : {
+    "drop_folder" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ordner hier ablegen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drop Folder Here"
           }
         },
         "es" : {
@@ -290,12 +445,18 @@
         }
       }
     },
-    "Fill" : {
+    "fill_button_label" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Füllen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fill"
           }
         },
         "es" : {
@@ -312,56 +473,74 @@
         }
       }
     },
-    "Image" : {
+    "font_weight_label" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bild"
+            "value" : "Gewicht"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weight"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Imagen"
+            "value" : "Grosor"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Image"
+            "value" : "Épaisseur"
           }
         }
       }
     },
-    "None" : {
+    "license_details" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Keine"
+            "value" : "Lizenz\nDiese Anwendung ist Open Source und wird unter der  [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).\n\nDen Quellcode und die Lizenzdetails findest du auf [GitHub](https://github.com/doorhinge-apps/Folder-Studio)."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**License**\nThis application is open source and distributed under the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).\n\nYou can view the source code and license details on [GitHub](https://github.com/doorhinge-apps/Folder-Studio)."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ninguno"
+            "value" : "**Licencia**\nEsta aplicación es de código abierto y se distribuye bajo la [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).\n\nPuedes ver el código fuente y los detalles de la licencia en [GitHub](https://github.com/doorhinge-apps/Folder-Studio)."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aucun"
+            "value" : "**Licence**\nCette application est open source et distribuée sous la [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).\n\nVous pouvez consulter le code source et les détails de la licence sur [GitHub](https://github.com/doorhinge-apps/Folder-Studio)."
           }
         }
       }
     },
-    "Offset" : {
+    "offset_label" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Versatz"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Offset"
           }
         },
         "es" : {
@@ -378,12 +557,102 @@
         }
       }
     },
-    "Opacity" : {
+    "onboarding_2_title" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dies ist die Ordner-Vorschau. Alle Designänderungen, die du vornimmst, werden hier angezeigt."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is the folder preview. All design changes you make will be reflected here."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta es la vista previa de la carpeta. Todos los cambios de diseño que realices se reflejarán aquí."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ceci est l’aperçu du dossier. Tous les changements de design que vous effectuez seront visibles ici."
+          }
+        }
+      }
+    },
+    "onboarding_3_title" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wenn du einen Ordner in die Vorschau ziehst, aktualisiert Folder Studio das Symbol automatisch."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When you drag and drop a folder to the preview, Folder Studio will automatically update its icon."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuando arrastras y sueltas una carpeta en la vista previa, Folder Studio actualizará automáticamente su icono."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lorsque vous faites glisser un dossier vers l’aperçu, Folder Studio mettra automatiquement son icône à jour."
+          }
+        }
+      }
+    },
+    "onboarding_4_title" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An der Seite kannst du ein Symbol oder Bild auswählen und dessen Einstellungen ändern."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Off to the side, you can select an icon or image and change its settings."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En el lateral, puedes seleccionar un icono o imagen y cambiar su configuración."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sur le côté, vous pouvez sélectionner une icône ou une image et modifier ses paramètres."
+          }
+        }
+      }
+    },
+    "opacity_label" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deckkraft"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opacity"
           }
         },
         "es" : {
@@ -400,12 +669,18 @@
         }
       }
     },
-    "Outline" : {
+    "outline_button_label" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Umriss"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outline"
           }
         },
         "es" : {
@@ -422,12 +697,18 @@
         }
       }
     },
-    "Presets" : {
+    "preset_label_text" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voreinstellungen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Presets"
           }
         },
         "es" : {
@@ -444,12 +725,21 @@
         }
       }
     },
-    "Reset" : {
+    "Reset Onboarding" : {
+
+    },
+    "reset_label" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zurücksetzen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset"
           }
         },
         "es" : {
@@ -466,12 +756,18 @@
         }
       }
     },
-    "Save as Image" : {
+    "save_image" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Als Bild Speichern"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save as Image"
           }
         },
         "es" : {
@@ -488,12 +784,18 @@
         }
       }
     },
-    "Scale" : {
+    "scale_label" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Skalierung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scale"
           }
         },
         "es" : {
@@ -510,12 +812,18 @@
         }
       }
     },
-    "Search for an Icon" : {
+    "search_icon_prompt" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Symbol suchen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for an Icon"
           }
         },
         "es" : {
@@ -532,12 +840,18 @@
         }
       }
     },
-    "Select" : {
+    "select_image" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Auswählen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select"
           }
         },
         "es" : {
@@ -554,53 +868,15 @@
         }
       }
     },
-    "SF Folders" : {
+    "standard_image_mode" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Folder Studio"
+            "value" : "Standard"
           }
         },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Folder Studio"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Folder Studio"
-          }
-        }
-      }
-    },
-    "SF Symbol" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SF Symbol"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SF Symbol"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SF Symbol"
-          }
-        }
-      }
-    },
-    "Standard" : {
-      "localizations" : {
-        "de" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Standard"
@@ -620,9 +896,15 @@
         }
       }
     },
-    "Symbol" : {
+    "symbol_color_label" : {
       "localizations" : {
         "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbol"
+          }
+        },
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Symbol"
@@ -642,12 +924,18 @@
         }
       }
     },
-    "Tab" : {
+    "tab_color_label" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ordnertab"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tab"
           }
         },
         "es" : {
@@ -664,12 +952,140 @@
         }
       }
     },
-    "Type:" : {
+    "translate_download_prompt_text" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herunterladen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descargar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Télécharger"
+          }
+        }
+      }
+    },
+    "translate_notice" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noch eine Sache:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una cosa más:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une dernière chose:"
+          }
+        }
+      }
+    },
+    "translation_notice_description" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder Studio unterstützt über 6.000 Apple-Symbole. Ihre Beschriftungen sind jedoch nur auf Englisch verfügbar. Um die Suche auf Deutsch zu ermöglichen, muss ein lokales Übersetzungsmodell heruntergeladen werden. Alternativ kannst du dies überspringen und auf Englisch suchen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder Studio incluye compatibilidad con más de 6,000 iconos de Apple. Sin embargo, sus etiquetas están solo en inglés. Para admitir búsquedas en español, es necesario descargar un modelo de traducción local. También puedes omitir esto y buscar en inglés."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder Studio prend en charge plus de 6 000 icônes d’Apple. Cependant, leurs étiquettes sont uniquement en anglais. Pour permettre la recherche en français, le téléchargement d’un modèle de traduction local est requis. Vous pouvez aussi ignorer cela et effectuer les recherches en anglais."
+          }
+        }
+      }
+    },
+    "type_image_label" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bild"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image"
+          }
+        }
+      }
+    },
+    "type_none_label" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ninguno"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun"
+          }
+        }
+      }
+    },
+    "type_selector_label" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Typ:"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type:"
           }
         },
         "es" : {
@@ -685,6 +1101,35 @@
           }
         }
       }
+    },
+    "type_sfsymbol_label" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SF Symbol"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SF Symbol"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SF Symbol"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SF Symbol"
+          }
+        }
+      },
+      "shouldTranslate" : false
     },
     "Version %@" : {
       "localizations" : {
@@ -708,24 +1153,30 @@
         }
       }
     },
-    "Weight" : {
+    "welcome_title_text" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gewicht"
+            "value" : "Willkommen bei Folder Studio"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to Folder Studio"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Grosor"
+            "value" : "Bienvenida a Folder Studio"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Épaisseur"
+            "value" : "Bienvenue dans Folder Studio"
           }
         }
       }

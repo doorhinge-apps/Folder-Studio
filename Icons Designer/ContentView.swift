@@ -26,7 +26,7 @@ struct ContentView: View {
             VSplitView {
                 HStack(spacing: 0) {
                     HStack {
-                        Text("Presets")
+                        Text("preset_label_text")
                             .font(.system(.title, design: .rounded, weight: .bold))
                             .rotationEffect(Angle(degrees: -90))
                             .foregroundStyle(Color.white)
@@ -77,12 +77,12 @@ struct ContentView: View {
                                 .cornerRadius(10)
                                 .zIndex(10)
                                 
-                                Text("Drag Folders to Set Icons")
+                                Text("drag_to_set")
                                     .foregroundStyle(Color.white)
                                     .font(.system(.title3, design: .rounded, weight: .semibold))
                                 
                                 Button(action: savePNG) {
-                                    Text("Save as Image")
+                                    Text("save_image")
                                 }
                                 .buttonStyle(Button3DStyle())
                                 .frame(width: 200, height: 50)
@@ -94,7 +94,7 @@ struct ContentView: View {
                                         .frame(width: smallGeo.size.width, height: smallGeo.size.height)
                                     
                                     VStack {
-                                        Text("Drop Folder Here")
+                                        Text("drop_folder")
                                             .font(.headline)
                                             .foregroundStyle(Color.white)
                                         
@@ -164,7 +164,7 @@ struct ContentView: View {
                             
                             // -- Colors
                             HStack {
-                                Text("Colors")
+                                Text("colors_label")
                                     .font(.system(.title, design: .rounded, weight: .bold))
                                     .foregroundStyle(Color.white)
                                 Spacer()
@@ -172,7 +172,7 @@ struct ContentView: View {
                             
                             HStack {
                                 VStack(alignment: .center) {
-                                    Text("Base")
+                                    Text("base_color_label")
                                         .foregroundStyle(Color.white)
                                         .font(.system(.headline, design: .rounded, weight: .semibold))
                                     
@@ -195,7 +195,7 @@ struct ContentView: View {
                                 .padding(.trailing, 20)
                                 
                                 VStack(alignment: .center) {
-                                    Text("Tab")
+                                    Text("tab_color_label")
                                         .foregroundStyle(Color.white)
                                         .font(.system(.headline, design: .rounded, weight: .semibold))
                                     
@@ -218,7 +218,7 @@ struct ContentView: View {
                                 .padding(.trailing, 20)
                                 
                                 VStack(alignment: .center) {
-                                    Text("Symbol")
+                                    Text("symbol_color_label")
                                         .foregroundStyle(Color.white)
                                         .font(.system(.headline, design: .rounded, weight: .semibold))
                                     
@@ -256,7 +256,7 @@ struct ContentView: View {
                             VStack(alignment: .center, spacing: 20) {
                                 // -- Image Type
                                 HStack {
-                                    Text("Type:")
+                                    Text("type_selector_label")
                                         .font(.system(.title, design: .rounded, weight: .bold))
                                         .foregroundStyle(Color.white)
                                     
@@ -307,13 +307,13 @@ struct ContentView: View {
                                                 .animation(.default)
                                             
                                             HStack(spacing: 0) {
-                                                Text("None")
+                                                Text("type_none_label")
                                                     .frame(width: pickerGeo.size.width/3)
                                                 
-                                                Text("Image")
+                                                Text("type_image_label")
                                                     .frame(width: pickerGeo.size.width/3)
                                                 
-                                                Text("SF Symbol")
+                                                Text("type_sfsymbol_label")
                                                     .frame(width: pickerGeo.size.width/3)
                                             }.foregroundStyle(Color.white)
                                             
@@ -363,7 +363,7 @@ struct ContentView: View {
                                                 Button {
                                                     selectImageFile()
                                                 } label: {
-                                                    Text(foldersViewModel.selectedImage != nil ? "Change": "Select")
+                                                    Text(foldersViewModel.selectedImage != nil ? "change_image": "select_image")
                                                 }
                                                 .buttonStyle(SmallButton3DStyle())
                                                 .frame(width: 100, height: 30)
@@ -409,7 +409,7 @@ struct ContentView: View {
                                                                 Button {
                                                                     foldersViewModel.showIconPicker = false
                                                                 } label: {
-                                                                    Text("Close")
+                                                                    Text("close_popup")
                                                                 }
                                                             }.padding(15)
                                                             
@@ -471,10 +471,10 @@ struct ContentView: View {
                                                                     .animation(.default)
                                                                 
                                                                 HStack(spacing: 0) {
-                                                                    Text("Standard")
+                                                                    Text("standard_image_mode")
                                                                         .frame(width: advancedImagePicker.size.width/2)
                                                                     
-                                                                    Text("Advanced")
+                                                                    Text("advanced_image_mode")
                                                                         .frame(width: advancedImagePicker.size.width/2)
                                                                 }.foregroundStyle(Color.white)
                                                                 
@@ -502,7 +502,7 @@ struct ContentView: View {
                                                 
                                                 if foldersViewModel.imageType == .sfsymbol {
                                                     HStack {
-                                                        Text("Weight")
+                                                        Text("font_weight_label")
                                                             .foregroundStyle(Color.white)
                                                             .font(.system(.title3, design: .rounded, weight: .semibold))
                                                         
@@ -513,7 +513,7 @@ struct ContentView: View {
                                                                 foldersViewModel.symbolWeight = 4.0
                                                             }
                                                         } label: {
-                                                            Text("Reset")
+                                                            Text("reset_label")
                                                                 .padding(.horizontal, 20)
                                                         }
                                                         .buttonStyle(SmallButton3DStyle())
@@ -544,7 +544,7 @@ struct ContentView: View {
                                                 
                                                 HStack {
                                                     //                                                Text("Opacity: \(Int(symbolOpacity*100))%")
-                                                    Text("Opacity")
+                                                    Text("opacity_label")
                                                         .foregroundStyle(Color.white)
                                                         .font(.system(.title3, design: .rounded, weight: .semibold))
                                                     
@@ -555,7 +555,7 @@ struct ContentView: View {
                                                             foldersViewModel.symbolOpacity = 0.5
                                                         }
                                                     } label: {
-                                                        Text("Reset")
+                                                        Text("reset_label")
                                                             .padding(.horizontal, 20)
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
@@ -586,7 +586,7 @@ struct ContentView: View {
                                                 
                                                 HStack {
                                                     //                                                Text("Scale: \(Int(iconScale*100))%")
-                                                    Text("Scale")
+                                                    Text("scale_label")
                                                         .foregroundStyle(Color.white)
                                                         .font(.system(.title3, design: .rounded, weight: .semibold))
                                                     
@@ -597,7 +597,7 @@ struct ContentView: View {
                                                             foldersViewModel.iconScale = 1.0
                                                         }
                                                     } label: {
-                                                        Text("Reset")
+                                                        Text("reset_label")
                                                             .padding(.horizontal, 20)
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
@@ -627,7 +627,7 @@ struct ContentView: View {
                                                 Divider()
                                                 
                                                 HStack {
-                                                    Text("Offset")
+                                                    Text("offset_label")
                                                         .foregroundStyle(Color.white)
                                                         .font(.system(.title3, design: .rounded, weight: .semibold))
                                                     
@@ -639,7 +639,7 @@ struct ContentView: View {
                                                             foldersViewModel.iconOffsetX = 0
                                                         }
                                                     } label: {
-                                                        Text("Reset")
+                                                        Text("reset_label")
                                                             .padding(.horizontal, 20)
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())

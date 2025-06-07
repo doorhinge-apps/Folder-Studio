@@ -7,8 +7,8 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "SF Folders"
+            "state" : "translated",
+            "value" : "Folder Studio"
           }
         },
         "en" : {
@@ -19,21 +19,20 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "SF Folders"
+            "state" : "translated",
+            "value" : "Folder Studio"
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "SF Folders"
+            "state" : "translated",
+            "value" : "Folder Studio"
           }
         }
       }
     },
     "CFBundleName" : {
       "comment" : "Bundle name",
-      "extractionState" : "extracted_with_value",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -43,8 +42,8 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "SF Folders"
+            "state" : "translated",
+            "value" : "Folder Studio"
           }
         },
         "es" : {

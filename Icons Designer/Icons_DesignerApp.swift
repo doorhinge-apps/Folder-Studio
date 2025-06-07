@@ -14,7 +14,7 @@ import SwiftUI
 struct Icons_DesignerApp: App {
     @State private var aboutWindow: NSWindow?
     
-//    @StateObject var foldersViewModel = FoldersViewModel()
+    @AppStorage("onboardingCompleted") var onboardingCompleted = false
 
     var body: some Scene {
         WindowGroup {
@@ -30,8 +30,14 @@ struct Icons_DesignerApp: App {
         }.windowStyle(.hiddenTitleBar)
         .commands {
             CommandGroup(replacing: .appInfo) {
-                Button("About SF Folders") {
+                Button("about_menu_text") {
                     showAboutWindow()
+                }
+            }
+            CommandGroup(after: .appInfo) {
+                Divider()
+                Button("Reset Onboarding") {
+                    onboardingCompleted = false
                 }
             }
         }
@@ -46,7 +52,7 @@ struct Icons_DesignerApp: App {
                 backing: .buffered, defer: false
             )
             aboutWindow?.contentView = NSHostingView(rootView: aboutView)
-            aboutWindow?.title = "About"
+            aboutWindow?.title = NSLocalizedString("about_window_title", comment: "")
             aboutWindow?.isReleasedWhenClosed = false
             aboutWindow?.center()
         }

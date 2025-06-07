@@ -25,6 +25,7 @@
 		B9567A992D1FAA6F00CAD0F1 /* IconsArrayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A942D1FAA6F00CAD0F1 /* IconsArrayStorage.swift */; };
 		B9567A9A2D1FAA6F00CAD0F1 /* Icons Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */; };
 		B9734C3C2DF3AE7F00145163 /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9734C3B2DF3AE7F00145163 /* Welcome.swift */; };
+		B9734C3E2DF3D96500145163 /* Newest Icons Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9734C3D2DF3D96500145163 /* Newest Icons Array.swift */; };
 		B984865E2DF20B8200F25E91 /* AxisPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984865D2DF20B8200F25E91 /* AxisPicker.swift */; };
 		B98486602DF24A2B00F25E91 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984865F2DF24A2B00F25E91 /* EntryView.swift */; };
 		B98486902DF37A4A00F25E91 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B984868F2DF37A4A00F25E91 /* Localizable.xcstrings */; };
@@ -73,6 +74,7 @@
 		B9567A952D1FAA6F00CAD0F1 /* IconsArrayIOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsArrayIOS18.swift; sourceTree = "<group>"; };
 		B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Icons Arrays.swift"; sourceTree = "<group>"; };
 		B9734C3B2DF3AE7F00145163 /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
+		B9734C3D2DF3D96500145163 /* Newest Icons Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Newest Icons Array.swift"; sourceTree = "<group>"; };
 		B984865D2DF20B8200F25E91 /* AxisPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisPicker.swift; sourceTree = "<group>"; };
 		B984865F2DF24A2B00F25E91 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		B984866C2DF2931C00F25E91 /* SF FoldersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SF FoldersTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +220,7 @@
 				B9567A942D1FAA6F00CAD0F1 /* IconsArrayStorage.swift */,
 				B9567A952D1FAA6F00CAD0F1 /* IconsArrayIOS18.swift */,
 				B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */,
+				B9734C3D2DF3D96500145163 /* Newest Icons Array.swift */,
 			);
 			path = "Icon Picker";
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				B9567A902D1F9CD400CAD0F1 /* hex.swift in Sources */,
 				B9734C3C2DF3AE7F00145163 /* Welcome.swift in Sources */,
 				B9567A972D1FAA6F00CAD0F1 /* IconsArrayIOS18.swift in Sources */,
+				B9734C3E2DF3D96500145163 /* Newest Icons Array.swift in Sources */,
 				B9567A982D1FAA6F00CAD0F1 /* IconsPicker.swift in Sources */,
 				B9567A992D1FAA6F00CAD0F1 /* IconsArrayStorage.swift in Sources */,
 				B90822BB2DF0008B00C04565 /* Custom2DSlider.swift in Sources */,
@@ -557,7 +561,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Icons Designer/Icons Designer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"Icons Designer/Preview Content\"";
 				DEVELOPMENT_TEAM = 47J6H2LHDD;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -597,7 +601,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Icons Designer/Icons Designer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"Icons Designer/Preview Content\"";
 				DEVELOPMENT_TEAM = 47J6H2LHDD;
 				ENABLE_HARDENED_RUNTIME = YES;

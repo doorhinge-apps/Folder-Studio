@@ -12,7 +12,7 @@ struct EntryView: View {
                 .environmentObject(foldersViewModel)
         }
         else {
-            
+            Welcome()
         }
     }
 }
