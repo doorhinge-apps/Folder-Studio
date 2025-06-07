@@ -1,20 +1,18 @@
-//
-// SF Folders
-// EntryView.swift
-//
-// Created on 5/6/25
-//
-// Copyright ©2025 DoorHinge Apps.
-//
-
-
 import SwiftUI
+import Translation
 
 struct EntryView: View {
     @StateObject var foldersViewModel = FoldersViewModel()
+    
+    @AppStorage("onboardingCompleted") var onboardingCompleted = false
+
     var body: some View {
-        ContentView()
-            .environmentObject(foldersViewModel)
+        if onboardingCompleted {
+            ContentView()
+                .environmentObject(foldersViewModel)
+        }
+        else {
+            
+        }
     }
 }
-

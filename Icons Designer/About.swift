@@ -11,8 +11,8 @@
 import SwiftUI
 
 struct AboutView: View {
-    var appName: String = "SF Symbols Folders"
-    var appVersion: String = "Version 1.0.0"
+    var appName: LocalizedStringKey = "SF Folders"
+    var appVersion: LocalizedStringKey = "Version \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.1")"
     var copyright: String = "©2025 DoorHinge Apps"
 
     var body: some View {
@@ -30,15 +30,15 @@ struct AboutView: View {
                 .font(.subheadline)
                 .foregroundColor(.secondary)
             
-            Text(.init("""
-            **License**  
+            Text("""
+            **License**
             This application is open source and distributed under the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).
             
             You can view the source code and license details on [GitHub](https://github.com/doorhinge-apps/SF-Symbols-Folders).
-            """))
+            """)
             .lineLimit(nil)
 
-            Text(.init("[\(copyright)](https://doorhingeapps.com)"))
+            Text("[\(copyright)](https://doorhingeapps.com)")
                 .font(.footnote)
                 .foregroundColor(.secondary)
                 .underline(true)

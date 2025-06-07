@@ -1,5 +1,7 @@
 import SwiftUI
+import NaturalLanguage
 import SwiftData
+import Translation
 
 
 struct IconsPicker: View {
@@ -14,6 +16,9 @@ struct IconsPicker: View {
     @State var allIcons = false
     
     @State var iconSearch = ""
+    
+    @State private var translationConfig: TranslationSession.Configuration?
+    @State private var translatedSearchTerm: String = ""
     
     @State var filterApplied: IconFilter = .all
     
@@ -37,6 +42,21 @@ struct IconsPicker: View {
                             searchFocused = true
                         }
                         .autocorrectionDisabled(true)
+                        .onChange(of: iconSearch) { newValue in
+                            Task {
+                                await handleSearchInput(newValue)
+                            }
+                        }
+                        .translationTask(translationConfig) { session in
+                            do {
+                                let response = try await session.translate(iconSearch)
+                                translatedSearchTerm = response.targetText
+                                print("Translated Text: \(translatedSearchTerm)")
+                            } catch {
+                                print("Translation Error: \(error)")
+                                translatedSearchTerm = iconSearch
+                            }
+                        }
                 }
                 .frame(height: 50)
                 .padding(10)
@@ -124,7 +144,10 @@ struct IconsPicker: View {
                                     }
                                 }
                             }, id:\.self) { icon in
-                                if icon.contains(iconSearch.lowercased()) || icon.replacingOccurrences(of: ".", with: " ").contains(iconSearch.lowercased()) || iconSearch == "" {
+                                //if icon.contains(iconSearch.lowercased()) || icon.replacingOccurrences(of: ".", with: " ").contains(iconSearch.lowercased()) || iconSearch == "" {
+                                if icon.contains(translatedSearchTerm.lowercased()) ||
+                                   icon.replacingOccurrences(of: ".", with: " ").contains(translatedSearchTerm.lowercased()) ||
+                                   translatedSearchTerm.isEmpty {
                                     Button {
                                         currentIcon = icon
                                         print("Icon: \(icon)")
@@ -165,5 +188,54 @@ struct IconsPicker: View {
             }
         }
     }
+    
+    func handleSearchInput(_ input: String) async {
+            guard !input.isEmpty else {
+                translatedSearchTerm = ""
+                translationConfig = nil
+                return
+            }
+            // Detect the app's language, normalized
+            let appLocaleCode = Bundle.main.preferredLocalizations.first ?? "en"
+            let langCode = normalizedLanguageCode(appLocaleCode)
+            print("App Localization: \(appLocaleCode) -> Language: \(langCode)")
+
+            if langCode == "en" {
+                // No translation needed
+                translatedSearchTerm = input
+                translationConfig = nil
+                print("App is English. No translation needed.")
+                return
+            }
+
+            let sourceLanguage = Locale.Language(identifier: langCode)
+            let targetLanguage = Locale.Language(identifier: "en")
+
+            // Check if the model is available, but do not prompt to download
+            let availability = LanguageAvailability()
+            let status = await availability.status(from: sourceLanguage, to: targetLanguage)
+
+            switch status {
+            case .installed:
+                print("Translation model for \(langCode)→en is installed.")
+                translationConfig = TranslationSession.Configuration(source: sourceLanguage, target: targetLanguage)
+            case .supported:
+                print("Translation model for \(langCode)→en is supported but not installed. Skipping translation and will not prompt.")
+                translatedSearchTerm = input
+                translationConfig = nil
+            case .unsupported:
+                print("Translation from \(langCode)→en is unsupported.")
+                translatedSearchTerm = input
+                translationConfig = nil
+            @unknown default:
+                print("Unknown translation model status.")
+                translatedSearchTerm = input
+                translationConfig = nil
+            }
+        }
+
+        func normalizedLanguageCode(_ locale: String) -> String {
+            return locale.components(separatedBy: CharacterSet(charactersIn: "-_")).first ?? locale
+        }
 }
 

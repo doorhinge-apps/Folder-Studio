@@ -1,5 +1,6 @@
 import SwiftUI
 import AppKit
+import Translation
 
 struct ContentView: View {
     @EnvironmentObject var foldersViewModel: FoldersViewModel
@@ -13,6 +14,10 @@ struct ContentView: View {
     @State var bottomShapeColorIsUpdating: Bool = false
     @State var topShapeColorIsUpdating: Bool = false
     @State var symbolColorIsUpdating: Bool = false
+    
+    @State private var downloadConfig: TranslationSession.Configuration?
+    @State private var downloadStarted = false
+    @State private var availability: LanguageAvailability.Status?
     
     @State private var pos: [CGFloat] = [0, 0]
     
@@ -28,6 +33,23 @@ struct ContentView: View {
                             .frame(width: 200, height: 20)
                     }.frame(width: 10)
                         .offset(x: -10)
+                        .task {
+                            // Runs once when ContentView first appears
+                            await determineModelStatus()
+                        }
+                    // ────────── PERSISTENT SESSION THAT SHOWS THE SHEET
+                        .translationTask(downloadConfig) { session in
+                            guard !downloadStarted else { return }
+                            downloadStarted = true
+                            do {
+                                try await session.prepareTranslation()          // ← triggers Apple’s sheet
+                                availability = .installed                       // update when user finishes
+                                print("✅ Translation model installed.")
+                            } catch {
+                                availability = .supported                       // user cancelled or failed
+                                print("❌ prepareTranslation error:", error)
+                            }
+                        }
                     
                     ScrollView(showsIndicators: false) {
                         VStack(alignment: .leading) {
@@ -492,9 +514,11 @@ struct ContentView: View {
                                                             }
                                                         } label: {
                                                             Text("Reset")
+                                                                .padding(.horizontal, 20)
                                                         }
                                                         .buttonStyle(SmallButton3DStyle())
-                                                        .frame(width: 70, height: 30)
+                                                        .frame(height: 30)
+                                                        .fixedSize()
                                                         .padding([.top, .bottom])
                                                         
                                                         Button {
@@ -532,9 +556,11 @@ struct ContentView: View {
                                                         }
                                                     } label: {
                                                         Text("Reset")
+                                                            .padding(.horizontal, 20)
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
-                                                    .frame(width: 70, height: 30)
+                                                    .frame(height: 30)
+                                                    .fixedSize()
                                                     .padding([.top, .bottom])
                                                     
                                                     Button {
@@ -572,9 +598,11 @@ struct ContentView: View {
                                                         }
                                                     } label: {
                                                         Text("Reset")
+                                                            .padding(.horizontal, 20)
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
-                                                    .frame(width: 70, height: 30)
+                                                    .frame(height: 30)
+                                                    .fixedSize()
                                                     .padding([.top, .bottom])
                                                     
                                                     Button {
@@ -612,9 +640,11 @@ struct ContentView: View {
                                                         }
                                                     } label: {
                                                         Text("Reset")
+                                                            .padding(.horizontal, 20)
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
-                                                    .frame(width: 70, height: 30)
+                                                    .frame(height: 30)
+                                                    .fixedSize()
                                                     .padding([.top, .bottom])
                                                     
                                                     Button {
@@ -663,7 +693,7 @@ struct ContentView: View {
                 .frame(minHeight: 300, idealHeight: 500)
             }
         }
-        .frame(minWidth: 850, minHeight: 500)
+        .frame(minWidth: 950, minHeight: 500)
     }
     
     // MARK: - Offset Controls
@@ -876,4 +906,31 @@ struct ContentView: View {
         
         return result
     }
+    
+    // MARK: - Code for Translations
+    @MainActor
+        private func determineModelStatus() async {
+            // 1. Current app localisation → base language code
+            let raw   = Bundle.main.preferredLocalizations.first ?? "en"
+            let base  = raw.split(separator: "-").first.map(String.init) ?? "en"
+            guard base != "en" else {
+                print("App UI is English – no model needed.")
+                availability = .installed
+                return
+            }
+
+            let src  = Locale.Language(identifier: base)
+            let tgt  = Locale.Language(identifier: "en")
+            let av   = LanguageAvailability()
+            let stat = await av.status(from: src, to: tgt)
+
+            availability = stat
+            print("ℹ️ Model status \(base)→en :", stat)
+
+            if stat == .supported {
+                // Create ONE configuration; never mutate it so the sheet can live.
+                downloadConfig = .init(source: src, target: tgt)
+                // translationTask will now run and call prepareTranslation()
+            }
+        }
 }

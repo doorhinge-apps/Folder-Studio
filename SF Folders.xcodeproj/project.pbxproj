@@ -24,8 +24,11 @@
 		B9567A982D1FAA6F00CAD0F1 /* IconsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A932D1FAA6F00CAD0F1 /* IconsPicker.swift */; };
 		B9567A992D1FAA6F00CAD0F1 /* IconsArrayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A942D1FAA6F00CAD0F1 /* IconsArrayStorage.swift */; };
 		B9567A9A2D1FAA6F00CAD0F1 /* Icons Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */; };
+		B9734C3C2DF3AE7F00145163 /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9734C3B2DF3AE7F00145163 /* Welcome.swift */; };
 		B984865E2DF20B8200F25E91 /* AxisPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984865D2DF20B8200F25E91 /* AxisPicker.swift */; };
 		B98486602DF24A2B00F25E91 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984865F2DF24A2B00F25E91 /* EntryView.swift */; };
+		B98486902DF37A4A00F25E91 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B984868F2DF37A4A00F25E91 /* Localizable.xcstrings */; };
+		B98486922DF3820100F25E91 /* SF-Folders-InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B98486912DF3820100F25E91 /* SF-Folders-InfoPlist.xcstrings */; };
 		B98FCE092D1FDDCC0033EAED /* IconChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FCE082D1FDDCC0033EAED /* IconChanger.swift */; };
 		B98FCE0C2D20AED10033EAED /* FolderClippingShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */; };
 		B99B9F502D547C5D00C81B69 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99B9F4F2D547C5D00C81B69 /* CustomSlider.swift */; };
@@ -69,11 +72,14 @@
 		B9567A942D1FAA6F00CAD0F1 /* IconsArrayStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsArrayStorage.swift; sourceTree = "<group>"; };
 		B9567A952D1FAA6F00CAD0F1 /* IconsArrayIOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsArrayIOS18.swift; sourceTree = "<group>"; };
 		B9567A962D1FAA6F00CAD0F1 /* Icons Arrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Icons Arrays.swift"; sourceTree = "<group>"; };
+		B9734C3B2DF3AE7F00145163 /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		B984865D2DF20B8200F25E91 /* AxisPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisPicker.swift; sourceTree = "<group>"; };
 		B984865F2DF24A2B00F25E91 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		B984866C2DF2931C00F25E91 /* SF FoldersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SF FoldersTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B98486792DF2932A00F25E91 /* SF FoldersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SF FoldersUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B984868E2DF2AB4400F25E91 /* SF-Folders-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SF-Folders-Info.plist"; sourceTree = "<group>"; };
+		B984868F2DF37A4A00F25E91 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = Localizable.xcstrings; path = "Icons Designer/Localizable.xcstrings"; sourceTree = SOURCE_ROOT; };
+		B98486912DF3820100F25E91 /* SF-Folders-InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = "SF-Folders-InfoPlist.xcstrings"; path = "Icons Designer/SF-Folders-InfoPlist.xcstrings"; sourceTree = SOURCE_ROOT; };
 		B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Icons Designer.entitlements"; sourceTree = "<group>"; };
 		B98FCE082D1FDDCC0033EAED /* IconChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconChanger.swift; sourceTree = "<group>"; };
 		B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderClippingShape.swift; sourceTree = "<group>"; };
@@ -177,11 +183,14 @@
 		B9567A722D1F536100CAD0F1 /* Icons Designer */ = {
 			isa = PBXGroup;
 			children = (
+				B984868F2DF37A4A00F25E91 /* Localizable.xcstrings */,
+				B98486912DF3820100F25E91 /* SF-Folders-InfoPlist.xcstrings */,
 				B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */,
 				B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */,
 				B9567A702D1F536100CAD0F1 /* ContentView.swift */,
 				B984865F2DF24A2B00F25E91 /* EntryView.swift */,
 				B90822BE2DF012EC00C04565 /* FoldersViewModel.swift */,
+				B9734C3A2DF3AE5500145163 /* Onboarding */,
 				B90822B82DEFFCA700C04565 /* The Folder */,
 				B90822B92DF0006C00C04565 /* UI Components */,
 				B9567A8D2D1F96B300CAD0F1 /* Snapshot.swift */,
@@ -192,6 +201,14 @@
 				B9567A6E2D1F536100CAD0F1 /* Preview Content */,
 			);
 			path = "Icons Designer";
+			sourceTree = "<group>";
+		};
+		B9734C3A2DF3AE5500145163 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				B9734C3B2DF3AE7F00145163 /* Welcome.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		B98FCE0A2D1FDE020033EAED /* Icon Picker */ = {
@@ -303,6 +320,9 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
+				es,
+				de,
 			);
 			mainGroup = B9567A532D1F515E00CAD0F1;
 			minimizedProjectReferenceProxies = 1;
@@ -327,6 +347,8 @@
 			files = (
 				B9567A752D1F536100CAD0F1 /* Preview Assets.xcassets in Resources */,
 				B9567A762D1F536100CAD0F1 /* Assets.xcassets in Resources */,
+				B98486902DF37A4A00F25E91 /* Localizable.xcstrings in Resources */,
+				B98486922DF3820100F25E91 /* SF-Folders-InfoPlist.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +375,7 @@
 			files = (
 				B9567A882D1F69FF00CAD0F1 /* FolderTop.swift in Sources */,
 				B9567A902D1F9CD400CAD0F1 /* hex.swift in Sources */,
+				B9734C3C2DF3AE7F00145163 /* Welcome.swift in Sources */,
 				B9567A972D1FAA6F00CAD0F1 /* IconsArrayIOS18.swift in Sources */,
 				B9567A982D1FAA6F00CAD0F1 /* IconsPicker.swift in Sources */,
 				B9567A992D1FAA6F00CAD0F1 /* IconsArrayStorage.swift in Sources */,
@@ -465,6 +488,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -521,6 +545,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -528,18 +553,18 @@
 		B9567A6B2D1F516000CAD0F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "New AppIcon";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "Newest AppIcon";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Icons Designer/Icons Designer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"Icons Designer/Preview Content\"";
 				DEVELOPMENT_TEAM = 47J6H2LHDD;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SF-Folders-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "SF Folders";
+				INFOPLIST_KEY_CFBundleDisplayName = "Folder Studio";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -568,18 +593,18 @@
 		B9567A6C2D1F516000CAD0F1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "New AppIcon";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "Newest AppIcon";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Icons Designer/Icons Designer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"Icons Designer/Preview Content\"";
 				DEVELOPMENT_TEAM = 47J6H2LHDD;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SF-Folders-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "SF Folders";
+				INFOPLIST_KEY_CFBundleDisplayName = "Folder Studio";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
