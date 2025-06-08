@@ -4,6 +4,9 @@
     "" : {
 
     },
+    ", " : {
+
+    },
     ": " : {
 
     },
@@ -153,6 +156,26 @@
         }
       }
     },
+    "accessibility_folder_preview_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder Preview and Set Icon Actions"
+          }
+        }
+      }
+    },
+    "accessibility_image_rendering_selector_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image Rendering Mode Selector"
+          }
+        }
+      }
+    },
     "accessibility_options_panel_label" : {
       "localizations" : {
         "en" : {
@@ -183,6 +206,16 @@
         }
       }
     },
+    "accessibility_select_or_change_image_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select or change image"
+          }
+        }
+      }
+    },
     "accessibility_symbol_color_label" : {
       "localizations" : {
         "en" : {
@@ -199,6 +232,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Folder Tab Color"
+          }
+        }
+      }
+    },
+    "accessibility_type_selector_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder Icon Type Selector"
           }
         }
       }

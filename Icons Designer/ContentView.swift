@@ -22,6 +22,7 @@ struct ContentView: View {
                     }.buttonStyle(.plain)
                     
                     PreviewDrag()
+                        .accessibilityLabel("accessibility_folder_preview_label")
 
                     Spacer()
                         .frame(width: 20)
@@ -34,6 +35,7 @@ struct ContentView: View {
                                     Text("type_selector_label")
                                         .font(.system(.title, design: .rounded, weight: .bold))
                                         .foregroundStyle(Color.white)
+                                        .accessibilityHidden(true)
                                     
                                     Spacer()
                                 }
@@ -84,33 +86,61 @@ struct ContentView: View {
                                             HStack(spacing: 0) {
                                                 Text("type_none_label")
                                                     .frame(width: pickerGeo.size.width/3)
+                                                    .accessibilityHidden(true)
                                                 
                                                 Text("type_image_label")
                                                     .frame(width: pickerGeo.size.width/3)
+                                                    .accessibilityHidden(true)
                                                 
                                                 Text("type_sfsymbol_label")
                                                     .frame(width: pickerGeo.size.width/3)
+                                                    .accessibilityHidden(true)
                                             }.foregroundStyle(Color.white)
                                             
                                             HStack(spacing: 0) {
-                                                Color.white.opacity(0.001)
-                                                    .frame(width: pickerGeo.size.width/3, height: 30)
-                                                    .onTapGesture {
-                                                        foldersViewModel.imageType = .none
-                                                    }
-                                                
-                                                Color.white.opacity(0.001)
-                                                    .frame(width: pickerGeo.size.width/3, height: 30)
-                                                    .onTapGesture {
-                                                        foldersViewModel.imageType = .png
-                                                    }
-                                                
-                                                Color.white.opacity(0.001)
-                                                    .frame(width: pickerGeo.size.width/3, height: 30)
-                                                    .onTapGesture {
-                                                        foldersViewModel.imageType = .sfsymbol
-                                                    }
+                                                // None
+                                                Button { foldersViewModel.imageType = .none } label: {
+                                                    Color.clear
+                                                        .frame(width: pickerGeo.size.width/3, height: 30)
+                                                }
+                                                .buttonStyle(.plain)
+
+                                                // Image
+                                                Button { foldersViewModel.imageType = .png } label: {
+                                                    Color.clear
+                                                        .frame(width: pickerGeo.size.width/3, height: 30)
+                                                }
+                                                .buttonStyle(.plain)
+
+                                                // SF Symbol
+                                                Button { foldersViewModel.imageType = .sfsymbol } label: {
+                                                    Color.clear
+                                                        .frame(width: pickerGeo.size.width/3, height: 30)
+                                                }
+                                                .buttonStyle(.plain)
                                             }
+                                            .accessibilityElement(children: .ignore)
+                                            .accessibilityLabel(
+                                                Text("accessibility_type_selector_label")
+                                                + Text(", ")
+                                                + Text(
+                                                    foldersViewModel.imageType == .none
+                                                        ? "type_none_label"
+                                                    : foldersViewModel.imageType == .png
+                                                        ? "type_image_label"
+                                                        : "type_sfsymbol_label"
+                                                )
+                                            )
+                                            .accessibilityAction(named: Text("type_none_label")) {
+                                                foldersViewModel.imageType = .none
+                                            }
+                                            .accessibilityAction(named: Text("type_image_label")) {
+                                                foldersViewModel.imageType = .png
+                                            }
+                                            .accessibilityAction(named: Text("type_sfsymbol_label")) {
+                                                foldersViewModel.imageType = .sfsymbol
+                                            }
+
                                             
                                         }
                                     }
@@ -142,6 +172,7 @@ struct ContentView: View {
                                                 }
                                                 .buttonStyle(SmallButton3DStyle())
                                                 .frame(width: 100, height: 30)
+                                                .accessibilityLabel("accessibility_select_or_change_image_label")
                                             }
                                             else if foldersViewModel.imageType == .sfsymbol {
                                                 VStack(alignment: .center) {
@@ -248,24 +279,40 @@ struct ContentView: View {
                                                                 HStack(spacing: 0) {
                                                                     Text("standard_image_mode")
                                                                         .frame(width: advancedImagePicker.size.width/2)
+                                                                        .accessibilityHidden(true)
                                                                     
                                                                     Text("advanced_image_mode")
                                                                         .frame(width: advancedImagePicker.size.width/2)
+                                                                        .accessibilityHidden(true)
                                                                 }.foregroundStyle(Color.white)
                                                                 
                                                                 HStack(spacing: 0) {
-                                                                    Color.white.opacity(0.001)
-                                                                        .frame(width: advancedImagePicker.size.width/2, height: 30)
-                                                                        .onTapGesture {
-                                                                            foldersViewModel.useAdvancedIconRendering = false
-                                                                        }
-                                                                    
-                                                                    Color.white.opacity(0.001)
-                                                                        .frame(width: advancedImagePicker.size.width/2, height: 30)
-                                                                        .onTapGesture {
-                                                                            foldersViewModel.useAdvancedIconRendering = true
-                                                                        }
+                                                                    Button {
+                                                                        foldersViewModel.useAdvancedIconRendering = false
+                                                                    } label: {
+                                                                        Color.clear
+                                                                            .frame(width: advancedImagePicker.size.width/2, height: 30)
+                                                                    }
+                                                                    .buttonStyle(.plain)
+                                                                    .accessibilityLabel(Text("standard_image_mode"))
+                                                                    .accessibilityAddTraits(
+                                                                        foldersViewModel.useAdvancedIconRendering ? [] : .isSelected
+                                                                    )
+
+                                                                    Button {
+                                                                        foldersViewModel.useAdvancedIconRendering = true
+                                                                    } label: {
+                                                                        Color.clear
+                                                                            .frame(width: advancedImagePicker.size.width/2, height: 30)
+                                                                    }
+                                                                    .buttonStyle(.plain)
+                                                                    .accessibilityLabel(Text("advanced_image_mode"))
+                                                                    .accessibilityAddTraits(
+                                                                        foldersViewModel.useAdvancedIconRendering ? .isSelected : []
+                                                                    )
                                                                 }
+                                                                .accessibilityElement(children: .combine)
+                                                                    .accessibilityLabel("accessibility_image_rendering_selector_label")
                                                                 
                                                             }
                                                             
