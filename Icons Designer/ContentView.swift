@@ -7,17 +7,7 @@ struct ContentView: View {
     
     let timer = Timer.publish(every: 0.75, on: .main, in: .common).autoconnect()
     
-    @State var bottomShapeColor = Color.blue
-    @State var topShapeColor = Color.blue
-    @State var symbolColor = Color.blue
-    
-    @State var bottomShapeColorIsUpdating: Bool = false
-    @State var topShapeColorIsUpdating: Bool = false
-    @State var symbolColorIsUpdating: Bool = false
-    
-    @State private var downloadConfig: TranslationSession.Configuration?
-    @State private var downloadStarted = false
-    @State private var availability: LanguageAvailability.Status?
+    @State var showSetFolderAlert = false
     
     @State private var pos: [CGFloat] = [0, 0]
     
@@ -25,228 +15,13 @@ struct ContentView: View {
         GeometryReader { geo in
             VSplitView {
                 HStack(spacing: 0) {
-                    HStack {
-                        Text("preset_label_text")
-                            .font(.system(.title, design: .rounded, weight: .bold))
-                            .rotationEffect(Angle(degrees: -90))
-                            .foregroundStyle(Color.white)
-                            .frame(width: 200, height: 20)
-                    }.frame(width: 10)
-                        .offset(x: -10)
-                        .task {
-                            // Runs once when ContentView first appears
-                            await determineModelStatus()
-                        }
-                    // ────────── PERSISTENT SESSION THAT SHOWS THE SHEET
-                        .translationTask(downloadConfig) { session in
-                            guard !downloadStarted else { return }
-                            downloadStarted = true
-                            do {
-                                try await session.prepareTranslation()          // ← triggers Apple’s sheet
-                                availability = .installed                       // update when user finishes
-                                print("✅ Translation model installed.")
-                            } catch {
-                                availability = .supported                       // user cancelled or failed
-                                print("❌ prepareTranslation error:", error)
-                            }
-                        }
+                    Button {
+                        //
+                    } label: {
+                        Presets()
+                    }.buttonStyle(.plain)
                     
-                    ScrollView(showsIndicators: false) {
-                        VStack(alignment: .leading) {
-                            ForEach(foldersViewModel.presets, id:\.self) { preset in
-                                FolderPresetPreview(
-                                    color1: preset[0],
-                                    color2: preset[1]
-                                )
-                            }
-                            
-                            Spacer()
-                                .frame(height: 50)
-                        }
-                    }.frame(width: 80)
-                        .offset(x: -5)
-                    
-                    GeometryReader { smallGeo in
-                        VStack {
-                            VStack {
-                                FolderIconView(
-                                    resolutionScale: 0.25
-                                )
-                                .frame(width: 200, height: 200)
-                                .scaleEffect(0.43)
-                                .cornerRadius(10)
-                                .zIndex(10)
-                                
-                                Text("drag_to_set")
-                                    .foregroundStyle(Color.white)
-                                    .font(.system(.title3, design: .rounded, weight: .semibold))
-                                
-                                Button(action: savePNG) {
-                                    Text("save_image")
-                                }
-                                .buttonStyle(Button3DStyle())
-                                .frame(width: 200, height: 50)
-                                .padding(.top, 10)
-                            }
-                            .overlay {
-                                ZStack {
-                                    Color(hex: "78D6FF")
-                                        .frame(width: smallGeo.size.width, height: smallGeo.size.height)
-                                    
-                                    VStack {
-                                        Text("drop_folder")
-                                            .font(.headline)
-                                            .foregroundStyle(Color.white)
-                                        
-                                        Spacer()
-                                            .frame(height: 75)
-                                        
-                                        ZStack {
-                                            ZStack {
-                                                HStack {
-                                                    Image(systemName: "chevron.compact.right")
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .frame(width: 20)
-                                                        .foregroundStyle(Color.white)
-                                                    
-                                                    Spacer()
-                                                        .frame(width: foldersViewModel.breatheAnimation ? 190: 120)
-                                                        .animation(.bouncy(duration: 0.75), value: foldersViewModel.breatheAnimation)
-                                                    
-                                                    Image(systemName: "chevron.compact.right")
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .frame(width: 20)
-                                                        .foregroundStyle(Color.white)
-                                                        .rotationEffect(Angle(degrees: 180))
-                                                }
-                                                
-                                                HStack {
-                                                    Image(systemName: "chevron.compact.right")
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .frame(width: 20)
-                                                        .foregroundStyle(Color.white)
-                                                    
-                                                    Spacer()
-                                                        .frame(width: foldersViewModel.breatheAnimation ? 190: 120)
-                                                        .animation(.bouncy(duration: 0.75), value: foldersViewModel.breatheAnimation)
-                                                    
-                                                    Image(systemName: "chevron.compact.right")
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .frame(width: 20)
-                                                        .foregroundStyle(Color.white)
-                                                        .rotationEffect(Angle(degrees: 180))
-                                                    
-                                                }.rotationEffect(Angle(degrees: 90))
-                                            }.rotationEffect(Angle(degrees: Double(foldersViewModel.rotationAngle)))
-                                                .animation(.bouncy(duration: 0.5), value: foldersViewModel.rotationAngle)
-                                                .onReceive(timer) { thing in
-                                                    foldersViewModel.breatheAnimation.toggle()
-                                                    foldersViewModel.rotationAngle += 90
-                                                }
-                                            
-                                            FolderIconView(
-                                                resolutionScale: 0.125
-                                            )
-                                            .frame(width: 100, height: 100)
-                                            .scaleEffect(0.21)
-                                        }
-                                    }
-                                }.opacity(foldersViewModel.isTargetedDrop ? 1 : 0)
-                                    .animation(.default, value: foldersViewModel.isTargetedDrop)
-                            }
-                            .onDrop(of: ["public.file-url"], isTargeted: $foldersViewModel.isTargetedDrop) { providers in
-                                handleDrop(providers: providers)
-                            }
-                            
-                            // -- Colors
-                            HStack {
-                                Text("colors_label")
-                                    .font(.system(.title, design: .rounded, weight: .bold))
-                                    .foregroundStyle(Color.white)
-                                Spacer()
-                            }.padding(.top, 20)
-                            
-                            HStack {
-                                VStack(alignment: .center) {
-                                    Text("base_color_label")
-                                        .foregroundStyle(Color.white)
-                                        .font(.system(.headline, design: .rounded, weight: .semibold))
-                                    
-                                    ColorWell(color: $bottomShapeColor)
-                                        .onChange(of: bottomShapeColor) { oldValue, newValue in
-                                            bottomShapeColorIsUpdating = true
-                                            foldersViewModel.bottomShapeColor = newValue
-                                            print("Updating 1")
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                                                bottomShapeColorIsUpdating = false
-                                            }
-                                        }
-                                        .onChange(of: foldersViewModel.bottomShapeColor) { oldValue, newValue in
-                                            if !bottomShapeColorIsUpdating {
-                                                bottomShapeColor = newValue
-                                                print("Updating 2")
-                                            }
-                                        }
-                                }
-                                .padding(.trailing, 20)
-                                
-                                VStack(alignment: .center) {
-                                    Text("tab_color_label")
-                                        .foregroundStyle(Color.white)
-                                        .font(.system(.headline, design: .rounded, weight: .semibold))
-                                    
-                                    ColorWell(color: $topShapeColor)
-                                        .onChange(of: topShapeColor) { oldValue, newValue in
-                                            topShapeColorIsUpdating = true
-                                            foldersViewModel.topShapeColor = newValue
-                                            print("Updating 1")
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                                                topShapeColorIsUpdating = false
-                                            }
-                                        }
-                                        .onChange(of: foldersViewModel.topShapeColor) { oldValue, newValue in
-                                            if !topShapeColorIsUpdating {
-                                                topShapeColor = newValue
-                                                print("Updating 2")
-                                            }
-                                        }
-                                }
-                                .padding(.trailing, 20)
-                                
-                                VStack(alignment: .center) {
-                                    Text("symbol_color_label")
-                                        .foregroundStyle(Color.white)
-                                        .font(.system(.headline, design: .rounded, weight: .semibold))
-                                    
-                                    ColorWell(color: $symbolColor)
-                                        .onChange(of: symbolColor) { oldValue, newValue in
-                                            symbolColorIsUpdating = true
-                                            foldersViewModel.symbolColor = newValue
-                                            print("Updating 1")
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                                                symbolColorIsUpdating = false
-                                            }
-                                        }
-                                        .onChange(of: foldersViewModel.symbolColor) { oldValue, newValue in
-                                            if !symbolColorIsUpdating {
-                                                symbolColor = newValue
-                                                print("Updating 2")
-                                            }
-                                        }
-                                }
-                                .padding(.trailing, 20)
-                            }.frame(height: 50)
-                                .onAppear() {
-                                    bottomShapeColor = foldersViewModel.bottomShapeColor
-                                    topShapeColor = foldersViewModel.topShapeColor
-                                    symbolColor = foldersViewModel.symbolColor
-                                }
-                        }
-                    }.frame(width: 300)
+                    PreviewDrag()
 
                     Spacer()
                         .frame(width: 20)
@@ -361,7 +136,7 @@ struct ContentView: View {
                                                 }
                                                 
                                                 Button {
-                                                    selectImageFile()
+                                                    foldersViewModel.selectImageFile()
                                                 } label: {
                                                     Text(foldersViewModel.selectedImage != nil ? "change_image": "select_image")
                                                 }
@@ -528,6 +303,7 @@ struct ContentView: View {
                                                         } label: {
                                                             Image(systemName: "chevron.down")
                                                                 .rotationEffect(Angle(degrees: !foldersViewModel.hideWeight ? -180: 0))
+                                                                .accessibilityLabel(foldersViewModel.hideWeight ? "accessibility_expand_label": "accessibility_collapse_label")
                                                         }
                                                         .buttonStyle(SmallButton3DStyle())
                                                         .frame(width: 30, height: 30)
@@ -570,6 +346,7 @@ struct ContentView: View {
                                                     } label: {
                                                         Image(systemName: "chevron.down")
                                                             .rotationEffect(Angle(degrees: !foldersViewModel.hideOpacity ? -180: 0))
+                                                            .accessibilityLabel(foldersViewModel.hideOpacity ? "accessibility_expand_label": "accessibility_collapse_label")
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
                                                     .frame(width: 30, height: 30)
@@ -612,6 +389,7 @@ struct ContentView: View {
                                                     } label: {
                                                         Image(systemName: "chevron.down")
                                                             .rotationEffect(Angle(degrees: !foldersViewModel.hideScale ? -180: 0))
+                                                            .accessibilityLabel(foldersViewModel.hideScale ? "accessibility_expand_label": "accessibility_collapse_label")
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
                                                     .frame(width: 30, height: 30)
@@ -654,6 +432,7 @@ struct ContentView: View {
                                                     } label: {
                                                         Image(systemName: "chevron.down")
                                                             .rotationEffect(Angle(degrees: !foldersViewModel.hideOffset ? -180: 0))
+                                                            .accessibilityLabel(foldersViewModel.hideOffset ? "accessibility_expand_label": "accessibility_collapse_label")
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
                                                     .frame(width: 30, height: 30)
@@ -680,6 +459,7 @@ struct ContentView: View {
                                                 }
                                             }
                                         }
+                                        .accessibilityLabel("accessibility_options_panel_label")
                                         Spacer()
                                     }
                                     
@@ -723,24 +503,24 @@ struct ContentView: View {
         }
     }
     
-    private func selectImageFile() {
-        let panel = NSOpenPanel()
-        panel.allowedContentTypes = [.image, .png, .svg]
-        panel.canChooseFiles = true
-        panel.canChooseDirectories = false
-        
-        if panel.runModal() == .OK, let url = panel.url {
-            if let image = NSImage(contentsOf: url) {
-                foldersViewModel.selectedImage = image
-            } else {
-                print("Failed to load the selected PNG file.")
-            }
-        }
-    }
+//    private func selectImageFile() {
+//        let panel = NSOpenPanel()
+//        panel.allowedContentTypes = [.image, .png, .svg]
+//        panel.canChooseFiles = true
+//        panel.canChooseDirectories = false
+//        
+//        if panel.runModal() == .OK, let url = panel.url {
+//            if let image = NSImage(contentsOf: url) {
+//                foldersViewModel.selectedImage = image
+//            } else {
+//                print("Failed to load the selected PNG file.")
+//            }
+//        }
+//    }
     
     
     // MARK: - Save as PNG to user-chosen location
-    private func savePNG() {
+    /*private func savePNG() {
         let panel = NSSavePanel()
         panel.canCreateDirectories = true
         panel.allowedContentTypes = [.png]
@@ -853,6 +633,23 @@ struct ContentView: View {
         }
     }
     
+    private func selectFolder() {
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = false          // folders only
+        panel.canChooseDirectories = true
+        panel.allowsMultipleSelection = false
+
+        if panel.runModal() == .OK, let url = panel.url {
+            do {
+                try setFolderIcon(folderURL: url)
+                foldersViewModel.dropError = nil
+                showSetFolderAlert = true
+            } catch {
+                foldersViewModel.dropError = error.localizedDescription
+            }
+        }
+    }
+    
     // MARK: - Export PNG to a single file in ~/Library/FolderIconChanger
     private func exportIconPNGToLibrary(pngData: Data) throws -> URL {
         let fileManager = FileManager.default
@@ -874,63 +671,36 @@ struct ContentView: View {
         }
         try pngData.write(to: iconURL)
         return iconURL
-    }
+    }*/
 
     // MARK: - Resize Icon for Folder (512x512)
-    private func resizeIcon(from sourceURL: URL, maxSize: CGFloat) throws -> NSImage {
-        guard let loadedImage = NSImage(contentsOf: sourceURL) else {
-            throw NSError(domain: "FolderIconChanger", code: 1003,
-                          userInfo: [NSLocalizedDescriptionKey: "Could not load the PNG from \(sourceURL)."])
-        }
-
-        // Scale to fit within maxSize × maxSize
-        let targetSize = NSSize(width: maxSize, height: maxSize)
-        let result = NSImage(size: targetSize)
-        
-        result.lockFocus()
-        let ratio = min(
-            targetSize.width / loadedImage.size.width,
-            targetSize.height / loadedImage.size.height
-        )
-        let newWidth = loadedImage.size.width * ratio
-        let newHeight = loadedImage.size.height * ratio
-        
-        let drawRect = NSRect(
-            x: (targetSize.width - newWidth) / 2,
-            y: (targetSize.height - newHeight) / 2,
-            width: newWidth,
-            height: newHeight
-        )
-        loadedImage.draw(in: drawRect, from: .zero, operation: .sourceOver, fraction: 1.0)
-        result.unlockFocus()
-        
-        return result
-    }
-    
-    // MARK: - Code for Translations
-    @MainActor
-        private func determineModelStatus() async {
-            // 1. Current app localisation → base language code
-            let raw   = Bundle.main.preferredLocalizations.first ?? "en"
-            let base  = raw.split(separator: "-").first.map(String.init) ?? "en"
-            guard base != "en" else {
-                print("App UI is English – no model needed.")
-                availability = .installed
-                return
-            }
-
-            let src  = Locale.Language(identifier: base)
-            let tgt  = Locale.Language(identifier: "en")
-            let av   = LanguageAvailability()
-            let stat = await av.status(from: src, to: tgt)
-
-            availability = stat
-            print("ℹ️ Model status \(base)→en :", stat)
-
-            if stat == .supported {
-                // Create ONE configuration; never mutate it so the sheet can live.
-                downloadConfig = .init(source: src, target: tgt)
-                // translationTask will now run and call prepareTranslation()
-            }
-        }
+//    private func resizeIcon(from sourceURL: URL, maxSize: CGFloat) throws -> NSImage {
+//        guard let loadedImage = NSImage(contentsOf: sourceURL) else {
+//            throw NSError(domain: "FolderIconChanger", code: 1003,
+//                          userInfo: [NSLocalizedDescriptionKey: "Could not load the PNG from \(sourceURL)."])
+//        }
+//
+//        // Scale to fit within maxSize × maxSize
+//        let targetSize = NSSize(width: maxSize, height: maxSize)
+//        let result = NSImage(size: targetSize)
+//        
+//        result.lockFocus()
+//        let ratio = min(
+//            targetSize.width / loadedImage.size.width,
+//            targetSize.height / loadedImage.size.height
+//        )
+//        let newWidth = loadedImage.size.width * ratio
+//        let newHeight = loadedImage.size.height * ratio
+//        
+//        let drawRect = NSRect(
+//            x: (targetSize.width - newWidth) / 2,
+//            y: (targetSize.height - newHeight) / 2,
+//            width: newWidth,
+//            height: newHeight
+//        )
+//        loadedImage.draw(in: drawRect, from: .zero, operation: .sourceOver, fraction: 1.0)
+//        result.unlockFocus()
+//        
+//        return result
+//    }
 }

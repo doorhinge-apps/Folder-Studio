@@ -32,9 +32,12 @@
 		B98486922DF3820100F25E91 /* SF-Folders-InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B98486912DF3820100F25E91 /* SF-Folders-InfoPlist.xcstrings */; };
 		B98FCE092D1FDDCC0033EAED /* IconChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FCE082D1FDDCC0033EAED /* IconChanger.swift */; };
 		B98FCE0C2D20AED10033EAED /* FolderClippingShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */; };
+		B9957A602DF52E3D0082360C /* AccessibleColorPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9957A5F2DF52E3D0082360C /* AccessibleColorPanel.swift */; };
 		B99B9F502D547C5D00C81B69 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99B9F4F2D547C5D00C81B69 /* CustomSlider.swift */; };
 		B99E1CBF2D27DD9A008EF662 /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99E1CBE2D27DD9A008EF662 /* About.swift */; };
 		B9CE9DBB2D403B700008BE06 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CE9DBA2D403B700008BE06 /* ButtonStyles.swift */; };
+		B9E7CC302DF4E9DC0012CD3F /* Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E7CC2F2DF4E9DC0012CD3F /* Presets.swift */; };
+		B9E7CC322DF4EA150012CD3F /* Preview and Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E7CC312DF4EA150012CD3F /* Preview and Drag.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,9 +88,12 @@
 		B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Icons Designer.entitlements"; sourceTree = "<group>"; };
 		B98FCE082D1FDDCC0033EAED /* IconChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconChanger.swift; sourceTree = "<group>"; };
 		B98FCE0B2D20AED10033EAED /* FolderClippingShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderClippingShape.swift; sourceTree = "<group>"; };
+		B9957A5F2DF52E3D0082360C /* AccessibleColorPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibleColorPanel.swift; sourceTree = "<group>"; };
 		B99B9F4F2D547C5D00C81B69 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		B99E1CBE2D27DD9A008EF662 /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
 		B9CE9DBA2D403B700008BE06 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
+		B9E7CC2F2DF4E9DC0012CD3F /* Presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presets.swift; sourceTree = "<group>"; };
+		B9E7CC312DF4EA150012CD3F /* Preview and Drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Preview and Drag.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -147,6 +153,7 @@
 				B90822BC2DF0051F00C04565 /* StrokeModifier.swift */,
 				B90822BA2DF0008B00C04565 /* Custom2DSlider.swift */,
 				B9281BA12D9C4B3200C29B95 /* ColorWell.swift */,
+				B9957A5F2DF52E3D0082360C /* AccessibleColorPanel.swift */,
 				B9CE9DBA2D403B700008BE06 /* ButtonStyles.swift */,
 				B98FCE0A2D1FDE020033EAED /* Icon Picker */,
 			);
@@ -190,6 +197,7 @@
 				B98FCDEC2D1FC27E0033EAED /* Icons Designer.entitlements */,
 				B9567A712D1F536100CAD0F1 /* Icons_DesignerApp.swift */,
 				B9567A702D1F536100CAD0F1 /* ContentView.swift */,
+				B9E7CC2E2DF4E9CC0012CD3F /* Main Content */,
 				B984865F2DF24A2B00F25E91 /* EntryView.swift */,
 				B90822BE2DF012EC00C04565 /* FoldersViewModel.swift */,
 				B9734C3A2DF3AE5500145163 /* Onboarding */,
@@ -223,6 +231,15 @@
 				B9734C3D2DF3D96500145163 /* Newest Icons Array.swift */,
 			);
 			path = "Icon Picker";
+			sourceTree = "<group>";
+		};
+		B9E7CC2E2DF4E9CC0012CD3F /* Main Content */ = {
+			isa = PBXGroup;
+			children = (
+				B9E7CC2F2DF4E9DC0012CD3F /* Presets.swift */,
+				B9E7CC312DF4EA150012CD3F /* Preview and Drag.swift */,
+			);
+			path = "Main Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,10 +396,12 @@
 				B9567A882D1F69FF00CAD0F1 /* FolderTop.swift in Sources */,
 				B9567A902D1F9CD400CAD0F1 /* hex.swift in Sources */,
 				B9734C3C2DF3AE7F00145163 /* Welcome.swift in Sources */,
+				B9E7CC302DF4E9DC0012CD3F /* Presets.swift in Sources */,
 				B9567A972D1FAA6F00CAD0F1 /* IconsArrayIOS18.swift in Sources */,
 				B9734C3E2DF3D96500145163 /* Newest Icons Array.swift in Sources */,
 				B9567A982D1FAA6F00CAD0F1 /* IconsPicker.swift in Sources */,
 				B9567A992D1FAA6F00CAD0F1 /* IconsArrayStorage.swift in Sources */,
+				B9E7CC322DF4EA150012CD3F /* Preview and Drag.swift in Sources */,
 				B90822BB2DF0008B00C04565 /* Custom2DSlider.swift in Sources */,
 				B9567A9A2D1FAA6F00CAD0F1 /* Icons Arrays.swift in Sources */,
 				B9281BA22D9C4B3200C29B95 /* ColorWell.swift in Sources */,
@@ -393,6 +412,7 @@
 				B99E1CBF2D27DD9A008EF662 /* About.swift in Sources */,
 				B98FCE0C2D20AED10033EAED /* FolderClippingShape.swift in Sources */,
 				B984865E2DF20B8200F25E91 /* AxisPicker.swift in Sources */,
+				B9957A602DF52E3D0082360C /* AccessibleColorPanel.swift in Sources */,
 				B99B9F502D547C5D00C81B69 /* CustomSlider.swift in Sources */,
 				B98FCE092D1FDDCC0033EAED /* IconChanger.swift in Sources */,
 				B9567A8C2D1F969C00CAD0F1 /* FolderIconView.swift in Sources */,

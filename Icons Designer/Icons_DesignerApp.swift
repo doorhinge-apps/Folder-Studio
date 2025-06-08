@@ -25,6 +25,7 @@ struct Icons_DesignerApp: App {
                         
                         Image("grain")
                             .scaledToFill()
+                            .accessibilityHidden(true)
                     }.ignoresSafeArea()
                 })
         }.windowStyle(.hiddenTitleBar)
@@ -36,7 +37,7 @@ struct Icons_DesignerApp: App {
             }
             CommandGroup(after: .appInfo) {
                 Divider()
-                Button("Reset Onboarding") {
+                Button("reset_onboarding_text") {
                     onboardingCompleted = false
                 }
             }

@@ -29,6 +29,9 @@ class FoldersViewModel: ObservableObject {
     
     @Published var presets = [["1E8CCB", "6FCDF6"], ["D23359", "F66F8F"], ["DA8521", "F6B86F"], ["DCAE46", "F5DD62"], ["20731D", "43AC40"], ["2955AB", "5788E5"], ["7125BD", "A750FF"], ["BD2593", "FA62F4"]]
     
+//    @Published var presetLabels: [LocalizedStringKey] = ["light_blue_label", "red_label", "orange_label", "yellow_label", "green_label", "blue_label", "purple_label", "pink_label"]
+    @Published var presetLabels: [String: LocalizedStringKey] = ["1E8CCB":"light_blue_label", "D23359": "red_label", "DA8521": "orange_label", "DCAE46": "yellow_label", "20731D": "green_label", "2955AB": "blue_label", "7125BD": "purple_label", "BD2593": "pink_label"]
+    
     @Published var dropError: String? = nil
     
     // MARK: - Random Booleans
@@ -38,6 +41,8 @@ class FoldersViewModel: ObservableObject {
 
     @Published var breatheAnimation = false
     @Published var rotateAnimation = false
+    
+    @Published var showSetFolderAlert = false
     
     // MARK: - Customization Options
     @Published var imageType: ImageType = .sfsymbol
@@ -138,5 +143,205 @@ class FoldersViewModel: ObservableObject {
 
     private static func clamp<T: Comparable>(_ val: T, _ min: T, _ max: T) -> T {
         Swift.max(min, Swift.min(max, val))
+    }
+    
+    
+    func savePNG() {
+        let panel = NSSavePanel()
+        panel.canCreateDirectories = true
+        panel.allowedContentTypes = [.png]
+        panel.nameFieldStringValue = "FolderIcon.png"
+        
+        if panel.runModal() == .OK, let url = panel.url {
+            // 1) Render a 470×395 icon at 100% scale. If advanced rendering is
+            // enabled we synchronously pre-process the image so the snapshot is
+            // fully rendered.
+            let fullSizeIcon = FolderIconView(
+                resolutionScale: 1.0,
+                preRenderedImage: preRenderedImage()
+            ).environmentObject(self)
+            
+            // 2) Use .snapshotAsNSImage (your existing logic)
+            let nsImage = fullSizeIcon.snapshotAsNSImage()
+            
+            // 3) Convert NSImage -> PNG data
+            guard let tiffData = nsImage.tiffRepresentation,
+                  let bitmap = NSBitmapImageRep(data: tiffData),
+                  let pngData = bitmap.representation(using: .png, properties: [:]) else {
+                return
+            }
+            // 4) Write out
+            do {
+                try pngData.write(to: url)
+            } catch {
+                print("Failed to save: \(error)")
+            }
+        }
+    }
+
+    // MARK: - Drag-and-Drop Handling
+    func handleDrop(providers: [NSItemProvider]) -> Bool {
+        let group = DispatchGroup()
+        var encounteredError: String? = nil
+
+        for provider in providers {
+            group.enter()
+            provider.loadItem(forTypeIdentifier: "public.file-url", options: nil) { item, error in
+                DispatchQueue.main.async {
+                    defer { group.leave() }
+
+                    if let error = error {
+                        encounteredError = "Error loading item: \(error.localizedDescription)"
+                        return
+                    }
+
+                    guard let data = item as? Data,
+                          let folderURL = URL(dataRepresentation: data, relativeTo: nil) else {
+                        encounteredError = "Invalid URL format."
+                        return
+                    }
+
+                    do {
+                        var isDirectory: ObjCBool = false
+                        guard FileManager.default.fileExists(atPath: folderURL.path, isDirectory: &isDirectory),
+                              isDirectory.boolValue else {
+                            encounteredError = "The dropped item is not a folder."
+                            return
+                        }
+
+                        // Attempt to set the folder icon
+                        try self.setFolderIcon(folderURL: folderURL)
+                        
+                    } catch {
+                        encounteredError = "Failed to set folder icon: \(error.localizedDescription)"
+                    }
+                }
+            }
+        }
+
+        group.notify(queue: .main) {
+//            dropError = encounteredError
+        }
+
+        return true
+    }
+
+    // MARK: - Set Folder Icon (Drag-and-Drop) - Unified Logic
+    func setFolderIcon(folderURL: URL) throws {
+        // 1) Generate the same 470×395 icon as "Save as Image".
+        let fullSizeIcon = FolderIconView(
+            resolutionScale: 1.0,
+            preRenderedImage: preRenderedImage()
+        ).environmentObject(self)
+        let nsImage = fullSizeIcon.snapshotAsNSImage()
+        
+        // 2) Convert NSImage -> PNG data
+        guard let tiffData = nsImage.tiffRepresentation,
+              let bitmap = NSBitmapImageRep(data: tiffData),
+              let pngData = bitmap.representation(using: .png, properties: [:]) else {
+            throw NSError(domain: "FolderIconChanger", code: 1001,
+                          userInfo: [NSLocalizedDescriptionKey: "Failed to create PNG data for folder icon."])
+        }
+
+        // 3) Write the PNG to a temporary location in ~/Library/FolderIconChanger/currentIcon.png
+        let iconURL = try exportIconPNGToLibrary(pngData: pngData)
+
+        // 4) Resize the image for 512x512 (like your example code) and set the folder icon
+        let finalIcon = try resizeIcon(from: iconURL, maxSize: 512)
+        
+        // 5) Apply the icon to the folder
+        let workspace = NSWorkspace.shared
+        do {
+            try workspace.setIcon(finalIcon, forFile: folderURL.path, options: .excludeQuickDrawElementsIconCreationOption)
+        } catch {
+            throw NSError(domain: "FolderIconChanger", code: 2,
+                          userInfo: [NSLocalizedDescriptionKey: "Failed to set folder icon.\n\(error.localizedDescription)"])
+        }
+    }
+    
+    func selectFolder() {
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = false          // folders only
+        panel.canChooseDirectories = true
+        panel.allowsMultipleSelection = false
+
+        if panel.runModal() == .OK, let url = panel.url {
+            do {
+                try setFolderIcon(folderURL: url)
+                dropError = nil
+                showSetFolderAlert = true
+            } catch {
+                dropError = error.localizedDescription
+            }
+        }
+    }
+    
+    // MARK: - Export PNG to a single file in ~/Library/FolderIconChanger
+    func exportIconPNGToLibrary(pngData: Data) throws -> URL {
+        let fileManager = FileManager.default
+
+        // 1) Get Library directory
+        guard let libraryDir = fileManager.urls(for: .libraryDirectory, in: .userDomainMask).first else {
+            throw NSError(domain: "FolderIconChanger", code: 1002,
+                          userInfo: [NSLocalizedDescriptionKey: "Unable to locate Library directory."])
+        }
+        // 2) Create subdirectory if needed
+        let appDir = libraryDir.appendingPathComponent("FolderIconChanger")
+        if !fileManager.fileExists(atPath: appDir.path) {
+            try fileManager.createDirectory(at: appDir, withIntermediateDirectories: true)
+        }
+        // 3) Write to 'currentIcon.png', overwriting if present
+        let iconURL = appDir.appendingPathComponent("currentIcon.png")
+        if fileManager.fileExists(atPath: iconURL.path) {
+            try fileManager.removeItem(at: iconURL)
+        }
+        try pngData.write(to: iconURL)
+        return iconURL
+    }
+    
+    // MARK: - Resize Icon for Folder (512x512)
+    func resizeIcon(from sourceURL: URL, maxSize: CGFloat) throws -> NSImage {
+        guard let loadedImage = NSImage(contentsOf: sourceURL) else {
+            throw NSError(domain: "FolderIconChanger", code: 1003,
+                          userInfo: [NSLocalizedDescriptionKey: "Could not load the PNG from \(sourceURL)."])
+        }
+
+        // Scale to fit within maxSize × maxSize
+        let targetSize = NSSize(width: maxSize, height: maxSize)
+        let result = NSImage(size: targetSize)
+        
+        result.lockFocus()
+        let ratio = min(
+            targetSize.width / loadedImage.size.width,
+            targetSize.height / loadedImage.size.height
+        )
+        let newWidth = loadedImage.size.width * ratio
+        let newHeight = loadedImage.size.height * ratio
+        
+        let drawRect = NSRect(
+            x: (targetSize.width - newWidth) / 2,
+            y: (targetSize.height - newHeight) / 2,
+            width: newWidth,
+            height: newHeight
+        )
+        loadedImage.draw(in: drawRect, from: .zero, operation: .sourceOver, fraction: 1.0)
+        result.unlockFocus()
+        
+        return result
+    }
+    
+    func selectImageFile() {
+        let panel = NSOpenPanel()
+        panel.allowedContentTypes = [.image, .png, .svg]
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = false
+        
+        if panel.runModal() == .OK, let url = panel.url {
+            if let image = NSImage(contentsOf: url) {
+                selectedImage = image
+            } else {
+                print("Failed to load the selected PNG file.")
+            }
+        }
     }
 }

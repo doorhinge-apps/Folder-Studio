@@ -31,6 +31,12 @@ struct Welcome: View {
     
     @AppStorage("onboardingCompleted") var onboardingCompleted = false
     
+    // Accessibility
+    @AccessibilityFocusState private var isFocused: Bool
+    @AccessibilityFocusState private var focusContinueButton: Bool
+    @AccessibilityFocusState private var focusBackButton: Bool
+    @AccessibilityFocusState private var focusDownloadButton: Bool
+    
     var body: some View {
         VStack {
             Spacer()
@@ -41,6 +47,7 @@ struct Welcome: View {
                 .font(.system(currentStep == 0 ? .largeTitle: .title, design: .rounded, weight: .bold))
                 .contentTransition(.numericText())
                 .frame(height: 80)
+                .accessibilityLabel(titleTextKeys[currentStep])
             
             if currentStep == 4 {
                 Text("translation_notice_description")
@@ -52,6 +59,7 @@ struct Welcome: View {
                 Image(imageNames[currentStep])
                     .resizable()
                     .scaledToFit()
+                    .accessibilityHidden(true)
                 
                 if currentStep > 0 {
                     RoundedRectangle(cornerRadius: 10)
@@ -74,9 +82,12 @@ struct Welcome: View {
                 .buttonStyle(Button3DStyle())
                 .frame(height: 50)
                 .fixedSize()
+                .accessibilityFocused($focusDownloadButton)
+
             }
             
             Spacer()
+                .frame(minHeight: 50)
             
             HStack(spacing: 20) {
                 if currentStep > 0 {
@@ -91,6 +102,7 @@ struct Welcome: View {
                     }.buttonStyle(Button3DStyle())
                         .frame(height: 50)
                         .fixedSize()
+                        .accessibilityFocused($focusBackButton)
                 }
                 
                 Button {
@@ -107,12 +119,43 @@ struct Welcome: View {
                 }.buttonStyle(Button3DStyle())
                     .frame(height: 50)
                     .fixedSize()
+                    .accessibilityFocused($focusContinueButton)
             }
             
             Spacer()
                 .frame(height: 50)
-        }.task(id: currentStep) {
-            if currentStep == 4 { await refreshStatus() }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel(for: currentStep))
+        .accessibilityFocused($isFocused)
+        .onChange(of: currentStep) { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                isFocused = true
+            }
+        }
+        .task(id: currentStep) {
+            if currentStep == 4 {
+                await refreshStatus()
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                    // Reset all focus states
+                    focusContinueButton = false
+                    focusBackButton = false
+                    focusDownloadButton = false
+                    
+                    // Apply the one you want
+                    switch currentStep {
+                    case 4:
+                        if status == .installed {
+                            focusContinueButton = true
+                        } else {
+                            focusDownloadButton = true
+                        }
+                    default:
+                        focusContinueButton = true
+                    }
+                }
         }
         // download sheet lives here
         .translationTask(downloadConfig) { session in
@@ -121,6 +164,7 @@ struct Welcome: View {
             do {
                 try await session.prepareTranslation()  // Apple sheet
                 status = .installed
+                focusContinueButton = true
                 print("✅ Model installed.")
             } catch {
                 print("❌ prepareTranslation error:", error)
@@ -138,7 +182,7 @@ struct Welcome: View {
             let src = Locale.Language(identifier: lang)
             let tgt = Locale.Language(identifier: "en")
             status  = await LanguageAvailability().status(from: src, to: tgt)
-            print("🌐 Model \(lang)→en status:", status!)
+//            print("🌐 Model \(lang)→en status:", status!)
         }
 
         @MainActor
@@ -150,7 +194,7 @@ struct Welcome: View {
             await refreshStatus()
 
             guard status == .supported else {
-                print("ℹ️ Nothing to download (status = \(String(describing: status))).")
+//                print("ℹ️ Nothing to download (status = \(String(describing: status))).")
                 return
             }
 
@@ -159,8 +203,26 @@ struct Welcome: View {
             downloadConfig = .init(source: .init(identifier: lang),
                                    target: .init(identifier: "en"))
             shouldPrepare  = true                          // triggers sheet
-            print("📥 Prompting user to download \(lang)→en model …")
+//            print("📥 Prompting user to download \(lang)→en model …")
         }
+    
+    func accessibilityLabel(for step: Int) -> LocalizedStringKey {
+        switch step {
+        case 0:
+            return "welcome_title_text"
+        case 1:
+            return "onboarding_2_title"
+        case 2:
+            return "onboarding_3_title"
+        case 3:
+            return "onboarding_4_title"
+        case 4:
+            return "translate_notice_description"
+        default:
+            return ""
+        }
+    }
+
 }
 
 #Preview {

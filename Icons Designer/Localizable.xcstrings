@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
+    ": " : {
+
+    },
     "[%@](https://doorhingeapps.com)" : {
       "localizations" : {
         "de" : {
@@ -23,6 +29,22 @@
         }
       },
       "shouldTranslate" : false
+    },
+    "%lld" : {
+
+    },
+    "%lld %%" : {
+
+    },
+    "2-D picker" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coordinates Picker"
+          }
+        }
+      }
     },
     "about_menu_text" : {
       "localizations" : {
@@ -76,6 +98,107 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "À propos de Folder Studio"
+          }
+        }
+      }
+    },
+    "accessibility_bottom_color_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder Bottom Color"
+          }
+        }
+      }
+    },
+    "accessibility_collapse_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collapse Section"
+          }
+        }
+      }
+    },
+    "accessibility_color_presets_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder Color Presets"
+          }
+        }
+      }
+    },
+    "accessibility_custom_color_text" : {
+      "comment" : "Custom color RGB description, e.g., Red %d, Green %d, Blue %d\nGeneric fallback for custom color",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Custom color. Red %d, Green %d, Blue %d"
+          }
+        }
+      }
+    },
+    "accessibility_expand_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expand Section"
+          }
+        }
+      }
+    },
+    "accessibility_options_panel_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Customization Options"
+          }
+        }
+      }
+    },
+    "accessibility_preset_label_default %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color Preset: %lld"
+          }
+        }
+      }
+    },
+    "accessibility_select_folder_button_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select a folder to set its icon"
+          }
+        }
+      }
+    },
+    "accessibility_symbol_color_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder Symbol Color"
+          }
+        }
+      }
+    },
+    "accessibility_top_color_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder Tab Color"
           }
         }
       }
@@ -217,6 +340,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Base"
+          }
+        }
+      }
+    },
+    "black_label" : {
+      "comment" : "Color black",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Black"
+          }
+        }
+      }
+    },
+    "blue_label" : {
+      "comment" : "Color blue",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blue"
           }
         }
       }
@@ -473,6 +618,16 @@
         }
       }
     },
+    "folder_set_alert_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder Icon Set Successfully"
+          }
+        }
+      }
+    },
     "font_weight_label" : {
       "localizations" : {
         "de" : {
@@ -501,6 +656,17 @@
         }
       }
     },
+    "green_label" : {
+      "comment" : "Color green",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Green"
+          }
+        }
+      }
+    },
     "license_details" : {
       "localizations" : {
         "de" : {
@@ -525,6 +691,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "**Licence**\nCette application est open source et distribuée sous la [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).\n\nVous pouvez consulter le code source et les détails de la licence sur [GitHub](https://github.com/doorhinge-apps/Folder-Studio)."
+          }
+        }
+      }
+    },
+    "light_blue_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light Blue"
           }
         }
       }
@@ -669,6 +845,16 @@
         }
       }
     },
+    "orange_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Orange"
+          }
+        }
+      }
+    },
     "outline_button_label" : {
       "localizations" : {
         "de" : {
@@ -693,6 +879,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contour"
+          }
+        }
+      }
+    },
+    "pink_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pink"
           }
         }
       }
@@ -725,8 +921,26 @@
         }
       }
     },
-    "Reset Onboarding" : {
-
+    "purple_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purple"
+          }
+        }
+      }
+    },
+    "red_label" : {
+      "comment" : "Color red",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Red"
+          }
+        }
+      }
     },
     "reset_label" : {
       "localizations" : {
@@ -752,6 +966,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Réinitialiser"
+          }
+        }
+      }
+    },
+    "reset_onboarding_text" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset Onboarding"
           }
         }
       }
@@ -836,6 +1060,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rechercher une icône"
+          }
+        }
+      }
+    },
+    "select_folder_button" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select a Folder"
           }
         }
       }
@@ -995,6 +1229,9 @@
           }
         }
       }
+    },
+    "translate_notice_description" : {
+
     },
     "translation_notice_description" : {
       "localizations" : {
@@ -1177,6 +1414,47 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bienvenue dans Folder Studio"
+          }
+        }
+      }
+    },
+    "white_label" : {
+      "comment" : "Color white",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "White"
+          }
+        }
+      }
+    },
+    "X axis" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adjust X axis"
+          }
+        }
+      }
+    },
+    "Y axis" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adjust Y axis"
+          }
+        }
+      }
+    },
+    "yellow_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yellow"
           }
         }
       }

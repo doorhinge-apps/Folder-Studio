@@ -15,19 +15,7 @@ struct FolderPresetPreview: View {
     
     @State var color1: String
     @State var color2: String
-    
-//    @Binding var symbolName: String
-//    @Binding var topOffset: CGFloat
-//    @Binding var bottomOffset: CGFloat
-//    
-//    @Binding var topShapeColorSetter: Color
-//    @Binding var bottomShapeColorSetter: Color
-//    @Binding var iconColorSetter: Color
-//    @Binding var opacitySetter: Double
-//    
-//    @Binding var iconScale: Double
-//    
-//    @Binding var selectedImage: NSImage?
+
     var body: some View {
         ZStack {
             PresetFolderIconView(

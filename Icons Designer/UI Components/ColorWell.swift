@@ -19,9 +19,16 @@ struct ColorWell: NSViewRepresentable {
         let colorWell = NSColorWell(style: .minimal)
         colorWell.color = NSColor(color)
         
+        colorWell.setAccessibilityElement(true)
+        colorWell.setAccessibilityLabel("accessibility_color_picker_label_generic")
+        colorWell.setAccessibilityHelp("accessibility_color_picker_popover_description")
+        colorWell.setAccessibilityRole(.colorWell)
+        colorWell.setAccessibilityEnabled(true)
+
         context.coordinator.startObservingColorChange(of: colorWell)
         return colorWell
     }
+
     
     func updateNSView(_ nsView: NSColorWell, context: Context) {
         nsView.color = NSColor(color)
@@ -47,3 +54,26 @@ struct ColorWell: NSViewRepresentable {
         }
     }
 }
+
+
+extension Color {
+    var accessibilityName: String {
+        if self == .red { return NSLocalizedString("red_label", comment: "Color red") }
+        if self == .blue { return NSLocalizedString("blue_label", comment: "Color blue") }
+        if self == .green { return NSLocalizedString("green_label", comment: "Color green") }
+        if self == .black { return NSLocalizedString("black_label", comment: "Color black") }
+        if self == .white { return NSLocalizedString("white_label", comment: "Color white") }
+
+        if let nsColor = NSColor(self).usingColorSpace(.deviceRGB) {
+            let r = Int(nsColor.redComponent * 255)
+            let g = Int(nsColor.greenComponent * 255)
+            let b = Int(nsColor.blueComponent * 255)
+
+            let format = NSLocalizedString("accessibility_custom_color_text", comment: "Custom color RGB description, e.g., Red %d, Green %d, Blue %d")
+            return String(format: format, r, g, b)
+        }
+
+        return NSLocalizedString("accessibility_custom_color_text", comment: "Generic fallback for custom color")
+    }
+}
+

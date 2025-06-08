@@ -1,16 +1,12 @@
 import SwiftUI
-import AppKit  // for detecting Shift key
+import AppKit   // for detecting Shift key
 
 // Array safety helper
 fileprivate extension Array {
-    subscript(safe i: Int) -> Element? {
-        indices.contains(i) ? self[i] : nil
-    }
+    subscript(safe i: Int) -> Element? { indices.contains(i) ? self[i] : nil }
 }
 
-private enum LockAxis {
-    case horizontal, vertical, diagonal
-}
+private enum LockAxis { case horizontal, vertical, diagonal }
 
 struct AxisPicker: View {
     @Binding var coords: [CGFloat]
@@ -35,7 +31,7 @@ struct AxisPicker: View {
 
     public var body: some View {
         GeometryReader { geo in
-            let side = min(geo.size.width, geo.size.height)
+            let side  = min(geo.size.width, geo.size.height)
             let track = side - knobRadius * 2
 
             let nx = ((coords[safe: 0] ?? xMin) - xMin) / xSpan
@@ -51,9 +47,7 @@ struct AxisPicker: View {
                             RoundedRectangle(cornerRadius: 12.5)
                                 .stroke(Color.black.opacity(0.7), lineWidth: strokeWidth)
                                 .blur(radius: 5)
-                                .mask {
-                                    RoundedRectangle(cornerRadius: 12.5)
-                                }
+                                .mask { RoundedRectangle(cornerRadius: 12.5) }
 
                             RoundedRectangle(cornerRadius: 12.5)
                                 .stroke(Color(hex: "1E8CCB"), lineWidth: strokeWidth)
@@ -92,8 +86,8 @@ struct AxisPicker: View {
                                 let absDx = abs(dx)
                                 let absDy = abs(dy)
                                 let dHorizontal = absDy
-                                let dVertical = absDx
-                                let dDiagonal = abs(absDx - absDy)
+                                let dVertical   = absDx
+                                let dDiagonal   = abs(absDx - absDy)
 
                                 if dragLockedAxis == nil {
                                     if dDiagonal < dHorizontal && dDiagonal < dVertical {
@@ -112,7 +106,6 @@ struct AxisPicker: View {
                                     targetX = start.x
                                 case .diagonal:
                                     if dx * dy >= 0 {
-                                        // slope +1 projection
                                         let rawT = (dx + dy) / 2
                                         let tMin = max(knobRadius - start.x, knobRadius - start.y)
                                         let tMax = min(side - knobRadius - start.x, side - knobRadius - start.y)
@@ -120,7 +113,6 @@ struct AxisPicker: View {
                                         targetX = start.x + t
                                         targetY = start.y + t
                                     } else {
-                                        // slope -1 projection
                                         let rawT = (dx - dy) / 2
                                         let tMin = max(knobRadius - start.x, start.y - (side - knobRadius))
                                         let tMax = min(side - knobRadius - start.x, start.y - knobRadius)
@@ -146,8 +138,38 @@ struct AxisPicker: View {
             .frame(width: side, height: side)
         }
         .aspectRatio(1, contentMode: .fit)
-        .onAppear {
-            if coords.count != 2 { coords = [xMin, yMin] }
+        .onAppear { if coords.count != 2 { coords = [xMin, yMin] } }
+
+        // -------------------- ACCESSIBILITY ADDITIONS --------------------
+        .focusable(true)                               // keyboard focus
+        .onMoveCommand { dir in                        // arrow-key adjustments
+            let stepX = xSpan / 20
+            let stepY = ySpan / 20
+            switch dir {
+            case .left:  coords[0] = clamp((coords[safe:0] ?? xMin) - stepX, xMin, xMax)
+            case .right: coords[0] = clamp((coords[safe:0] ?? xMin) + stepX, xMin, xMax)
+            case .up:    coords[1] = clamp((coords[safe:1] ?? yMin) + stepY, yMin, yMax)
+            case .down:  coords[1] = clamp((coords[safe:1] ?? yMin) - stepY, yMin, yMax)
+            default: break
+            }
         }
+        .accessibilityRepresentation {                 // VoiceOver / Switch Control
+            VStack {
+                Slider(value: Binding(
+                           get: { Double(coords[safe:0] ?? xMin) },
+                           set: { coords[0] = CGFloat($0) }),
+                       in: xMin...xMax) { Text("X axis") }
+                    .accessibilityValue(Text("\(Int(coords[safe:0] ?? xMin))"))
+                
+                Slider(value: Binding(
+                           get: { Double(coords[safe:1] ?? yMin) },
+                           set: { coords[1] = CGFloat($0) }),
+                       in: yMin...yMax) { Text("Y axis") }
+                    .accessibilityValue(Text("\(Int(coords[safe:1] ?? yMin))"))
+            }
+            .accessibilityElement(children: .contain)
+            .accessibilityLabel("2-D picker")
+        }
+        // ----------------------------------------------------------------
     }
 }

@@ -1,13 +1,3 @@
-//
-// SF Folders
-// Custom2DSlider.swift
-//
-// Created on 3/6/25
-//
-// Copyright ©2025 DoorHinge Apps.
-//
-
-
 import SwiftUI
 
 struct Custom2DSlider: View {
@@ -54,66 +44,99 @@ struct Custom2DSlider: View {
                     
                     Circle()
                         .fill(Color(hex: "4C7C97")
-                                .shadow(.inner(color: Color.black.opacity(0.3), radius: 4)))
+                            .shadow(.inner(color: Color.black.opacity(0.3), radius: 4)))
                         .frame(width: handleSize - strokeWidth * 2,
                                height: handleSize - strokeWidth * 2)
                 }
                 .position(x: valueX + (handleSize / 2),
-                           y: valueY + (handleSize / 2))
+                          y: valueY + (handleSize / 2))
                 
-                // MARK: - Constraints
+                // MARK: - Constraints / Edges
                 Rectangle()
                     .fill(Color(hex: "78D6FF"))
-                    .frame(width: trailingMargin,
-                           height: geometry.size.height)
-                    
+                    .frame(width: trailingMargin, height: geometry.size.height)
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { drag in
-                                self.valueX = maxValueX + (drag.location.x - handleSize) * (maxValueX
-- minValueX) / planeWidth
+                                self.valueX = maxValueX + (drag.location.x - handleSize) * (maxValueX - minValueX) / planeWidth
                             }
                     )
                 Rectangle()
                     .fill(Color(hex: "78D6FF"))
-                    .frame(width: geometry.size.width,
-                           height: trailingMargin)
-                    
+                    .frame(width: geometry.size.width, height: trailingMargin)
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { drag in
-                                self.valueY = maxValueY + (drag.location.y - handleSize) * (maxValueY
-- minValueY) / planeHeight
-                            }
-                    )
-                
-                Rectangle()
-                    .fill(Color(hex: "78D6FF"))
-                    .frame(width: trailingMargin,
-                           height: geometry.size.height)
-                    
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { drag in
-                                self.valueX = minValueX + (drag.location.x - handleSize) * (maxValueX
-- minValueX) / planeWidth
+                                self.valueY = maxValueY + (drag.location.y - handleSize) * (maxValueY - minValueY) / planeHeight
                             }
                     )
                 Rectangle()
                     .fill(Color(hex: "78D6FF"))
-                    .frame(width: geometry.size.width,
-                           height: trailingMargin)
-                    
+                    .frame(width: trailingMargin, height: geometry.size.height)
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { drag in
-                                self.valueY = minValueY + (drag.location.y - handleSize) * (maxValueY
-- minValueY) / planeHeight
+                                self.valueX = minValueX + (drag.location.x - handleSize) * (maxValueX - minValueX) / planeWidth
+                            }
+                    )
+                Rectangle()
+                    .fill(Color(hex: "78D6FF"))
+                    .frame(width: geometry.size.width, height: trailingMargin)
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { drag in
+                                self.valueY = minValueY + (drag.location.y - handleSize) * (maxValueY - minValueY) / planeHeight
                             }
                     )
             }
+//            .accessibilityElement()
+//            .accessibilityCustomContent("X", Text("\(valueX)"))
+//            .accessibilityCustomContent("Y", Text("\(valueY)"))
             .contentShape(Rectangle())
             .frame(height: geometry.size.height)
+            .focusable(true)
+            .onMoveCommand { direction in
+                let stepX = (maxValueX - minValueX) / 20
+                let stepY = (maxValueY - minValueY) / 20
+                switch direction {
+                case .left:
+                    valueX = CGFloat(max(Double(valueX) - stepX, minValueX))
+                case .right:
+                    valueX = CGFloat(min(Double(valueX) + stepX, maxValueX))
+                case .up:
+                    valueY = CGFloat(max(Double(valueY) - stepY, minValueY))
+                case .down:
+                    valueY = CGFloat(min(Double(valueY) + stepY, maxValueY))
+                default: break
+                }
+            }
+            .accessibilityRepresentation {
+                VStack {
+                    Slider(
+                        value: Binding(get: { Double(valueX) }, set: { valueX = CGFloat($0) }),
+                        in: minValueX...maxValueX
+                    ) {
+                        Text("X axis")
+                    }
+                    .accessibilityLabel("X axis")
+                    .accessibilityValue(Text("\(Int(valueX))"))
+
+                    Slider(
+                        value: Binding(get: { Double(valueY) }, set: { valueY = CGFloat($0) }),
+                        in: minValueY...maxValueY
+                    ) {
+                        Text("Y axis")
+                    }
+                    .accessibilityLabel("Y axis")
+                    .accessibilityValue(Text("\(Int(valueY))"))
+                }
+            }
+
+//            .accessibilityLabel("2D Slider")
+//            .accessibilityCustomContent(AccessibilityCustomContentKey("X"), String(valueX))
+//            .accessibilityCustomContent(AccessibilityCustomContentKey("Y"), String(valueY))
+//            .accessibilityCustomContent("X", value: Int(valueX))
+//            .accessibilityCustomContent("Y", value: Int(valueY))
         }
     }
 }
