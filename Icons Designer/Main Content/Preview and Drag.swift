@@ -63,10 +63,10 @@ struct PreviewDrag: View {
                             Text("close_popup")
                         }
                     }
-                }
+                }//.accessibilityLabel("accessibility_folder_preview_label")
                 .accessibilityElement(children: .contain)
                 .accessibilityLabel(content: { label in
-//                    Text("accessibility_folder_preview_description")
+                    Text("accessibility_folder_preview_label")
                     label
                 })
                 .overlay {

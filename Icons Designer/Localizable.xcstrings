@@ -152,6 +152,7 @@
       }
     },
     "accessibility_collapse_label" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -237,6 +238,7 @@
       }
     },
     "accessibility_expand_label" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

@@ -22,7 +22,6 @@ struct ContentView: View {
                     }.buttonStyle(.plain)
                     
                     PreviewDrag()
-                        .accessibilityLabel("accessibility_folder_preview_label")
 
                     Spacer()
                         .frame(width: 20)
@@ -100,21 +99,21 @@ struct ContentView: View {
                                             HStack(spacing: 0) {
                                                 // None
                                                 Button { foldersViewModel.imageType = .none } label: {
-                                                    Color.clear
+                                                    Color.white.opacity(0.001)
                                                         .frame(width: pickerGeo.size.width/3, height: 30)
                                                 }
                                                 .buttonStyle(.plain)
 
                                                 // Image
                                                 Button { foldersViewModel.imageType = .png } label: {
-                                                    Color.clear
+                                                    Color.white.opacity(0.001)
                                                         .frame(width: pickerGeo.size.width/3, height: 30)
                                                 }
                                                 .buttonStyle(.plain)
 
                                                 // SF Symbol
                                                 Button { foldersViewModel.imageType = .sfsymbol } label: {
-                                                    Color.clear
+                                                    Color.white.opacity(0.001)
                                                         .frame(width: pickerGeo.size.width/3, height: 30)
                                                 }
                                                 .buttonStyle(.plain)
@@ -290,7 +289,7 @@ struct ContentView: View {
                                                                     Button {
                                                                         foldersViewModel.useAdvancedIconRendering = false
                                                                     } label: {
-                                                                        Color.clear
+                                                                        Color.white.opacity(0.001)
                                                                             .frame(width: advancedImagePicker.size.width/2, height: 30)
                                                                     }
                                                                     .buttonStyle(.plain)
@@ -302,7 +301,7 @@ struct ContentView: View {
                                                                     Button {
                                                                         foldersViewModel.useAdvancedIconRendering = true
                                                                     } label: {
-                                                                        Color.clear
+                                                                        Color.white.opacity(0.001)
                                                                             .frame(width: advancedImagePicker.size.width/2, height: 30)
                                                                     }
                                                                     .buttonStyle(.plain)
@@ -327,6 +326,7 @@ struct ContentView: View {
                                                         Text("font_weight_label")
                                                             .foregroundStyle(Color.white)
                                                             .font(.system(.title3, design: .rounded, weight: .semibold))
+                                                            .accessibilityHidden(true)
                                                         
                                                         Spacer()
                                                         
@@ -342,6 +342,7 @@ struct ContentView: View {
                                                         .frame(height: 30)
                                                         .fixedSize()
                                                         .padding([.top, .bottom])
+                                                        .accessibilityLabel(Text(", ") + Text("font_weight_label") + Text(", ") + Text("reset_label"))
                                                         
                                                         Button {
                                                             withAnimation {
@@ -350,7 +351,7 @@ struct ContentView: View {
                                                         } label: {
                                                             Image(systemName: "chevron.down")
                                                                 .rotationEffect(Angle(degrees: !foldersViewModel.hideWeight ? -180: 0))
-                                                                .accessibilityLabel(foldersViewModel.hideWeight ? "accessibility_expand_label": "accessibility_collapse_label")
+                                                                .accessibilityLabel(Text(", ") + Text(LocalizedStringKey("font_weight_label")) + Text(", ") + Text(LocalizedStringKey(foldersViewModel.hideWeight ? "accessibility_expand_label" : "accessibility_collapse_label")))
                                                         }
                                                         .buttonStyle(SmallButton3DStyle())
                                                         .frame(width: 30, height: 30)
@@ -360,6 +361,10 @@ struct ContentView: View {
                                                     if !foldersViewModel.hideWeight {
                                                         CustomSlider(value: $foldersViewModel.symbolWeight, minValue: 1, maxValue: 9)
                                                             .padding(.horizontal, 5)
+                                                            .accessibilityLabel { label in
+                                                                Text(LocalizedStringKey("font_weight_label"))
+                                                                label
+                                                            }
                                                     }
                                                     
                                                     Divider()
@@ -370,6 +375,7 @@ struct ContentView: View {
                                                     Text("opacity_label")
                                                         .foregroundStyle(Color.white)
                                                         .font(.system(.title3, design: .rounded, weight: .semibold))
+                                                        .accessibilityHidden(true)
                                                     
                                                     Spacer()
                                                     
@@ -385,6 +391,7 @@ struct ContentView: View {
                                                     .frame(height: 30)
                                                     .fixedSize()
                                                     .padding([.top, .bottom])
+                                                    .accessibilityLabel(Text(", ") + Text("opacity_label") + Text(", ") + Text("reset_label"))
                                                     
                                                     Button {
                                                         withAnimation {
@@ -393,7 +400,7 @@ struct ContentView: View {
                                                     } label: {
                                                         Image(systemName: "chevron.down")
                                                             .rotationEffect(Angle(degrees: !foldersViewModel.hideOpacity ? -180: 0))
-                                                            .accessibilityLabel(foldersViewModel.hideOpacity ? "accessibility_expand_label": "accessibility_collapse_label")
+                                                            .accessibilityLabel(Text(", ") + Text(LocalizedStringKey("opacity_label")) + Text(", ") + Text(LocalizedStringKey(foldersViewModel.hideOpacity ? "accessibility_expand_label" : "accessibility_collapse_label")))
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
                                                     .frame(width: 30, height: 30)
@@ -402,17 +409,20 @@ struct ContentView: View {
                                                 
                                                 if !foldersViewModel.hideOpacity {
                                                     CustomSlider(value: $foldersViewModel.symbolOpacity, minValue: 0, maxValue: 1)
-                                                        //.frame(width: 200)
                                                         .padding(.horizontal, 5)
+                                                        .accessibilityLabel { label in
+                                                            Text(LocalizedStringKey("opacity_label"))
+                                                            label
+                                                        }
                                                 }
                                                 
                                                 Divider()
                                                 
                                                 HStack {
-                                                    //                                                Text("Scale: \(Int(iconScale*100))%")
                                                     Text("scale_label")
                                                         .foregroundStyle(Color.white)
                                                         .font(.system(.title3, design: .rounded, weight: .semibold))
+                                                        .accessibilityHidden(true)
                                                     
                                                     Spacer()
                                                     
@@ -428,6 +438,7 @@ struct ContentView: View {
                                                     .frame(height: 30)
                                                     .fixedSize()
                                                     .padding([.top, .bottom])
+                                                    .accessibilityLabel(Text(", ") + Text("scale_label") + Text(", ") + Text("reset_label"))
                                                     
                                                     Button {
                                                         withAnimation {
@@ -436,7 +447,7 @@ struct ContentView: View {
                                                     } label: {
                                                         Image(systemName: "chevron.down")
                                                             .rotationEffect(Angle(degrees: !foldersViewModel.hideScale ? -180: 0))
-                                                            .accessibilityLabel(foldersViewModel.hideScale ? "accessibility_expand_label": "accessibility_collapse_label")
+                                                            .accessibilityLabel(Text(", ") + Text(LocalizedStringKey("scale_label")) + Text(", ") + Text(LocalizedStringKey(foldersViewModel.hideScale ? "accessibility_expand_label" : "accessibility_collapse_label")))
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
                                                     .frame(width: 30, height: 30)
@@ -445,8 +456,11 @@ struct ContentView: View {
                                                 
                                                 if !foldersViewModel.hideScale {
                                                     CustomSlider(value: $foldersViewModel.iconScale, minValue: 0.2, maxValue: 5)
-                                                        //.frame(width: 200)
                                                         .padding(.horizontal, 5)
+                                                        .accessibilityLabel { label in
+                                                            Text(LocalizedStringKey("scale_label"))
+                                                            label
+                                                        }
                                                 }
                                                 
                                                 Divider()
@@ -455,6 +469,7 @@ struct ContentView: View {
                                                     Text("offset_label")
                                                         .foregroundStyle(Color.white)
                                                         .font(.system(.title3, design: .rounded, weight: .semibold))
+                                                        .accessibilityHidden(true)
                                                     
                                                     Spacer()
                                                     
@@ -471,6 +486,7 @@ struct ContentView: View {
                                                     .frame(height: 30)
                                                     .fixedSize()
                                                     .padding([.top, .bottom])
+                                                    .accessibilityLabel(Text(", ") + Text("opacity_label") + Text(", ") + Text("offset_label"))
                                                     
                                                     Button {
                                                         withAnimation {
@@ -479,7 +495,7 @@ struct ContentView: View {
                                                     } label: {
                                                         Image(systemName: "chevron.down")
                                                             .rotationEffect(Angle(degrees: !foldersViewModel.hideOffset ? -180: 0))
-                                                            .accessibilityLabel(foldersViewModel.hideOffset ? "accessibility_expand_label": "accessibility_collapse_label")
+                                                            .accessibilityLabel(Text(", ") + Text(LocalizedStringKey("offset_label")) + Text(", ") + Text(LocalizedStringKey(foldersViewModel.hideOffset ? "accessibility_expand_label" : "accessibility_collapse_label")))
                                                     }
                                                     .buttonStyle(SmallButton3DStyle())
                                                     .frame(width: 30, height: 30)
@@ -503,6 +519,10 @@ struct ContentView: View {
                                                     )
                                                     .padding(.horizontal, 5)
                                                     .padding(.bottom, 20)
+                                                    .accessibilityLabel { label in
+                                                        Text(LocalizedStringKey("offset_label"))
+                                                        label
+                                                    }
                                                 }
                                             }
                                         }

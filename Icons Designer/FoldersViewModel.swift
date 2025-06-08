@@ -67,6 +67,7 @@ class FoldersViewModel: ObservableObject {
     /// Creates a synchronously processed image matching the advanced rendering
     /// mode. This is used when exporting icons so that the snapshot reflects
     /// the final tinted image without waiting for asynchronous tasks.
+    
     func preRenderedImage() -> NSImage? {
         guard useAdvancedIconRendering,
               imageType == .png,
@@ -74,6 +75,16 @@ class FoldersViewModel: ObservableObject {
 
         return Self.grayscaleMappedImage(from: image, tint: NSColor(symbolColor))
     }
+//    func preRenderedImage() async -> NSImage? {
+//        guard useAdvancedIconRendering,
+//              imageType == .png,
+//              let image = selectedImage else { return nil }
+//
+//        return await Task.detached(priority: .userInitiated) {
+//            Self.grayscaleMappedImage(from: image, tint: NSColor(self.symbolColor))
+//        }.value
+//    }
+
 
     private static func grayscaleMappedImage(from original: NSImage, tint baseColor: NSColor) -> NSImage? {
         guard let tiff = original.tiffRepresentation,
@@ -139,6 +150,15 @@ class FoldersViewModel: ObservableObject {
 
         guard let outputCG = context.makeImage() else { return nil }
         return NSImage(cgImage: outputCG, size: NSSize(width: width, height: height))
+    }
+    
+    static func generateGrayscaleMappedImage(from original: NSImage, tint baseColor: NSColor, completion: @escaping (NSImage?) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let result = grayscaleMappedImage(from: original, tint: baseColor)
+            DispatchQueue.main.async {
+                completion(result)
+            }
+        }
     }
 
     private static func clamp<T: Comparable>(_ val: T, _ min: T, _ max: T) -> T {
