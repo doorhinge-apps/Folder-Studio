@@ -244,7 +244,8 @@ struct FolderIconView: View {
 
         imageProcessingTask = Task(priority: .userInitiated) {
             let result = await withTaskCancellationHandler {
-                return grayscaleMappedImage(from: original, tint: tint)
+                await FoldersViewModel.generateGrayscaleMappedImage(from: original,
+                                                                   tint: tint)
             } onCancel: {
                 // Optional: Clean up if needed
             }
@@ -499,7 +500,8 @@ struct PresetFolderIconView: View {
 
         imageProcessingTask = Task(priority: .userInitiated) {
             let result = await withTaskCancellationHandler {
-                return grayscaleMappedImage(from: original, tint: tint)
+                await FoldersViewModel.generateGrayscaleMappedImage(from: original,
+                                                                   tint: tint)
             } onCancel: {
                 // Optional: Clean up if needed
             }
