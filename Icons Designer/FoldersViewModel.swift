@@ -152,13 +152,11 @@ class FoldersViewModel: ObservableObject {
         return NSImage(cgImage: outputCG, size: NSSize(width: width, height: height))
     }
     
-    static func generateGrayscaleMappedImage(from original: NSImage, tint baseColor: NSColor, completion: @escaping (NSImage?) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let result = grayscaleMappedImage(from: original, tint: baseColor)
-            DispatchQueue.main.async {
-                completion(result)
-            }
-        }
+    static func generateGrayscaleMappedImage(from original: NSImage,
+                                             tint baseColor: NSColor) async -> NSImage? {
+        await Task.detached(priority: .userInitiated) {
+            grayscaleMappedImage(from: original, tint: baseColor)
+        }.value
     }
 
     private static func clamp<T: Comparable>(_ val: T, _ min: T, _ max: T) -> T {
